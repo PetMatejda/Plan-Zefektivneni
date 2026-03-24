@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finanční analýza & Podklady · Areál Za Zastávkou</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #1c1a16; --ink-soft: #4a4540;
+  --linen: #f4efe6; --linen-dark: #e8e0d2;
+  --amber: #c8860a; --amber-light: #f0b845; --amber-pale: #fdf3de;
+  --concrete: #8a8278; --concrete-light: #c4bdb4;
+  --film: #2c3e50; --film-pale: #e8ecf0;
+  --green: #3d6b4f; --green-pale: #e8f2ec;
+  --corten: #b5611a; --corten-pale: #fdf0e8;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(--ink); }
+
+.nav { position: sticky; top: 0; z-index: 100; background: var(--ink); border-bottom: 2px solid var(--amber); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 54px; }
+.nav-brand { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--amber-light); text-decoration: none; }
+.nav-links { display: flex; gap: 4px; }
+.nav-link { font-size: 11.5px; font-weight: 500; color: rgba(255,255,255,0.65); text-decoration: none; padding: 6px 14px; transition: all 0.2s; }
+.nav-link:hover, .nav-link.active { color: white; background: rgba(255,255,255,0.08); }
+.nav-link.active { color: var(--amber-light); }
+
+/* PAGE HERO */
+.page-hero { background: var(--ink); padding: 64px 64px 56px; position: relative; overflow: hidden; }
+.page-hero::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255,0.02) 8px, rgba(255,255,255,0.02) 9px); }
+.ph-inner { position: relative; z-index: 1; max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; }
+.ph-eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--amber-light); margin-bottom: 14px; }
+.ph-title { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; color: white; line-height: 1.05; letter-spacing: -0.02em; }
+.ph-title em { font-style: italic; color: var(--amber-light); }
+.ph-desc { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.8; }
+.ph-links { display: flex; flex-direction: column; gap: 3px; }
+.ph-link { display: block; padding: 16px 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); text-decoration: none; transition: all 0.2s; }
+.ph-link:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); }
+.phl-num { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.15em; color: var(--amber-light); margin-bottom: 4px; }
+.phl-title { font-size: 13.5px; font-weight: 600; color: white; }
+
+/* MAIN */
+.main { max-width: 1300px; margin: 0 auto; padding: 72px 64px; }
+.section { margin-bottom: 80px; }
+.section-label { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: var(--concrete); margin-bottom: 6px; }
+.section-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 400; margin-bottom: 8px; }
+.section-title em { font-style: italic; color: var(--amber); }
+.section-desc { font-size: 13.5px; color: var(--ink-soft); line-height: 1.7; margin-bottom: 28px; }
+
+/* COMPARISON TABLE */
+.comp-table { width: 100%; border-collapse: collapse; }
+.comp-table th { padding: 12px 16px; font-size: 11.5px; font-weight: 600; text-align: left; }
+.comp-table th.h-base { background: var(--ink); color: white; }
+.comp-table th.h-f1 { background: var(--green); color: white; }
+.comp-table th.h-f2 { background: var(--amber); color: white; }
+.comp-table th.h-f3 { background: var(--film); color: white; }
+.comp-table td { padding: 10px 16px; border-bottom: 1px solid var(--linen-dark); font-size: 12.5px; color: var(--ink-soft); vertical-align: top; }
+.comp-table tr:last-child td { border-bottom: none; }
+.comp-table tr:nth-child(even) td { background: rgba(0,0,0,0.018); }
+.comp-table td.row-label { font-weight: 600; color: var(--ink); font-size: 13px; }
+.comp-table td.f1-val { background: rgba(61,107,79,0.05); }
+.comp-table td.f2-val { background: rgba(200,134,10,0.05); }
+.comp-table td.f3-val { background: rgba(44,62,80,0.05); }
+.val-main { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 600; color: var(--ink); }
+.val-f1 { color: var(--green); }
+.val-f2 { color: var(--amber); }
+.val-f3 { color: var(--film); }
+.val-sub { font-size: 10.5px; color: var(--concrete); margin-top: 2px; }
+
+/* REPAIRS */
+.repairs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.repair-group {}
+.rg-title { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid; }
+.rg-title.always { color: var(--green); border-color: var(--green); }
+.rg-title.skip { color: var(--corten); border-color: var(--corten); }
+.repair-item { display: flex; gap: 10px; margin-bottom: 10px; align-items: flex-start; }
+.r-icon { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; margin-top: 1px; }
+.r-icon-yes { background: var(--green-pale); border: 1.5px solid var(--green); color: var(--green); }
+.r-icon-no { background: var(--corten-pale); border: 1.5px solid var(--corten); color: var(--corten); }
+.r-content {}
+.r-name { font-weight: 600; font-size: 13px; color: var(--ink); margin-bottom: 2px; }
+.r-desc { font-size: 11.5px; color: var(--ink-soft); line-height: 1.5; }
+.r-cost { font-family: 'DM Mono', monospace; font-size: 10.5px; color: var(--concrete); margin-top: 3px; }
+
+/* REPAIRS SAVINGS */
+.savings-banner { background: var(--green); padding: 24px 28px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-top: 20px; }
+.sb-item { text-align: center; }
+.sb-val { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 600; color: white; line-height: 1; }
+.sb-label { font-size: 10.5px; color: rgba(255,255,255,0.7); margin-top: 5px; }
+
+/* FUNDING TABLE */
+.funding-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+.fund-card { padding: 24px 22px; background: white; border: 1px solid var(--linen-dark); }
+.fc-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+.fc-name { font-weight: 700; font-size: 14px; margin-bottom: 3px; }
+.fc-program { font-family: 'DM Mono', monospace; font-size: 9.5px; color: var(--concrete); letter-spacing: 0.08em; }
+.fc-badge { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; padding: 3px 8px; border-radius: 1px; white-space: nowrap; }
+.fc-badge-green { background: var(--green-pale); color: var(--green); border: 1px solid var(--green); }
+.fc-badge-amber { background: var(--amber-pale); color: var(--amber); border: 1px solid var(--amber); }
+.fc-badge-film { background: var(--film-pale); color: var(--film); border: 1px solid var(--film); }
+.fc-amount { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; color: var(--amber); margin-bottom: 8px; }
+.fc-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.55; }
+.fc-phases { display: flex; gap: 4px; margin-top: 10px; }
+.fc-phase-dot { font-family: 'DM Mono', monospace; font-size: 9px; padding: 2px 7px; border-radius: 1px; }
+.fcp-1 { background: var(--green-pale); color: var(--green); }
+.fcp-2 { background: var(--amber-pale); color: var(--amber); }
+.fcp-3 { background: var(--film-pale); color: var(--film); }
+
+/* TIMELINE */
+.timeline-full { position: relative; padding-left: 48px; }
+.tl-year-marker { position: absolute; left: 0; font-family: 'DM Mono', monospace; font-size: 10px; color: var(--concrete); letter-spacing: 0.1em; }
+.tl-event { position: relative; padding: 20px 24px; background: white; border: 1px solid var(--linen-dark); margin-bottom: 3px; border-left: 3px solid; }
+.tl-event.ev-prep { border-left-color: var(--concrete); }
+.tl-event.ev-f1 { border-left-color: var(--green); }
+.tl-event.ev-f2 { border-left-color: var(--amber); }
+.tl-event.ev-f3 { border-left-color: var(--film); }
+.tl-event-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.tl-event-period { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: var(--concrete); }
+.tl-event-tag { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; padding: 3px 8px; }
+.tag-prep { background: rgba(138,130,120,0.12); color: var(--concrete); }
+.tag-f1 { background: var(--green-pale); color: var(--green); }
+.tag-f2 { background: var(--amber-pale); color: var(--amber); }
+.tag-f3 { background: var(--film-pale); color: var(--film); }
+.tl-event-title { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+.tl-event-desc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.6; }
+
+/* DECISION MATRIX */
+.decision-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3px; }
+.decision-card { padding: 28px 24px; }
+.dc-f1 { background: var(--green-pale); border: 2px solid var(--green); }
+.dc-f2 { background: var(--amber-pale); border: 2px solid var(--amber); }
+.dc-f3 { background: var(--film-pale); border: 2px solid var(--film); }
+.dc-header { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; margin-bottom: 10px; }
+.dc-f1 .dc-header { color: var(--green); }
+.dc-f2 .dc-header { color: var(--amber); }
+.dc-f3 .dc-header { color: var(--film); }
+.dc-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; margin-bottom: 16px; }
+.dc-items { display: flex; flex-direction: column; gap: 8px; }
+.dc-item { font-size: 12.5px; color: var(--ink-soft); display: flex; gap: 8px; }
+.dc-check { flex-shrink: 0; font-size: 14px; }
+.dc-condition { margin-top: 16px; padding-top: 14px; border-top: 1px solid; font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.1em; }
+.dc-f1 .dc-condition { border-color: var(--green); color: var(--green); }
+.dc-f2 .dc-condition { border-color: var(--amber); color: var(--amber); }
+.dc-f3 .dc-condition { border-color: var(--film); color: var(--film); }
+
+/* CONCLUSION */
+.conclusion { background: var(--ink); padding: 56px 64px; position: relative; overflow: hidden; }
+.conclusion::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255,0.015) 8px, rgba(255,255,255,0.015) 9px); }
+.conc-inner { position: relative; z-index: 1; max-width: 900px; }
+.conc-eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--amber-light); margin-bottom: 16px; }
+.conc-title { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; color: white; line-height: 1.1; margin-bottom: 24px; }
+.conc-title em { font-style: italic; color: var(--amber-light); }
+.conc-text { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.8; margin-bottom: 16px; }
+.conc-btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 32px; }
+.btn { display: inline-block; text-decoration: none; padding: 13px 28px; font-size: 13px; font-weight: 600; transition: all 0.2s; }
+.btn-amber { background: var(--amber); color: white; }
+.btn-amber:hover { background: var(--amber-light); color: var(--ink); }
+.btn-green { background: var(--green); color: white; }
+.btn-green:hover { background: #4d8a63; }
+.btn-film { background: var(--film); color: white; }
+.btn-film:hover { background: #3d5a73; }
+.btn-outline { background: transparent; color: rgba(255,255,255,0.7); border: 1.5px solid rgba(255,255,255,0.25); }
+.btn-outline:hover { border-color: white; color: white; }
+
+/* PHASE NAV */
+.phase-nav { background: var(--ink); padding: 32px 64px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.08); }
+.phase-nav-back { display: flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(255,255,255,0.6); font-size: 12px; transition: color 0.2s; }
+.phase-nav-back:hover { color: white; }
+.footer-copy { font-size: 10.5px; color: rgba(255,255,255,0.25); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-brand" href="index.html">AREÁL ZA ZASTÁVKOU · PLÁN ZEFEKTIVNĚNÍ</a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Přehled</a>
+    <a class="nav-link" href="faze1.html">Fáze 1 – HUB</a>
+    <a class="nav-link" href="faze2.html">Fáze 2 – Kampus</a>
+    <a class="nav-link" href="faze3.html">Fáze 3 – Film</a>
+    <a class="nav-link active" href="analyza.html">Analýza &amp; Finance</a>
+    <a class="nav-link" href="dokumenty.html">Dokumenty</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="ph-inner">
+    <div>
+      <div class="ph-eyebrow">ANALYTICKÝ PODKLAD · BALLOON · LIGHT · Praha · BŘEZEN 2026</div>
+      <h1 class="ph-title">Finanční analýza<br>&amp; <em>podklady</em><br>pro zastupitele</h1>
+    </div>
+    <div>
+      <p class="ph-desc" style="margin-bottom: 24px;">
+        Kompletní finanční model tří fází, analýza povinných oprav, přehled dostupných
+        dotací a rozhodovací matice pro zastupitele Dolních Měcholup. Podklad pro diskuzi
+        o prodloužení pachtu a budoucím směřování areálu Za Zastávkou 377.
+      </p>
+      <div class="ph-links">
+        <a class="ph-link" href="#srovnani">
+          <div class="phl-num">01 · SROVNÁNÍ FAZ</div>
+          <div class="phl-title">Finanční komparace všech tří fází</div>
+        </a>
+        <a class="ph-link" href="#opravy">
+          <div class="phl-num">02 · POVINNÉ OPRAVY</div>
+          <div class="phl-title">Analýza přílohy č. 2 — co opravit, co vynechat</div>
+        </a>
+        <a class="ph-link" href="#dotace">
+          <div class="phl-num">03 · DOTACE</div>
+          <div class="phl-title">Přehled dostupných zdrojů financování</div>
+        </a>
+        <a class="ph-link" href="#harmonogram">
+          <div class="phl-num">04 · HARMONOGRAM</div>
+          <div class="phl-title">Časová osa 2026–2035+</div>
+        </a>
+        <a class="ph-link" href="#rozhodnuti">
+          <div class="phl-num">05 · ROZHODNUTÍ</div>
+          <div class="phl-title">Matice pro zastupitele: co který souhlas přináší</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- COMPARISON -->
+  <div class="section" id="srovnani">
+    <div class="section-label">SROVNÁNÍ FÁZÍ</div>
+    <h2 class="section-title">Tři fáze — tři úrovně <em>ambice a výnosu</em></h2>
+    <p class="section-desc">Každá fáze je samostatně životaschopná. Níže kompletní srovnání klíčových parametrů pro rozhodování zastupitelů.</p>
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th class="h-base" style="width: 22%;">Parametr</th>
+          <th class="h-f1">Fáze 1 · Řemeslný HUB</th>
+          <th class="h-f2">Fáze 2 · Smart Campus ★</th>
+          <th class="h-f3">Fáze 3 · Filmový Park</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="row-label">Časový horizont</td>
+          <td class="f1-val"><span class="val-main val-f1">2025–2027</span></td>
+          <td class="f2-val"><span class="val-main val-f2">2028–2033</span></td>
+          <td class="f3-val"><span class="val-main val-f3">2033+</span></td>
+        </tr>
+        <tr>
+          <td class="row-label">Celková investice</td>
+          <td class="f1-val"><span class="val-main val-f1">12–18 mil. Kč</span></td>
+          <td class="f2-val"><span class="val-main val-f2">45–70 mil. Kč</span></td>
+          <td class="f3-val"><span class="val-main val-f3">350+ mil. Kč</span></td>
+        </tr>
+        <tr>
+          <td class="row-label">Max. riziko obce</td>
+          <td class="f1-val"><span class="val-main val-f1">10 mil. Kč</span><div class="val-sub">zbylé hradí BALLOON</div></td>
+          <td class="f2-val"><span class="val-main val-f2">10 mil. Kč</span><div class="val-sub">+ dotace dle schválení</div></td>
+          <td class="f3-val"><span class="val-main val-f3">10 mil. Kč</span><div class="val-sub">strategický investor</div></td>
+        </tr>
+        <tr>
+          <td class="row-label">Měsíční příjem</td>
+          <td class="f1-val"><span class="val-main val-f1">1,3–2,6 mil. Kč</span><div class="val-sub">vs. stávající 0,7 mil.</div></td>
+          <td class="f2-val"><span class="val-main val-f2">2,6–5,0 mil. Kč</span><div class="val-sub">3,7× více než dnes</div></td>
+          <td class="f3-val"><span class="val-main val-f3">2–10 mil. Kč</span><div class="val-sub">dle obsazenosti stagí</div></td>
+        </tr>
+        <tr>
+          <td class="row-label">Roční výnos</td>
+          <td class="f1-val"><span class="val-main val-f1">15–31 mil. Kč</span></td>
+          <td class="f2-val"><span class="val-main val-f2">31–60 mil. Kč</span></td>
+          <td class="f3-val"><span class="val-main val-f3">24–120 mil. Kč</span></td>
+        </tr>
+        <tr>
+          <td class="row-label">Návratnost investice</td>
+          <td class="f1-val"><span class="val-main val-f1">3–6 měsíců</span><div class="val-sub">nejrychlejší ze 3 fází</div></td>
+          <td class="f2-val"><span class="val-main val-f2">7–12 let</span><div class="val-sub">s dotacemi zkrátit</div></td>
+          <td class="f3-val"><span class="val-main val-f3">6–17 let (střed ~10)</span></td>
+        </tr>
+        <tr>
+          <td class="row-label">Podmínka pachtu</td>
+          <td class="f1-val"><span class="val-main" style="color: var(--green);">Žádná — stávající pacht</span></td>
+          <td class="f2-val"><span class="val-main val-f2">Prodloužení na 20+ let</span></td>
+          <td class="f3-val"><span class="val-main val-f3">Prodloužení na 50 let</span></td>
+        </tr>
+        <tr>
+          <td class="row-label">Míra rizika</td>
+          <td class="f1-val"><span class="val-main" style="color: var(--green);">Nízká ●○○○○</span></td>
+          <td class="f2-val"><span class="val-main val-f2">Střední ●●●○○</span></td>
+          <td class="f3-val"><span class="val-main val-f3">Vysoká ●●●●○</span><div class="val-sub">mitigovaná Dual-Use</div></td>
+        </tr>
+        <tr>
+          <td class="row-label">Nájemné</td>
+          <td class="f1-val"><span class="val-main val-f1">40–80 Kč/m²/měs.</span></td>
+          <td class="f2-val"><span class="val-main val-f2">80–150 Kč/m²/měs.</span></td>
+          <td class="f3-val"><span class="val-main val-f3">40–80 tis. Kč/den/stage</span></td>
+        </tr>
+        <tr>
+          <td class="row-label">Investice stává majetkem</td>
+          <td class="f1-val"><span class="val-main" style="color: var(--green);">✓ Dolních Měcholup</span></td>
+          <td class="f2-val"><span class="val-main" style="color: var(--green);">✓ Dolních Měcholup</span></td>
+          <td class="f3-val"><span class="val-main" style="color: var(--green);">✓ Dolních Měcholup</span></td>
+        </tr>
+        <tr>
+          <td class="row-label">Dostupné dotace</td>
+          <td class="f1-val"><span style="font-size: 11.5px; color: var(--ink-soft);">OP ŽP, SFŽP zeleň</span></td>
+          <td class="f2-val"><span style="font-size: 11.5px; color: var(--ink-soft);">RES+, ENERG ETS, OP ŽP, NPO</span></td>
+          <td class="f3-val"><span style="font-size: 11.5px; color: var(--ink-soft);">SFA, NPO Brownfieldy</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- REPAIRS -->
+  <div class="section" id="opravy">
+    <div class="section-label">POVINNÉ OPRAVY · PŘÍLOHA Č. 2 PACHTU</div>
+    <h2 class="section-title">Co opravit, co <em>vynechat</em> nebo zredukovat</h2>
+    <p class="section-desc">
+      Příloha č. 2 pachtu definuje 14 povinných oprav v celkové výši 11–20 mil. Kč.
+      Analýza ukazuje, kde lze ušetřit 3–5 mil. Kč přesměrováním na smysluplnější investice.
+    </p>
+    <div class="repairs-grid">
+      <div class="repair-group">
+        <div class="rg-title always">✓ Vždy provést — kritické opravy</div>
+        <div class="repair-item">
+          <div class="r-icon r-icon-yes">✓</div>
+          <div class="r-content">
+            <div class="r-name">LED osvětlení haly a areálu</div>
+            <div class="r-desc">Povinná legislativní úspora energií, okamžitá návratnost ze snížených nákladů.</div>
+            <div class="r-cost">Odh. náklady: 800 tis. – 1,2 mil. Kč</div>
+          </div>
+        </div>
+        <div class="repair-item">
+          <div class="r-icon r-icon-yes">✓</div>
+          <div class="r-content">
+            <div class="r-name">Elektrické rozvaděče + revize</div>
+            <div class="r-desc">Bezpečnostní nezbytnost, požadavek pojišťovny i legislativy. Nelze odkládat.</div>
+            <div class="r-cost">Odh. náklady: 600–900 tis. Kč</div>
+          </div>
+        </div>
+        <div class="repair-item">
+          <div class="r-icon r-icon-yes">✓</div>
+          <div class="r-content">
+            <div class="r-name">Hromosvod a uzemnění</div>
+            <div class="r-desc">Legislativní povinnost, kritická pro bezpečnost. Nízké náklady, nulová alternativa.</div>
+            <div class="r-cost">Odh. náklady: 200–400 tis. Kč</div>
+          </div>
+        </div>
+        <div class="repair-item">
+          <div class="r-icon r-icon-yes">✓</div>
+          <div class="r-content">
+            <div class="r-name">Trafostanice — revize a oprava</div>
+            <div class="r-desc">Napájení celého areálu závisí na funkční trafostanici. V případě Fáze 3 zásadní pro megawattový výkon stagí.</div>
+            <div class="r-cost">Odh. náklady: 1–1,5 mil. Kč</div>
+          </div>
+        </div>
+        <div class="repair-item">
+          <div class="r-icon r-icon-yes">✓</div>
+          <div class="r-content">
+            <div class="r-name">Kanalizace — kamerová inspekce</div>
+            <div class="r-desc">Nutné pro povolení jakékoliv budoucí výstavby. Levná preventivní akce.</div>
+            <div class="r-cost">Odh. náklady: 100–200 tis. Kč</div>
+          </div>
+        </div>
+      </div>
+      <div class="repair-group">
+        <div class="rg-title skip">✕ Vynechat nebo zredukovat — zbytečné výdaje</div>
+        <div class="repair-item">
+          <div class="r-icon r-icon-no">✕</div>
+          <div class="r-content">
+            <div class="r-name">Střecha kotelny — plný standard</div>
+            <div class="r-desc">Kotelna je určena k demolici nebo přestavbě ve Fázi 3. Stačí minimální oprava těsnosti, ne plná rekonstrukce.</div>
+            <div class="r-cost">Úspora: 1,5–2,5 mil. Kč</div>
+          </div>
+        </div>
+        <div class="repair-item">
+          <div class="r-icon r-icon-no">✕</div>
+          <div class="r-content">
+            <div class="r-name">Interiér kotelny</div>
+            <div class="r-desc">Interní prostory budovy určené k radikální přestavbě. Výmalba a povrchy postrádají smysl.</div>
+            <div class="r-cost">Úspora: 500 tis. – 1 mil. Kč</div>
+          </div>
+        </div>
+        <div class="repair-item">
+          <div class="r-icon r-icon-no">✕</div>
+          <div class="r-content">
+            <div class="r-name">Oprava fasády budov F3 zóny</div>
+            <div class="r-desc">Budovy určené k demolici/přestavbě pro sound stages — oprava fasády by se okamžitě demolovala.</div>
+            <div class="r-cost">Úspora: 800 tis. – 1,5 mil. Kč</div>
+          </div>
+        </div>
+        <div class="repair-item">
+          <div class="r-icon r-icon-no">✕</div>
+          <div class="r-content">
+            <div class="r-name">Parkoviště — plná rekonstrukce</div>
+            <div class="r-desc">Parkoviště bude znovu zpracováno v rámci architektonické studie. Postačí oprava kritických míst.</div>
+            <div class="r-cost">Úspora: 300–600 tis. Kč</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="savings-banner">
+      <div class="sb-item">
+        <div class="sb-val">3–5 mil. Kč</div>
+        <div class="sb-label">CELKOVÁ MOŽNÁ ÚSPORA</div>
+      </div>
+      <div class="sb-item">
+        <div class="sb-val">→ Architektonická studie</div>
+        <div class="sb-label">PŘESMĚROVÁNÍ ÚSPOR</div>
+      </div>
+      <div class="sb-item">
+        <div class="sb-val">+ Kontejnerová infrastruktura</div>
+        <div class="sb-label">A ZELENÁ KRAJINA FÁZE 1</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FUNDING -->
+  <div class="section" id="dotace">
+    <div class="section-label">DOTAČNÍ PŘÍLEŽITOSTI</div>
+    <h2 class="section-title">Dostupné zdroje <em>financování</em></h2>
+    <p class="section-desc">Přehled dotačních titulů relevantních pro jednotlivé fáze projektu. Celkový dotační potenciál: 20–30 mil. Kč pro Fáze 1+2.</p>
+    <div class="funding-grid">
+      <div class="fund-card">
+        <div class="fc-header">
+          <div>
+            <div class="fc-name">RES+ Modernizační fond</div>
+            <div class="fc-program">SFŽP · MŽP · PRŮBĚŽNÁ VÝZVA</div>
+          </div>
+          <div class="fc-badge fc-badge-amber">F2</div>
+        </div>
+        <div class="fc-amount">50 % nákladů FVE</div>
+        <div class="fc-desc">Podpora fotovoltaických elektráren a úspor energie. Pro FVE 200 kWp = 2–2,8 mil. Kč dotace. Snadno dosažitelný, standardní žádost.</div>
+        <div class="fc-phases">
+          <span class="fc-phase-dot fcp-2">FÁZE 2</span>
+        </div>
+      </div>
+      <div class="fund-card">
+        <div class="fc-header">
+          <div>
+            <div class="fc-name">ENERG ETS</div>
+            <div class="fc-program">MPO · VÝZVA PRAVIDELNÁ</div>
+          </div>
+          <div class="fc-badge fc-badge-amber">F2</div>
+        </div>
+        <div class="fc-amount">30–50 % nákladů</div>
+        <div class="fc-desc">Podpora energetické efektivity průmyslových budov. Tepelná čerpadla, izolace, výměna oken. Pro areál odh. 3–8 mil. Kč dotace.</div>
+        <div class="fc-phases">
+          <span class="fc-phase-dot fcp-2">FÁZE 2</span>
+        </div>
+      </div>
+      <div class="fund-card">
+        <div class="fc-header">
+          <div>
+            <div class="fc-name">OP ŽP SC 1.5</div>
+            <div class="fc-program">SFŽP · OPERAČNÍ PROGRAM ŽP</div>
+          </div>
+          <div class="fc-badge fc-badge-green">F1+F2</div>
+        </div>
+        <div class="fc-amount">40–85 % nákladů</div>
+        <div class="fc-desc">Zelená infrastruktura ve městech: stromy, travnaté plochy, mokřady, zelené střechy. Aplikovatelné od Fáze 1 (zelený pás) i Fáze 2 (střechy hal).</div>
+        <div class="fc-phases">
+          <span class="fc-phase-dot fcp-1">FÁZE 1</span>
+          <span class="fc-phase-dot fcp-2">FÁZE 2</span>
+        </div>
+      </div>
+      <div class="fund-card">
+        <div class="fc-header">
+          <div>
+            <div class="fc-name">SFŽP — Komunita &amp; sadba</div>
+            <div class="fc-program">SFŽP · PRŮBĚŽNÁ VÝZVA</div>
+          </div>
+          <div class="fc-badge fc-badge-green">F1</div>
+        </div>
+        <div class="fc-amount">50–80 % nákladů</div>
+        <div class="fc-desc">Komunitní výsadba a veřejné sadové úpravy. Pro zelený pás podél Za Zastávkou — výsadba stromů a trvalkové plochy. Relativně snadná žádost.</div>
+        <div class="fc-phases">
+          <span class="fc-phase-dot fcp-1">FÁZE 1</span>
+        </div>
+      </div>
+      <div class="fund-card">
+        <div class="fc-header">
+          <div>
+            <div class="fc-name">NPO Brownfieldy</div>
+            <div class="fc-program">MMR · NÁRODNÍ PLÁN OBNOVY</div>
+          </div>
+          <div class="fc-badge fc-badge-film">F2+F3</div>
+        </div>
+        <div class="fc-amount">3–500 mil. Kč</div>
+        <div class="fc-desc">Revitalizace průmyslových brownfieldů. Velký dotační titul s potenciálem pokrýt podstatnou část investice do hal a infrastruktury. Vyžaduje studie.</div>
+        <div class="fc-phases">
+          <span class="fc-phase-dot fcp-2">FÁZE 2</span>
+          <span class="fc-phase-dot fcp-3">FÁZE 3</span>
+        </div>
+      </div>
+      <div class="fund-card">
+        <div class="fc-header">
+          <div>
+            <div class="fc-name">SFA — Filmová infrastruktura</div>
+            <div class="fc-program">STÁTNÍ FOND PRO KINEMATOGRAFII</div>
+          </div>
+          <div class="fc-badge fc-badge-film">F3</div>
+        </div>
+        <div class="fc-amount">Cash rebate 25–35 %</div>
+        <div class="fc-desc">Podpora výstavby filmové infrastruktury a cash rebate pro produkce točící v ČR. Od 1. 1. 2025. Klíčový nástroj pro přilákání zahraničních produkcí do areálu.</div>
+        <div class="fc-phases">
+          <span class="fc-phase-dot fcp-3">FÁZE 3</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="section" id="harmonogram">
+    <div class="section-label">HARMONOGRAM</div>
+    <h2 class="section-title">Časová osa <em>2026–2035+</em></h2>
+    <div class="timeline-full">
+      <div class="tl-event ev-prep">
+        <div class="tl-event-header">
+          <div class="tl-event-period">Q1–Q2 2026</div>
+          <div class="tl-event-tag tag-prep">PŘÍPRAVA</div>
+        </div>
+        <div class="tl-event-title">Architektonická studie + průzkumy</div>
+        <div class="tl-event-desc">Zadání architektonické studie pro kontejnerový park a veřejný prostor. Kamerová inspekce kanalizace. Geodetické zaměření. Prezentace konceptu zastupitelům Dolní Měcholupy.</div>
+      </div>
+      <div class="tl-event ev-prep">
+        <div class="tl-event-header">
+          <div class="tl-event-period">Q3 2026</div>
+          <div class="tl-event-tag tag-prep">VYJEDNÁVÁNÍ</div>
+        </div>
+        <div class="tl-event-title">Předložení plánu obci · Vyjednávání o prodloužení pachtu</div>
+        <div class="tl-event-desc">Formální prezentace Plánu Zefektivnění zastupitelům. Zahájení jednání o podmínkách prodloužení pachtu (20+ let pro Fázi 2). Podání žádosti o dotace OP ŽP a SFŽP.</div>
+      </div>
+      <div class="tl-event ev-prep">
+        <div class="tl-event-header">
+          <div class="tl-event-period">Q3–Q4 2026</div>
+          <div class="tl-event-tag tag-prep">OPRAVY</div>
+        </div>
+        <div class="tl-event-title">Prioritní povinné opravy</div>
+        <div class="tl-event-desc">Realizace kritických oprav z Přílohy č. 2: elektrické rozvaděče, hromosvod, LED osvětlení, trafostanice. Přesměrování úspor (3–5 mil.) do přípravy Fáze 1.</div>
+      </div>
+      <div class="tl-event ev-f1">
+        <div class="tl-event-header">
+          <div class="tl-event-period">2026–2027</div>
+          <div class="tl-event-tag tag-f1">FÁZE 1</div>
+        </div>
+        <div class="tl-event-title">Řemeslný HUB — realizace</div>
+        <div class="tl-event-desc">Instalace 40–60 kontejnerů podél Za Zastávkou. Výsadba zeleného pásu s dotací SFŽP/OP ŽP. Zpevnění komunikací a napojení na inženýrské sítě. Obsazování nájemníky od 1. kontejneru.</div>
+      </div>
+      <div class="tl-event ev-f2">
+        <div class="tl-event-header">
+          <div class="tl-event-period">2028–2033</div>
+          <div class="tl-event-tag tag-f2">FÁZE 2 (podmínka: pacht 20+ let)</div>
+        </div>
+        <div class="tl-event-title">Smart Campus — realizace</div>
+        <div class="tl-event-desc">Adaptace průmyslových hal, zelené střechy, LED komín, FVE 200 kWp, tepelná čerpadla. Veřejný lineární park. Makerspace a kreativní kampus. Plné obsazení ~2031–2032.</div>
+      </div>
+      <div class="tl-event ev-f3">
+        <div class="tl-event-header">
+          <div class="tl-event-period">2033+</div>
+          <div class="tl-event-tag tag-f3">FÁZE 3 (podmínka: pacht 50 let + investor)</div>
+        </div>
+        <div class="tl-event-title">Filmový Park — realizace</div>
+        <div class="tl-event-desc">Výstavba 5 sound stages (1 200 m² každá), LED Volume Stage, produkční zázemí. Strategický investor, SFA dotace na infrastrukturu. Cíl: první produkce 2036–2037.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DECISION MATRIX -->
+  <div class="section" id="rozhodnuti">
+    <div class="section-label">ROZHODOVACÍ MATICE PRO ZASTUPITELE</div>
+    <h2 class="section-title">Co který <em>souhlas přináší</em></h2>
+    <p class="section-desc">Dolní Měcholupy může vstoupit do projektu na libovolné úrovni. Každé rozhodnutí zastupitelů má definované důsledky a rizika.</p>
+    <div class="decision-grid">
+      <div class="decision-card dc-f1">
+        <div class="dc-header">SOUHLAS ÚROVNĚ 1 · NÁVRH PRO STÁVAJÍCÍ PACHT</div>
+        <div class="dc-title">Fáze 1 + příprava dalších fází v rámci stávajícího pachtu</div>
+        <div class="dc-items">
+          <div class="dc-item"><span class="dc-check">✓</span><span>Okamžité zvýšení příjmu: +600 tis. – 1,9 mil. Kč/měs.</span></div>
+          <div class="dc-item"><span class="dc-check">✓</span><span>Kontejnerový park + zelený pás pro Dolní Měcholupy</span></div>
+          <div class="dc-item"><span class="dc-check">✓</span><span>Max. riziko obce: 10 mil. Kč (zbylé hradí BALLOON)</span></div>
+          <div class="dc-item"><span class="dc-check">✓</span><span>Kontejnery přemístitelné — reversibilní investice</span></div>
+          <div class="dc-item"><span class="dc-check">✓</span><span><strong>Architektonická studie</strong> — projektová příprava Fází 2 a 3</span></div>
+          <div class="dc-item"><span class="dc-check">✓</span><span><strong>Průzkumy &amp; geodézie</strong> — podklady pro stavební povolení</span></div>
+          <div class="dc-item"><span class="dc-check">✓</span><span><strong>Dotační příprava</strong> — žádosti RES+, OP ŽP, NPO Brownfieldy</span></div>
+          <div class="dc-item"><span class="dc-check">✓</span><span><strong>Hledání investora</strong> — oslovení strategických partnerů pro Fázi 3</span></div>
+        </div>
+        <div style="margin-top:14px; padding:10px 12px; background:rgba(240,184,69,0.12); border:1px solid rgba(240,184,69,0.3); font-size:11.5px; color:#4a4540; line-height:1.6;">
+          💡 <strong>Klíčový princip:</strong> Až zastupitelé rozhodnou o prodloužení pachtu, veškerá příprava je hotová — projekt pokračuje bez prodlení.
+        </div>
+        <div class="dc-condition">PODMÍNKA: ŽÁDNÁ — STÁVAJÍCÍ PACHT (do února 2035)</div>
+      </div>
+      <div class="decision-card dc-f2">
+        <div class="dc-header">SOUHLAS ÚROVNĚ 2 · ZLATÝ STŘED ★</div>
+        <div class="dc-title">Prodloužení pachtu na 20+ let → Fáze 1 + 2</div>
+        <div class="dc-items">
+          <div class="dc-item"><span class="dc-check">✓</span><span>Příjem 2,6–5 mil. Kč/měs. = 3,7× více než dnes</span></div>
+          <div class="dc-item"><span class="dc-check">✓</span><span>Kreativní kampus, LED komín, veřejný park, FVE</span></div>
+          <div class="dc-item"><span class="dc-check">✓</span><span>Dotace až 25–30 mil. Kč (RES+, ENERG, OP ŽP, NPO)</span></div>
+          <div class="dc-item"><span class="dc-check">✓</span><span>Identita Dolních Měcholup jako kreativní čtvrti</span></div>
+          <div class="dc-item"><span class="dc-check">✗</span><span>Střední riziko — přijatelné s dotacemi</span></div>
+        </div>
+        <div class="dc-condition">PODMÍNKA: PACHT 20+ LET · ZASTUPITELÉ HLASUJÍ</div>
+      </div>
+      <div class="decision-card dc-f3">
+        <div class="dc-header">SOUHLAS ÚROVNĚ 3 · VIZIONÁŘSKÝ</div>
+        <div class="dc-title">Prodloužení pachtu na 50 let → všechny 3 fáze</div>
+        <div class="dc-items">
+          <div class="dc-item"><span class="dc-check">✓</span><span>Roční výnos 24–120 mil. Kč z filmového studia</span></div>
+          <div class="dc-item"><span class="dc-check">✓</span><span>Dolní Měcholupy jako mezinárodní filmová destinace</span></div>
+          <div class="dc-item"><span class="dc-check">✓</span><span>Dual-Use pojistka: i bez úspěchu vznikne logistická hala</span></div>
+          <div class="dc-item"><span class="dc-check">✓</span><span>Investici zajišťuje soukromý strategický investor</span></div>
+          <div class="dc-item"><span class="dc-check">✗</span><span>Vyžaduje nejdelší závazek a hledání investora</span></div>
+        </div>
+        <div class="dc-condition">PODMÍNKA: PACHT 50 LET + STRATEGICKÝ INVESTOR</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CONCLUSION -->
+<div class="conclusion">
+  <div class="conc-inner">
+    <div class="conc-eyebrow">ZÁVĚR ANALYTICKÉHO DOKUMENTU · BŘEZEN 2026</div>
+    <h2 class="conc-title">Unikátní příležitost,<br><em>tři úrovně ambice</em></h2>
+    <p class="conc-text">
+      Areál Za Zastávkou 377 představuje unikátní příležitost pro proměnu industriálního
+      brownfieldu, která se opakuje jednou za generaci. Fáze 1 je realizovatelná ihned
+      ze stávajícího pachtu bez jakéhokoliv dalšího rozhodnutí zastupitelů — a přináší
+      okamžité zvýšení příjmu a zkvalitnění prostředí.
+    </p>
+    <p class="conc-text">
+      Fáze 2 (Smart Campus) s prodloužením pachtu na 20 let je zlatý střed — dostatečně
+      ambiciózní pro mezinárodní věhlas, realizovatelný s dotacemi, bezpečný pro obec.
+      Fáze 3 (Filmový Park) využívá historické okno kapacitní krize pražských studií
+      a staví Dolní Měcholupy na světovou mapu filmových destinací — s Dual-Use pojistkou.
+    </p>
+    <div class="conc-btns">
+      <a class="btn btn-green" href="faze1.html">Fáze 1 — ihned →</a>
+      <a class="btn btn-amber" href="faze2.html">Fáze 2 — zlatý střed →</a>
+      <a class="btn btn-film" href="faze3.html">Fáze 3 — vizionářská →</a>
+      <a class="btn btn-outline" href="index.html">← Zpět na přehled</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER NAV -->
+<div class="phase-nav">
+  <a class="phase-nav-back" href="faze3.html">← Fáze 3 – Filmový Park</a>
+  <div class="footer-copy">BALLOON · light · Praha · Areál Za Zastávkou 377 · Dolní Měcholupy · Plán Zefektivnění 2026</div>
+</div>
+
+</body>
+</html>

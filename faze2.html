@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fáze 2 – Smart Campus · Areál Za Zastávkou</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #1c1a16; --ink-soft: #4a4540;
+  --linen: #f4efe6; --linen-dark: #e8e0d2;
+  --amber: #c8860a; --amber-light: #f0b845; --amber-pale: #fdf3de;
+  --concrete: #8a8278; --concrete-light: #c4bdb4;
+  --film: #2c3e50; --film-pale: #e8ecf0;
+  --green: #3d6b4f; --green-pale: #e8f2ec;
+  --corten: #b5611a; --corten-pale: #fdf0e8;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(--ink); }
+
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--ink); border-bottom: 2px solid var(--amber);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 54px;
+}
+.nav-brand { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--amber-light); text-decoration: none; }
+.nav-links { display: flex; gap: 4px; }
+.nav-link { font-size: 11.5px; font-weight: 500; color: rgba(255,255,255,0.65); text-decoration: none; padding: 6px 14px; transition: all 0.2s; }
+.nav-link:hover, .nav-link.active { color: white; background: rgba(255,255,255,0.08); }
+.nav-link.active { color: var(--amber-light); }
+
+/* HERO */
+.phase-hero {
+  background: var(--amber);
+  position: relative; overflow: hidden;
+}
+.phase-hero-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 560px;
+}
+.phase-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255,0.03) 8px, rgba(255,255,255,0.03) 9px);
+}
+.phase-hero-left {
+  padding: 72px 64px;
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; justify-content: center;
+  background: linear-gradient(to right, rgba(28,26,22,0.25) 0%, transparent 100%);
+}
+.phase-num { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.25em; color: rgba(255,255,255,0.55); margin-bottom: 10px; }
+.phase-badge-hero {
+  display: inline-block; font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.2em; padding: 5px 12px;
+  background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4);
+  color: white; margin-bottom: 20px;
+}
+.phase-title { font-family: 'Cormorant Garamond', serif; font-size: 64px; font-weight: 300; line-height: 1.0; color: white; margin-bottom: 6px; }
+.phase-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; color: rgba(255,255,255,0.75); margin-bottom: 24px; }
+.phase-desc { font-size: 14px; color: rgba(255,255,255,0.85); line-height: 1.75; max-width: 440px; }
+.phase-hero-right { position: relative; overflow: hidden; }
+.phase-hero-right img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+/* STAR BADGE */
+.star-badge {
+  position: absolute; top: 32px; right: 32px; z-index: 10;
+  background: var(--amber-light); color: var(--ink);
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.15em;
+  padding: 8px 16px; font-weight: 600;
+}
+
+/* KPI ROW */
+.kpi-row {
+  background: var(--ink);
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  border-bottom: 2px solid var(--amber);
+}
+.kpi-item { padding: 20px 28px; border-right: 1px solid rgba(255,255,255,0.08); }
+.kpi-item:last-child { border-right: none; }
+.kpi-val { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--amber-light); line-height: 1; margin-bottom: 4px; }
+.kpi-label { font-family: 'DM Mono', monospace; font-size: 8.5px; letter-spacing: 0.12em; color: rgba(255,255,255,0.45); }
+.kpi-note { font-size: 10.5px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+
+/* MAIN */
+.main { max-width: 1300px; margin: 0 auto; padding: 72px 64px; }
+.section { margin-bottom: 72px; }
+.section-label { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: var(--concrete); margin-bottom: 6px; }
+.section-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 400; margin-bottom: 28px; letter-spacing: -0.01em; }
+.section-title em { font-style: italic; color: var(--amber); }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+/* FEATURE CARDS */
+.feature-card {
+  padding: 28px 24px; background: white; border: 1px solid var(--linen-dark);
+  border-top: 3px solid var(--amber);
+}
+.fc-icon { font-size: 32px; margin-bottom: 14px; }
+.fc-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; margin-bottom: 10px; }
+.fc-desc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.65; }
+
+/* HIGH LINE FEATURE */
+.highlight-block {
+  background: var(--amber-pale); border: 2px solid var(--amber);
+  padding: 36px 40px; margin-bottom: 24px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+}
+.hb-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; margin-bottom: 12px; }
+.hb-title em { font-style: italic; color: var(--amber); }
+.hb-desc { font-size: 13.5px; color: var(--ink-soft); line-height: 1.75; }
+.hb-right { border-left: 2px solid var(--amber); padding-left: 28px; }
+.hb-fact { margin-bottom: 16px; }
+.hb-fact-val { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 600; color: var(--amber); line-height: 1; }
+.hb-fact-label { font-size: 11px; color: var(--ink-soft); margin-top: 4px; }
+
+/* GALLERY */
+.gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-bottom: 4px; }
+.gallery-img { overflow: hidden; position: relative; }
+.gallery-img img { width: 100%; height: 260px; object-fit: cover; display: block; transition: transform 0.4s; }
+.gallery-img:hover img { transform: scale(1.04); }
+.gallery-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 14px; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%); font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: rgba(255,255,255,0.8); }
+.gallery-wide { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3px; }
+
+/* SUSTAINABILITY */
+.sustain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+.sustain-card {
+  padding: 28px 24px; background: var(--green-pale); border: 1px solid var(--green);
+}
+.sc-icon { font-size: 28px; margin-bottom: 10px; }
+.sc-title { font-weight: 600; font-size: 15px; margin-bottom: 6px; }
+.sc-val { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: var(--green); margin-bottom: 6px; }
+.sc-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.55; }
+
+/* CHIMNEY */
+.chimney-block {
+  background: var(--ink); padding: 40px; display: grid;
+  grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+  position: relative; overflow: hidden;
+}
+.chimney-block::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255,0.02) 8px, rgba(255,255,255,0.02) 9px);
+}
+.cb-content { position: relative; z-index: 1; }
+.cb-eyebrow { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: var(--amber-light); margin-bottom: 12px; }
+.cb-title { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; color: white; line-height: 1.1; margin-bottom: 16px; }
+.cb-title em { font-style: italic; color: var(--amber-light); }
+.cb-desc { font-size: 13.5px; color: rgba(255,255,255,0.7); line-height: 1.75; }
+.cb-visual { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 12px; }
+.cb-stat { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); padding: 16px 20px; }
+.cb-stat-val { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; color: var(--amber-light); }
+.cb-stat-label { font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 0.05em; }
+
+/* FIN TABLE */
+.fin-table { width: 100%; border-collapse: collapse; }
+.fin-table th { background: var(--amber); color: white; padding: 11px 16px; text-align: left; font-size: 11px; font-weight: 600; }
+.fin-table td { padding: 10px 16px; border-bottom: 1px solid var(--linen-dark); font-size: 12.5px; color: var(--ink-soft); }
+.fin-table tr:last-child td { border-bottom: none; }
+.fin-table tr:nth-child(even) td { background: rgba(0,0,0,0.02); }
+.fin-table td.row-label { font-weight: 600; color: var(--ink); }
+.fin-table td.highlight { color: var(--amber); font-weight: 700; font-family: 'DM Mono', monospace; }
+
+/* RISK */
+.risk-band { background: var(--amber-pale); border: 2px solid var(--amber); padding: 24px 28px; display: flex; gap: 32px; align-items: center; margin-bottom: 24px; }
+.risk-label-main { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: var(--amber); margin-bottom: 8px; }
+.risk-dots { display: flex; gap: 4px; }
+.rdot { width: 20px; height: 7px; border-radius: 1px; }
+.rdot.on { background: var(--amber); }
+.rdot.off { background: var(--linen-dark); }
+.risk-text { font-size: 13.5px; color: var(--ink-soft); line-height: 1.6; }
+.risk-text strong { color: var(--amber); }
+
+/* REFERENCES */
+.ref-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.ref-card { padding: 20px 22px; background: white; border: 1px solid var(--linen-dark); border-left: 3px solid var(--amber); }
+.ref-name { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+.ref-location { font-family: 'DM Mono', monospace; font-size: 9.5px; color: var(--concrete); letter-spacing: 0.1em; margin-bottom: 8px; }
+.ref-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.55; }
+
+/* CALLOUT */
+.callout { background: var(--amber); padding: 36px 40px; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; }
+.callout-text { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: white; line-height: 1.4; }
+.callout-text em { font-style: italic; color: var(--amber-light); }
+.callout-action { display: flex; flex-direction: column; gap: 10px; }
+.btn { display: inline-block; text-decoration: none; text-align: center; padding: 12px 28px; font-size: 13px; font-weight: 600; transition: all 0.2s; }
+.btn-white { background: white; color: var(--amber); }
+.btn-white:hover { background: var(--amber-light); color: var(--ink); }
+.btn-outline-white { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.45); }
+.btn-outline-white:hover { border-color: white; background: rgba(255,255,255,0.1); }
+
+/* CONDITION BANNER */
+.condition-banner {
+  background: var(--ink); border-left: 4px solid var(--amber-light);
+  padding: 20px 28px; display: flex; gap: 20px; align-items: center;
+  margin-bottom: 40px;
+}
+.cb-icon { font-size: 28px; }
+.cb-text { }
+.cbt-title { font-weight: 600; color: var(--amber-light); margin-bottom: 4px; }
+.cbt-desc { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.6; }
+
+/* PHASE NAV */
+.phase-nav { background: var(--ink); padding: 32px 64px; display: flex; justify-content: space-between; align-items: center; }
+.phase-nav-back { display: flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(255,255,255,0.6); font-size: 12px; transition: color 0.2s; }
+.phase-nav-back:hover { color: white; }
+.phase-nav-next { display: flex; align-items: center; gap: 16px; }
+.phase-nav-next-label { text-align: right; }
+.pnn-eyebrow { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.15em; color: rgba(255,255,255,0.4); }
+.pnn-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: white; }
+.btn-next { display: flex; align-items: center; gap: 8px; background: var(--amber); color: white; padding: 12px 22px; font-size: 13px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+.btn-next:hover { background: var(--amber-light); color: var(--ink); }
+.features-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.features-list li { display: flex; gap: 14px; align-items: flex-start; font-size: 13.5px; color: var(--ink-soft); line-height: 1.6; }
+.feat-icon { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--amber-pale); border: 1.5px solid var(--amber); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--amber); margin-top: 1px; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-brand" href="index.html">AREÁL ZA ZASTÁVKOU · PLÁN ZEFEKTIVNĚNÍ</a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Přehled</a>
+    <a class="nav-link" href="faze1.html">Fáze 1 – HUB</a>
+    <a class="nav-link active" href="faze2.html">Fáze 2 – Kampus</a>
+    <a class="nav-link" href="faze3.html">Fáze 3 – Film</a>
+    <a class="nav-link" href="analyza.html">Analýza &amp; Finance</a>
+    <a class="nav-link" href="dokumenty.html">Dokumenty</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="phase-hero">
+  <div class="phase-hero-inner">
+    <div class="phase-hero-left">
+      <div class="phase-num">FÁZE 02 · 2028–2033</div>
+      <div class="phase-badge-hero">★ ZLATÝ STŘED · STŘEDNÍ RIZIKO</div>
+      <h1 class="phase-title">Smart Campus</h1>
+      <div class="phase-subtitle">Kreativní kampus & Lineární park</div>
+      <p class="phase-desc">
+        Haly areálu se proměňují v kreativní kampus s pochozími zelenými střechami,
+        veřejným lineárním parkem, LED komínem jako landmarkem čtvrti a solární elektrárnou
+        200 kWp. Inspirace z nejlepších brownfield transformací v Evropě.
+      </p>
+    </div>
+    <div class="phase-hero-right">
+      <img src="images/F2 Common ground Korea 2.jpg" alt="Smart Campus — Common Ground inspirace">
+      <div class="star-badge">★ DOPORUČENÁ FÁZE</div>
+    </div>
+  </div>
+</div>
+
+<!-- KPI -->
+<div class="kpi-row">
+  <div class="kpi-item">
+    <div class="kpi-val">45–70 mil. Kč</div>
+    <div class="kpi-label">INVESTICE</div>
+    <div class="kpi-note">velká část dotacemi</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-val">2,6–5,0 mil./měs.</div>
+    <div class="kpi-label">PŘÍJEM Z NÁJMŮ</div>
+    <div class="kpi-note">3,7× více než dnes</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-val">80–150 Kč/m²/měs.</div>
+    <div class="kpi-label">NÁJEMNÉ KAMPUS</div>
+    <div class="kpi-note">kreativní prostory Praha</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-val">7–12 let</div>
+    <div class="kpi-label">NÁVRATNOST</div>
+    <div class="kpi-note">standardní pro brownfield</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-val">200 kWp</div>
+    <div class="kpi-label">FVE SOLÁRNÍ EL.</div>
+    <div class="kpi-note">RES+ dotace 50 %</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- CONDITION BANNER -->
+  <div class="condition-banner">
+    <div class="cb-icon">📋</div>
+    <div class="cb-text">
+      <div class="cbt-title">Podmínka pro Fázi 2: Prodloužení pachtu na 20+ let</div>
+      <div class="cbt-desc">Investice 45–70 mil. Kč vyžaduje delší amortizační horizont. Prodloužení pachtu je přirozeným výsledkem úspěšné Fáze 1 a prokázané hodnoty projektu pro Dolní Měcholupy.</div>
+    </div>
+  </div>
+
+  <!-- CONCEPT -->
+  <div class="section">
+    <div class="section-label">KONCEPT KAMPUSU</div>
+    <h2 class="section-title">High Line princip — <em>průmysl jako veřejný prostor</em></h2>
+    <div class="highlight-block">
+      <div>
+        <div class="hb-title">Pochozí zelené střechy <em>nad halami</em></div>
+        <p class="hb-desc">
+          Industriální haly se nedemolují — jejich střechy se přeměňují na veřejně přístupné
+          promenády se zelení, lavičkami a výhledy. Princip proslulého High Line parku v New Yorku
+          adaptovaný pro pražský kontext. Propojení kontejnerového pásu s halami lávkami.
+        </p>
+        <p class="hb-desc" style="margin-top: 12px;">
+          Veřejný lineární park podél ulice Za Zastávkou se stává novou „zelenou páteří" čtvrti
+          — průchozí, cyklisticky dostupný, se zastavěnými plochami pro komunitní aktivity.
+        </p>
+      </div>
+      <div class="hb-right">
+        <div class="hb-fact">
+          <div class="hb-fact-val">300 m</div>
+          <div class="hb-fact-label">délka lineárního parku podél Za Zastávkou</div>
+        </div>
+        <div class="hb-fact">
+          <div class="hb-fact-val">~5 000 m²</div>
+          <div class="hb-fact-label">odhadovaná plocha zelených střech</div>
+        </div>
+        <div class="hb-fact">
+          <div class="hb-fact-val">High Line</div>
+          <div class="hb-fact-label">referenční projekt New York — 8 mil. návštěvníků/rok</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="three-col">
+      <div class="feature-card">
+        <div class="fc-icon">🌿</div>
+        <div class="fc-title">Zelené střechy &amp; biodiverzita</div>
+        <div class="fc-desc">Extenzivní zelené střechy na průmyslových halách. Srážková voda zachycena pro závlahu. Hmyzí hotely a nektarodárné rostliny. Dotace OP ŽP 40–85 %.</div>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon">☀️</div>
+        <div class="fc-title">FVE 200 kWp + tepelná čerpadla</div>
+        <div class="fc-desc">Solární panely na plochých střechách hal. Výroba ~200 MWh/rok. Tepelná čerpadla vzduch-voda pro vytápění. Dotace RES+ 50 % nákladů FVE.</div>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon">🔬</div>
+        <div class="fc-title">Makerspace &amp; hi-tech dílny</div>
+        <div class="fc-desc">Sdílené 3D tiskárny, CNC stroje, elektronické laboratoře. Model Fab Lab. Nájemníci: hardware startupy, IoT firmy, design studia.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="section">
+    <div class="section-label">VIZUÁLNÍ INSPIRACE</div>
+    <h2 class="section-title">Referenční projekty v obrazech</h2>
+    <div class="gallery" style="margin-bottom: 3px;">
+      <div class="gallery-img">
+        <img src="images/F2 Common ground Korea.jpg" alt="Common Ground Seoul">
+        <div class="gallery-caption">COMMON GROUND · SEOUL · NEJVĚTŠÍ KONTEJNEROVÝ KAMPUS SVĚTA</div>
+      </div>
+      <div class="gallery-img">
+        <img src="images/f2 Box-Park-Qatar.jpg" alt="Box Park Qatar">
+        <div class="gallery-caption">BOX PARK · KATAR · VEŘEJNÝ AKTIVNÍ PARTER</div>
+      </div>
+    </div>
+    <div class="gallery-wide">
+      <div class="gallery-img">
+        <img src="images/F2 topiaris-landscape-architecture-tagus-linear-park-designboom-05.jpg" alt="Tagus Linear Park" style="height: 200px;">
+        <div class="gallery-caption">TAGUS LINEAR PARK · LISABON</div>
+      </div>
+      <div class="gallery-img">
+        <img src="images/f2 torronto market.jpg" alt="Toronto Market" style="height: 200px;">
+        <div class="gallery-caption">TORONTO MARKET · AKTIVNÍ VEŘEJNÝ PROSTOR</div>
+      </div>
+      <div class="gallery-img">
+        <img src="images/f2 Box-Park- 2.jpg" alt="Box Park" style="height: 200px;">
+        <div class="gallery-caption">BOX PARK · MULTI-LEVEL KAMPUS</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LED CHIMNEY -->
+  <div class="section">
+    <div class="section-label">LANDMARK ČTVRTI</div>
+    <div class="chimney-block">
+      <div class="cb-content">
+        <div class="cb-eyebrow">KOMÍN 642/22 · DOMINANTA DOLNÍCH MĚCHOLUP</div>
+        <h2 class="cb-title">LED komín —<br><em>ikona nové</em> Dolních Měcholup</h2>
+        <p class="cb-desc">
+          Historický průmyslový komín se transformuje v noční landmark čtvrti.
+          LED projekce po celé výšce komínu — viditelná z dálnice D1, z vlaku,
+          z celého okolí Dolních Měcholup. Identita místa, která přitahuje pozornost
+          a komunikuje charakter areálu bez nutnosti reklamy.
+        </p>
+        <p class="cb-desc" style="margin-top: 12px;">
+          Komín zároveň slouží jako technická opora pro antény, meteorologické senzory
+          a výhledově jako turistická atrakce s vyhlídkovou plošinou.
+        </p>
+      </div>
+      <div class="cb-visual">
+        <div class="cb-stat">
+          <div class="cb-stat-val">Viditelnost z dálnice D1</div>
+          <div class="cb-stat-label">LED PROJEKCE NA KOMÍNU 642/22</div>
+        </div>
+        <div class="cb-stat">
+          <div class="cb-stat-val">24/7 identita lokality</div>
+          <div class="cb-stat-label">VIZUÁLNÍ LANDMARK BEZ NÁKLADŮ NA REKLAMU</div>
+        </div>
+        <div class="cb-stat">
+          <div class="cb-stat-val">Technická i estetická funkce</div>
+          <div class="cb-stat-label">ANTÉNY · SENZORY · VÝHLEDOVÁ PLOŠINA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUSTAINABILITY -->
+  <div class="section">
+    <div class="section-label">UDRŽITELNOST</div>
+    <h2 class="section-title">Ekologie jako <em>ekonomická výhoda</em></h2>
+    <div class="sustain-grid">
+      <div class="sustain-card">
+        <div class="sc-icon">☀️</div>
+        <div class="sc-title">Fotovoltaika 200 kWp</div>
+        <div class="sc-val">~200 MWh/rok</div>
+        <div class="sc-desc">Vlastní výroba elektřiny pro areál. Dotace RES+ Modernizační fond: 50 % pořizovacích nákladů FVE = 2–2,8 mil. Kč.</div>
+      </div>
+      <div class="sustain-card">
+        <div class="sc-icon">♻️</div>
+        <div class="sc-title">Tepelná čerpadla vzduch-voda</div>
+        <div class="sc-val">–60 % topných nákladů</div>
+        <div class="sc-desc">Nahrazení plynového vytápění. Dotace ENERG ETS: 30–50 % nákladů na energetické úspory a čistou energii.</div>
+      </div>
+      <div class="sustain-card">
+        <div class="sc-icon">🌿</div>
+        <div class="sc-title">Zelené střechy &amp; mokřady</div>
+        <div class="sc-val">5 000+ m² zeleně</div>
+        <div class="sc-desc">Extenzivní zelené střechy, retenční nádrže, zelené stěny. Dotace OP ŽP SC 1.5: 40–85 % nákladů.</div>
+      </div>
+      <div class="sustain-card">
+        <div class="sc-icon">🚲</div>
+        <div class="sc-title">Cyklistická infrastruktura</div>
+        <div class="sc-val">Propojení s Prahou 15</div>
+        <div class="sc-desc">Cyklostojan, sprchy, úschovny kol. Napojení na cyklostezky. Podpora SFŽP pro nemotorovou dopravu.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINANCIALS -->
+  <div class="section">
+    <div class="section-label">FINANČNÍ MODEL</div>
+    <h2 class="section-title">Investice s reálnou návratností</h2>
+    <div class="two-col">
+      <table class="fin-table">
+        <thead><tr><th>Parametr</th><th>Konzervativní</th><th>Optimistický</th></tr></thead>
+        <tbody>
+          <tr><td class="row-label">Plocha kampusu</td><td>~8 000 m²</td><td>~12 000 m²</td></tr>
+          <tr><td class="row-label">Průměrné nájemné</td><td>80 Kč/m²/měs.</td><td>150 Kč/m²/měs.</td></tr>
+          <tr><td class="row-label">Obsazenost</td><td>80 %</td><td>95 %</td></tr>
+          <tr><td class="row-label">Měsíční příjem</td><td class="highlight">2,6 mil. Kč</td><td class="highlight">5,0 mil. Kč</td></tr>
+          <tr><td class="row-label">Celková investice</td><td>45 mil. Kč</td><td>70 mil. Kč</td></tr>
+          <tr><td class="row-label">Dotace (odhadované)</td><td>15 mil. Kč</td><td>25 mil. Kč</td></tr>
+          <tr><td class="row-label">Čistá investice</td><td class="highlight">~30 mil. Kč</td><td class="highlight">~45 mil. Kč</td></tr>
+          <tr><td class="row-label">Návratnost</td><td class="highlight">7–9 let</td><td class="highlight">9–12 let</td></tr>
+        </tbody>
+      </table>
+      <div>
+        <div class="risk-band">
+          <div>
+            <div class="risk-label-main">ÚROVEŇ RIZIKA</div>
+            <div class="risk-dots">
+              <div class="rdot on"></div>
+              <div class="rdot on"></div>
+              <div class="rdot on"></div>
+              <div class="rdot off"></div>
+              <div class="rdot off"></div>
+            </div>
+          </div>
+          <p class="risk-text"><strong>Střední riziko.</strong> Vyžaduje prodloužení pachtu. Sníženo dostupnými dotacemi a ověřenou poptávkou po kreativních prostorech v Praze.</p>
+        </div>
+        <ul class="features-list">
+          <li><div class="feat-icon">✓</div><span>RES+ Modernizační fond: <strong>50 %</strong> na FVE 200 kWp</span></li>
+          <li><div class="feat-icon">✓</div><span>ENERG ETS: <strong>30–50 %</strong> na tepelná čerpadla a izolace</span></li>
+          <li><div class="feat-icon">✓</div><span>OP ŽP SC 1.5: <strong>40–85 %</strong> na zelené střechy a park</span></li>
+          <li><div class="feat-icon">✓</div><span>NPO Brownfieldy: <strong>3–500 mil. Kč</strong> na revitalizaci průmyslových ploch</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- REFERENCES -->
+  <div class="section">
+    <div class="section-label">REFERENČNÍ PROJEKTY</div>
+    <h2 class="section-title">Osvědčené modely z celého světa</h2>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-name">DEPO2015</div>
+        <div class="ref-location">PLZEŇ · ČR · 2015</div>
+        <div class="ref-desc">Proměna tramvajového depa v kreativní centrum. Dnes sídlo 40+ organizací, kulturní programy, kavárna. Nejlepší analogie pro českou veřejnost a zastupitele.</div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-name">Pragovka Art District</div>
+        <div class="ref-location">VYSOČANY · PRAHA 9</div>
+        <div class="ref-desc">Průmyslový areál Pragy transformovaný ve živou čtvrť s galeriemi, ateliéry, gastro. Dokazuje, že Praha má chuť na kreativní brownfieldy.</div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-name">Common Ground</div>
+        <div class="ref-location">SEOUL · JIŽNÍ KOREA · 2015</div>
+        <div class="ref-desc">Největší kontejnerový kampus na světě s pochozími střechami, kavárny, móda, design — 3 600 m² na 5 patrech. Inspirace pro multi-level využití.</div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-name">Westergasfabriek</div>
+        <div class="ref-location">AMSTERDAM · HOLANDSKO</div>
+        <div class="ref-desc">Industriální plynárna přeměněná v parkový areál s kulturním programem. Zelené střechy, veřejný park. Referenční příklad pro kombinaci zeleně a industriálu.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CALLOUT -->
+  <div class="callout">
+    <div class="callout-text">
+      Smart Campus je <em>zlatý střed</em> — dostatečně ambiciózní pro mezinárodní věhlas,<br>
+      realizovatelný s pomocí dotací, dostatečně bezpečný pro obec.
+    </div>
+    <div class="callout-action">
+      <a class="btn btn-white" href="faze3.html">Pokračovat na Fázi 3 →</a>
+      <a class="btn btn-outline-white" href="analyza.html">Finanční analýza</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- PHASE NAV -->
+<div class="phase-nav">
+  <a class="phase-nav-back" href="faze1.html">← Fáze 1 – Řemeslný HUB</a>
+  <div class="phase-nav-next">
+    <div class="phase-nav-next-label">
+      <div class="pnn-eyebrow">NÁSLEDUJÍCÍ FÁZE</div>
+      <div class="pnn-name">Filmový Park</div>
+    </div>
+    <a class="btn-next" href="faze3.html">Fáze 3 →</a>
+  </div>
+</div>
+
+</body>
+</html>

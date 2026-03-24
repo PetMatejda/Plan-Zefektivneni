@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Areál Za Zastávkou · Plán Zefektivnění</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #1c1a16; --ink-soft: #4a4540;
+  --linen: #f4efe6; --linen-dark: #e8e0d2;
+  --amber: #c8860a; --amber-light: #f0b845; --amber-pale: #fdf3de;
+  --concrete: #8a8278; --concrete-light: #c4bdb4;
+  --film: #2c3e50; --film-pale: #e8ecf0;
+  --green: #3d6b4f; --green-pale: #e8f2ec;
+  --corten: #b5611a; --corten-pale: #fdf0e8;
+  --white: #ffffff;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(--ink); overflow-x: hidden; }
+
+/* ── NAV ── */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--ink); border-bottom: 2px solid var(--amber);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 54px;
+}
+.nav-brand {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.2em; color: var(--amber-light); text-decoration: none;
+}
+.nav-links { display: flex; gap: 4px; }
+.nav-link {
+  font-family: 'DM Sans', sans-serif; font-size: 11.5px; font-weight: 500;
+  color: rgba(255,255,255,0.65); text-decoration: none;
+  padding: 6px 14px; border-radius: 2px;
+  transition: all 0.2s;
+}
+.nav-link:hover, .nav-link.active { color: white; background: rgba(255,255,255,0.08); }
+.nav-link.active { color: var(--amber-light); }
+
+/* ── HERO ── */
+.hero {
+  position: relative; height: 92vh; min-height: 600px;
+  display: flex; align-items: flex-end;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: url('images/fo Areal dnes.jpg') center/cover no-repeat;
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(28,26,22,0.92) 0%, rgba(28,26,22,0.4) 50%, rgba(28,26,22,0.1) 100%);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 0 64px 72px;
+  max-width: 900px;
+}
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.25em; color: var(--amber-light);
+  margin-bottom: 18px;
+}
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(48px, 7vw, 88px); font-weight: 300; line-height: 1.0;
+  color: white; letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+.hero-title em { font-style: italic; color: var(--amber-light); }
+.hero-desc {
+  font-size: 15px; color: rgba(255,255,255,0.75); font-weight: 300;
+  line-height: 1.7; max-width: 560px; margin-bottom: 36px;
+}
+.hero-stats {
+  display: flex; gap: 2px;
+}
+.hero-stat {
+  background: rgba(255,255,255,0.07); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 16px 24px;
+}
+.hero-stat-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-weight: 600; color: var(--amber-light);
+  line-height: 1; margin-bottom: 4px;
+}
+.hero-stat-label { font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; }
+
+/* ── SECTION INTRO ── */
+.section-intro {
+  padding: 72px 64px 48px;
+  max-width: 1300px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end;
+}
+.section-intro-left h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 40px; font-weight: 300; line-height: 1.15;
+  letter-spacing: -0.01em; margin-bottom: 20px;
+}
+.section-intro-left h2 em { font-style: italic; color: var(--amber); }
+.section-intro-left p {
+  font-size: 14px; color: var(--ink-soft); line-height: 1.8; margin-bottom: 12px;
+}
+.section-intro-right {
+  font-size: 13px; color: var(--ink-soft); line-height: 1.75;
+  border-left: 3px solid var(--amber); padding-left: 24px;
+}
+
+/* ── PHASE CARDS GRID ── */
+.phases-section {
+  padding: 0 64px 80px;
+  max-width: 1300px; margin: 0 auto;
+}
+.phases-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3px;
+}
+.phase-card {
+  position: relative; overflow: hidden;
+  min-height: 560px; display: flex; flex-direction: column; justify-content: flex-end;
+  text-decoration: none; color: inherit;
+  cursor: pointer;
+}
+.phase-card-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  transition: transform 0.6s ease;
+}
+.phase-card:hover .phase-card-bg { transform: scale(1.04); }
+.phase-card-overlay {
+  position: absolute; inset: 0;
+  transition: opacity 0.3s;
+}
+.phase-card-1 .phase-card-overlay { background: linear-gradient(to top, rgba(61,107,79,0.92) 0%, rgba(28,26,22,0.3) 55%, transparent 100%); }
+.phase-card-2 .phase-card-overlay { background: linear-gradient(to top, rgba(200,134,10,0.95) 0%, rgba(28,26,22,0.35) 55%, transparent 100%); }
+.phase-card-3 .phase-card-overlay { background: linear-gradient(to top, rgba(44,62,80,0.95) 0%, rgba(28,26,22,0.35) 55%, transparent 100%); }
+.phase-card-content {
+  position: relative; z-index: 2;
+  padding: 36px 32px;
+}
+.phase-card-badge {
+  display: inline-block;
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em;
+  padding: 4px 10px; border-radius: 1px; margin-bottom: 14px;
+}
+.phase-card-1 .phase-card-badge { background: var(--green); color: white; }
+.phase-card-2 .phase-card-badge { background: var(--amber-light); color: var(--ink); }
+.phase-card-3 .phase-card-badge { background: var(--film); color: white; border: 1px solid rgba(255,255,255,0.2); }
+.phase-card-num {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  color: rgba(255,255,255,0.55); letter-spacing: 0.1em; margin-bottom: 6px;
+}
+.phase-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 38px; font-weight: 600; color: white;
+  line-height: 1.05; margin-bottom: 8px;
+}
+.phase-card-tagline {
+  font-size: 12px; color: rgba(255,255,255,0.8); margin-bottom: 20px;
+  line-height: 1.5;
+}
+.phase-card-stats {
+  display: flex; gap: 20px; margin-bottom: 20px;
+  padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.2);
+}
+.pcs-item {}
+.pcs-val {
+  font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600;
+  color: white; line-height: 1;
+}
+.pcs-label { font-size: 9.5px; color: rgba(255,255,255,0.55); letter-spacing: 0.08em; margin-top: 3px; }
+.phase-card-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11.5px; font-weight: 600; color: white;
+  border: 1.5px solid rgba(255,255,255,0.45); padding: 9px 18px;
+  transition: all 0.2s;
+}
+.phase-card:hover .phase-card-cta {
+  background: rgba(255,255,255,0.15); border-color: white;
+}
+.phase-card-cta svg { transition: transform 0.2s; }
+.phase-card:hover .phase-card-cta svg { transform: translateX(4px); }
+
+/* ── FEATURED PHASE ── */
+.phase-card-2 { grid-row: span 1; }
+.phase-card-2 .phase-card-title { font-size: 44px; }
+
+/* ── CONTAINER STRIP ── */
+.container-strip {
+  background: var(--corten);
+  position: relative; overflow: hidden;
+  margin: 0 64px 80px;
+}
+.container-strip::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255,0.04) 8px, rgba(255,255,255,0.04) 9px);
+}
+.cs-inner {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 280px 1fr;
+}
+.cs-left {
+  padding: 40px 36px;
+  border-right: 1px solid rgba(255,255,255,0.15);
+}
+.cs-eyebrow { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: var(--amber-light); margin-bottom: 12px; }
+.cs-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: white; margin-bottom: 10px; }
+.cs-desc { font-size: 11.5px; color: rgba(255,255,255,0.7); line-height: 1.6; }
+.cs-right {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  padding: 0;
+}
+.cs-phase {
+  padding: 32px 28px;
+  border-right: 1px solid rgba(255,255,255,0.12);
+}
+.cs-phase:last-child { border-right: none; }
+.cs-ph-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.15em; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+.cs-ph-title { font-size: 13px; font-weight: 600; color: white; margin-bottom: 8px; }
+.cs-ph-desc { font-size: 11px; color: rgba(255,255,255,0.65); line-height: 1.55; }
+
+/* ── TIMELINE STRIP ── */
+.timeline-section {
+  padding: 0 64px 80px;
+  max-width: 1300px; margin: 0 auto;
+}
+.timeline-header {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.2em; color: var(--concrete); margin-bottom: 24px;
+}
+.timeline-track {
+  position: relative;
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 3px;
+}
+.timeline-track::before {
+  content: '';
+  position: absolute; top: 32px; left: 0; right: 0;
+  height: 2px; background: var(--linen-dark);
+  z-index: 0;
+}
+.tl-phase {
+  position: relative; z-index: 1;
+}
+.tl-dot {
+  width: 14px; height: 14px; border-radius: 50%;
+  margin-bottom: 16px; border: 3px solid white;
+  box-shadow: 0 0 0 2px currentColor;
+}
+.tl-phase:nth-child(1) .tl-dot { background: var(--green); color: var(--green); }
+.tl-phase:nth-child(2) .tl-dot { background: var(--amber); color: var(--amber); }
+.tl-phase:nth-child(3) .tl-dot { background: var(--film); color: var(--film); }
+.tl-year { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--concrete); margin-bottom: 6px; }
+.tl-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; margin-bottom: 6px; }
+.tl-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.55; }
+.tl-condition {
+  display: inline-block; margin-top: 10px;
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em;
+  padding: 3px 8px; border-radius: 1px;
+  border: 1px solid;
+}
+.tl-phase:nth-child(1) .tl-condition { color: var(--green); border-color: var(--green); background: var(--green-pale); }
+.tl-phase:nth-child(2) .tl-condition { color: var(--amber); border-color: var(--amber); background: var(--amber-pale); }
+.tl-phase:nth-child(3) .tl-condition { color: var(--film); border-color: var(--film); background: var(--film-pale); }
+
+/* ── DISCUSSION CALLOUT ── */
+.discussion-section {
+  margin: 0 64px 80px;
+  background: var(--ink);
+  padding: 56px 64px;
+  display: grid; grid-template-columns: 1fr 360px; gap: 60px; align-items: center;
+  position: relative; overflow: hidden;
+}
+.discussion-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255,0.015) 8px, rgba(255,255,255,0.015) 9px);
+}
+.ds-content { position: relative; z-index: 1; }
+.ds-eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--amber-light); margin-bottom: 16px; }
+.ds-title { font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 300; color: white; line-height: 1.1; margin-bottom: 16px; }
+.ds-title em { font-style: italic; color: var(--amber-light); }
+.ds-desc { font-size: 13.5px; color: rgba(255,255,255,0.65); line-height: 1.75; }
+.ds-actions { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 10px; }
+.ds-btn {
+  display: block; text-decoration: none; text-align: center;
+  padding: 16px 28px; font-size: 13px; font-weight: 600;
+  transition: all 0.2s;
+}
+.ds-btn-primary { background: var(--amber); color: white; }
+.ds-btn-primary:hover { background: var(--amber-light); color: var(--ink); }
+.ds-btn-secondary { background: transparent; color: rgba(255,255,255,0.7); border: 1.5px solid rgba(255,255,255,0.2); }
+.ds-btn-secondary:hover { border-color: rgba(255,255,255,0.5); color: white; }
+
+/* ── FOOTER ── */
+.footer {
+  background: var(--ink); padding: 36px 64px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.footer-brand { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--concrete); letter-spacing: 0.15em; }
+.footer-links { display: flex; gap: 24px; }
+.footer-link { font-size: 11.5px; color: var(--concrete); text-decoration: none; transition: color 0.2s; }
+.footer-link:hover { color: var(--amber-light); }
+.footer-copy { font-size: 10.5px; color: rgba(255,255,255,0.25); }
+
+@media (max-width: 1024px) {
+  .phases-grid { grid-template-columns: 1fr; }
+  .section-intro { grid-template-columns: 1fr; gap: 24px; }
+  .phases-section, .timeline-section, .container-strip, .discussion-section { margin-left: 24px; margin-right: 24px; padding-left: 24px; padding-right: 24px; }
+  .discussion-section { grid-template-columns: 1fr; }
+  .hero-content { padding: 0 32px 48px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-brand" href="index.html">AREÁL ZA ZASTÁVKOU · PLÁN ZEFEKTIVNĚNÍ</a>
+  <div class="nav-links">
+    <a class="nav-link active" href="index.html">Přehled</a>
+    <a class="nav-link" href="faze1.html">Fáze 1 – HUB</a>
+    <a class="nav-link" href="faze2.html">Fáze 2 – Kampus</a>
+    <a class="nav-link" href="faze3.html">Fáze 3 – Film</a>
+    <a class="nav-link" href="analyza.html">Analýza &amp; Finance</a>
+    <a class="nav-link" href="dokumenty.html">Dokumenty</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">AREÁL ZA ZASTÁVKOU 377 · DOLNÍ MĚCHOLUPY · PRAHA 15 · 33 000 m²</div>
+    <h1 class="hero-title">Tři fáze<br>proměny areálu</h1>
+    <p class="hero-desc">
+      Industriální brownfield v srdci Dolních Měcholup čeká na nový život.
+      Koncept navržený pro zastupitele Dolních Měcholup ukazuje cestu od okamžitě
+      realizovatelného řemeslného hubu přes kreativní kampus světové úrovně
+      až k filmovému studiu mezinárodního věhlasu.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-val">33 000 m²</div>
+        <div class="hero-stat-label">PLOCHA AREÁLU</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val">3 fáze</div>
+        <div class="hero-stat-label">POSTUPNÝ ROZVOJ</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val">12–350+ mil.</div>
+        <div class="hero-stat-label">INVESTICE KČ DLE FÁZE</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val">10 mil. Kč</div>
+        <div class="hero-stat-label">MAX. RIZIKO OBCE</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<div class="section-intro">
+  <div class="section-intro-left">
+    <h2>Od skladu k <em>ikoně čtvrti</em> —<br>každá fáze samostatně životaschopná</h2>
+    <p>
+      Areál Za Zastávkou 377 v Dolních Měcholupech tvoří unikátní příležitost pro proměnu
+      industriálního prostoru. 300metrový pás podél ulice Za Zastávkou se stane páteřním prvkem
+      celého konceptu — v každé fázi plní jinou roli, vždy s okamžitou ekonomickou návratností.
+    </p>
+    <p>
+      Koncept je navržen tak, aby Dolní Měcholupy mohly vstoupit kdykoliv, na libovolné úrovni ambice,
+      s maximálním rizikem omezeným na 10 mil. Kč ze strany obce.
+    </p>
+  </div>
+  <div class="section-intro-right">
+    <strong>Proč teď?</strong> Stávající pacht (700 514 Kč/měs.) je výrazně pod tržní hodnotou
+    (40–90 Kč/m²/měs.). Investice do areálu se automaticky stanou majetkem Dolních Měcholup.
+    Kapacitní krize pražských filmových studií vytváří historické okno pro Fázi 3.
+    SFA cash rebate 25–35 % (od 1. 1. 2025) dělá z ČR atraktivní produkční destinaci.
+    Barrandov je plně obsazen od roku 2023 — kapacity chybí právě nyní.
+  </div>
+</div>
+
+<!-- PHASE CARDS -->
+<div class="phases-section">
+  <div class="phases-grid">
+
+    <!-- PHASE 1 -->
+    <a class="phase-card phase-card-1" href="faze1.html">
+      <div class="phase-card-bg" style="background-image: url('images/f1 koma.jpg');"></div>
+      <div class="phase-card-overlay"></div>
+      <div class="phase-card-content">
+        <div class="phase-card-num">FÁZE 01 · 2025–2027</div>
+        <div class="phase-card-badge">REALIZOVATELNÉ IHNED</div>
+        <h2 class="phase-card-title">Řemeslný HUB</h2>
+        <p class="phase-card-tagline">Creative Garages · Kontejnerový park · Zelený pás</p>
+        <div class="phase-card-stats">
+          <div class="pcs-item">
+            <div class="pcs-val">12–18 mil.</div>
+            <div class="pcs-label">INVESTICE KČ</div>
+          </div>
+          <div class="pcs-item">
+            <div class="pcs-val">1,3–2,6 mil.</div>
+            <div class="pcs-label">PŘÍJEM / MĚS.</div>
+          </div>
+          <div class="pcs-item">
+            <div class="pcs-val">3–6 měs.</div>
+            <div class="pcs-label">NÁVRATNOST</div>
+          </div>
+        </div>
+        <div class="phase-card-cta">
+          Detailní přehled
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <!-- PHASE 2 -->
+    <a class="phase-card phase-card-2" href="faze2.html">
+      <div class="phase-card-bg" style="background-image: url('images/F2 Common ground Korea 2.jpg');"></div>
+      <div class="phase-card-overlay"></div>
+      <div class="phase-card-content">
+        <div class="phase-card-num">FÁZE 02 · 2028–2033</div>
+        <div class="phase-card-badge">★ ZLATÝ STŘED</div>
+        <h2 class="phase-card-title">Smart Campus</h2>
+        <p class="phase-card-tagline">Kreativní kampus · Veřejný park · LED komín · FVE 200 kWp</p>
+        <div class="phase-card-stats">
+          <div class="pcs-item">
+            <div class="pcs-val">45–70 mil.</div>
+            <div class="pcs-label">INVESTICE KČ</div>
+          </div>
+          <div class="pcs-item">
+            <div class="pcs-val">2,6–5,0 mil.</div>
+            <div class="pcs-label">PŘÍJEM / MĚS.</div>
+          </div>
+          <div class="pcs-item">
+            <div class="pcs-val">7–12 let</div>
+            <div class="pcs-label">NÁVRATNOST</div>
+          </div>
+        </div>
+        <div class="phase-card-cta">
+          Detailní přehled
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <!-- PHASE 3 -->
+    <a class="phase-card phase-card-3" href="faze3.html">
+      <div class="phase-card-bg" style="background-image: url('images/f3 cinecitta.jpeg');"></div>
+      <div class="phase-card-overlay"></div>
+      <div class="phase-card-content">
+        <div class="phase-card-num">FÁZE 03 · 2033+</div>
+        <div class="phase-card-badge">MAXIMALISTICKÁ</div>
+        <h2 class="phase-card-title">Filmový Park</h2>
+        <p class="phase-card-tagline">5× Sound Stage · LED Volume · Celoevropský věhlas</p>
+        <div class="phase-card-stats">
+          <div class="pcs-item">
+            <div class="pcs-val">350+ mil.</div>
+            <div class="pcs-label">INVESTICE KČ</div>
+          </div>
+          <div class="pcs-item">
+            <div class="pcs-val">100–120 mil.</div>
+            <div class="pcs-label">VÝNOS / ROK</div>
+          </div>
+          <div class="pcs-item">
+            <div class="pcs-val">6–17 let</div>
+            <div class="pcs-label">NÁVRATNOST</div>
+          </div>
+        </div>
+        <div class="phase-card-cta">
+          Detailní přehled
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<!-- CONTAINER STRIP -->
+<div class="container-strip">
+  <div class="cs-inner">
+    <div class="cs-left">
+      <div class="cs-eyebrow">PÁTEŘNÍ PRVEK VŠECH 3 FÁZÍ</div>
+      <div class="cs-title">Kontejnerový pás Za Zastávkou<br>300 m × 55 m</div>
+      <div class="cs-desc">
+        Přímá viditelnost z ulice Za Zastávkou. Za tratí: Metrans — největší
+        kontejnerové překladiště v Evropě. Kontrast surových vs. designových kontejnerů
+        tvoří silný identitní asset lokality.
+      </div>
+    </div>
+    <div class="cs-right">
+      <div class="cs-phase">
+        <div class="cs-ph-label">FÁZE 1</div>
+        <div class="cs-ph-title">Sklady + garáže + zelený pás</div>
+        <div class="cs-ph-desc">Modulární, přemístitelné kontejnery. Okamžitý příjem od prvního dne. 40–60 jednotek pro živnostníky a hobby dílny.</div>
+      </div>
+      <div class="cs-phase">
+        <div class="cs-ph-label">FÁZE 2</div>
+        <div class="cs-ph-title">Aktivní parter + pochozí střechy</div>
+        <div class="cs-ph-desc">High Line princip — kontejnery nesou pěší lávky. Kavárny, showroomy, veřejný lineární park podél celého pásu.</div>
+      </div>
+      <div class="cs-phase">
+        <div class="cs-ph-label">FÁZE 3</div>
+        <div class="cs-ph-title">Produkční zázemí + LED branding</div>
+        <div class="cs-ph-desc">Šatny, líčení, sklady rekvizit pro filmové produkce. LED panely s identitou studia jako vizuální landmark čtvrti.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CURRENT LEASE STRATEGY BANNER -->
+<div style="background:#1c1a16; border-left:5px solid #f0b845; margin:0 64px 4px; padding:28px 36px; display:grid; grid-template-columns:auto 1fr; gap:28px; align-items:start;">
+  <div style="font-size:32px; padding-top:2px;">📋</div>
+  <div>
+    <div style="font-family:'DM Mono',monospace; font-size:9.5px; letter-spacing:0.2em; color:#f0b845; margin-bottom:10px;">CO NAVRHUJEME V RÁMCI STÁVAJÍCÍHO PACHTU (do února 2035)</div>
+    <div style="font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:600; color:white; margin-bottom:14px; line-height:1.2;">Fáze 1 ihned + <span style="color:#f0b845; font-style:italic;">příprava půdy pro Fáze 2 a 3</span></div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+      <div>
+        <div style="font-size:11px; font-weight:600; color:#86efac; margin-bottom:6px;">▶ REALIZACE — okamžitě</div>
+        <div style="font-size:12.5px; color:rgba(255,255,255,0.7); line-height:1.65;">Fáze 1 (kontejnerový park, zelený pás) lze spustit bez jakékoliv změny pachtu. Příjem plyne od prvního kontejneru.</div>
+      </div>
+      <div>
+        <div style="font-size:11px; font-weight:600; color:#f0b845; margin-bottom:6px;">▶ PŘÍPRAVA DALŠÍCH FÁZÍ — souběžně</div>
+        <div style="font-size:12.5px; color:rgba(255,255,255,0.7); line-height:1.65;">Architektonická studie · Projekt pro stavební povolení · Průzkumy a geodézie · Příprava žádostí o dotace · Hledání strategického investora pro Fázi 3</div>
+      </div>
+    </div>
+    <div style="margin-top:14px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.1); font-size:12px; color:rgba(255,255,255,0.5); font-style:italic;">
+      Cíl: Až zastupitelé rozhodnou o prodloužení pachtu, veškerá příprava je hotová — projekt pokračuje bez prodlení.
+    </div>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div class="timeline-section">
+  <div class="timeline-header">ČASOVÁ OSA ROZVOJE</div>
+  <div class="timeline-track">
+    <div class="tl-phase">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2025 – 2027</div>
+      <div class="tl-name">Řemeslný HUB</div>
+      <div class="tl-desc">Kontejnerový park, zelený pás, živnosti, sklady, garáže. Okamžitý příjem bez přerušení provozu.</div>
+      <span class="tl-condition">STÁVAJÍCÍ PACHT · BEZ PODMÍNEK</span>
+    </div>
+    <div class="tl-phase">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2028 – 2033</div>
+      <div class="tl-name">Smart Campus</div>
+      <div class="tl-desc">Kreativní kampus, pochozí střechy, LED komín, FVE 200 kWp, makerspace a design studia.</div>
+      <span class="tl-condition">PODMÍNKA: PACHT 20+ LET</span>
+    </div>
+    <div class="tl-phase">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2033 +</div>
+      <div class="tl-name">Filmový Park</div>
+      <div class="tl-desc">5 sound stages, LED Volume Stage pro virtuální produkci, mezinárodní filmové produkce (Netflix, Apple, Amazon).</div>
+      <span class="tl-condition">PODMÍNKA: PACHT 50 LET + INVESTOR</span>
+    </div>
+  </div>
+</div>
+
+<!-- DISCUSSION -->
+<div class="discussion-section">
+  <div class="ds-content">
+    <div class="ds-eyebrow">PODKLAD PRO DISKUZI ZASTUPITELŮ</div>
+    <h2 class="ds-title">Jakou <em>ambici</em><br>zvolí Dolní Měcholupy?</h2>
+    <p class="ds-desc">
+      Tři fáze nabízejí tři různé úrovně závazku a odpovídající výnosy.
+      Fáze 1 je realizovatelná ihned ze stávajícího pachtu. Fáze 2 vyžaduje prodloužení
+      na 20 let. Fáze 3 otevírá cestu k mezinárodní identitě Dolních Měcholup jako filmové destinace —
+      s Dual-Use pojistkou, která eliminuje zbývající riziko pro obec.
+    </p>
+  </div>
+  <div class="ds-actions">
+    <a class="ds-btn ds-btn-primary" href="faze1.html">Začít s Fází 1 →</a>
+    <a class="ds-btn ds-btn-secondary" href="analyza.html">Finanční analýza &amp; podklady</a>
+    <a class="ds-btn ds-btn-secondary" href="faze3.html">Vizionářská Fáze 3 →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-brand">BALLOON · LIGHT · PRAHA · AREÁL ZA ZASTÁVKOU 377 · DOLNÍ MĚCHOLUPY · PLÁN ZEFEKTIVNĚNÍ 2026</div>
+  <div class="footer-links">
+    <a class="footer-link" href="faze1.html">Fáze 1</a>
+    <a class="footer-link" href="faze2.html">Fáze 2</a>
+    <a class="footer-link" href="faze3.html">Fáze 3</a>
+    <a class="footer-link" href="analyza.html">Analýza</a>
+  </div>
+  <div class="footer-copy">© 2026 BALLOON · light</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Podkladové dokumenty · Areál Za Zastávkou</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #1c1a16; --ink-soft: #4a4540;
+  --linen: #f4efe6; --linen-dark: #e8e0d2;
+  --amber: #c8860a; --amber-light: #f0b845; --amber-pale: #fdf3de;
+  --concrete: #8a8278;
+  --film: #2c3e50; --film-pale: #e8ecf0;
+  --green: #3d6b4f; --green-pale: #e8f2ec;
+  --corten: #b5611a;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(--ink); min-height: 100vh; display: flex; flex-direction: column; }
+
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--ink); border-bottom: 2px solid var(--amber);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 54px; flex-shrink: 0;
+}
+.nav-brand { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--amber-light); text-decoration: none; }
+.nav-links { display: flex; gap: 4px; }
+.nav-link { font-size: 11.5px; font-weight: 500; color: rgba(255,255,255,0.65); text-decoration: none; padding: 6px 14px; transition: all 0.2s; }
+.nav-link:hover, .nav-link.active { color: white; background: rgba(255,255,255,0.08); }
+.nav-link.active { color: var(--amber-light); }
+
+/* HERO */
+.page-hero { background: var(--ink); padding: 48px 64px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.ph-eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--amber-light); margin-bottom: 12px; }
+.ph-title { font-family: 'Cormorant Garamond', serif; font-size: 44px; font-weight: 300; color: white; line-height: 1.05; }
+.ph-title em { font-style: italic; color: var(--amber-light); }
+.ph-desc { font-size: 13.5px; color: rgba(255,255,255,0.55); margin-top: 12px; max-width: 680px; line-height: 1.7; }
+
+/* DOC CARDS */
+.docs-grid {
+  max-width: 1300px; margin: 0 auto;
+  padding: 56px 64px;
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3px;
+  flex: 1;
+}
+
+.doc-card {
+  background: white; border: 1px solid var(--linen-dark);
+  display: flex; flex-direction: column;
+  transition: box-shadow 0.2s;
+}
+.doc-card:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+
+.doc-card-preview {
+  height: 220px; overflow: hidden; position: relative;
+  background: var(--ink);
+}
+.doc-card-preview iframe {
+  width: 200%; height: 200%;
+  transform: scale(0.5); transform-origin: 0 0;
+  border: none; pointer-events: none;
+}
+.doc-card-preview-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.4) 100%);
+}
+.doc-card-preview-img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+
+.doc-card-body { padding: 24px 24px 20px; flex: 1; display: flex; flex-direction: column; }
+.doc-num { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: var(--concrete); margin-bottom: 8px; }
+.doc-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; margin-bottom: 8px; line-height: 1.2; }
+.doc-desc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.65; margin-bottom: 20px; flex: 1; }
+.doc-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+.doc-tag { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; padding: 3px 8px; border-radius: 1px; }
+.tag-html { background: var(--amber-pale); color: var(--amber); border: 1px solid var(--amber); }
+.tag-schema { background: var(--green-pale); color: var(--green); border: 1px solid var(--green); }
+.tag-infographic { background: var(--film-pale); color: var(--film); border: 1px solid var(--film); }
+.tag-web { background: var(--linen-dark); color: var(--ink-soft); border: 1px solid var(--linen-dark); }
+
+.doc-btn {
+  display: inline-block; text-decoration: none;
+  padding: 11px 20px; font-size: 12.5px; font-weight: 600;
+  background: var(--ink); color: white; text-align: center;
+  transition: all 0.2s;
+}
+.doc-btn:hover { background: var(--amber); }
+.doc-btn-outline {
+  display: inline-block; text-decoration: none;
+  padding: 11px 20px; font-size: 12.5px; font-weight: 600;
+  background: transparent; color: var(--ink-soft);
+  border: 1.5px solid var(--linen-dark); text-align: center; margin-top: 6px;
+  transition: all 0.2s;
+}
+.doc-btn-outline:hover { border-color: var(--ink); color: var(--ink); }
+
+/* VIEWER SECTION */
+.viewer-section { max-width: 1300px; margin: 0 auto; padding: 0 64px 80px; }
+.viewer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.viewer-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; }
+.viewer-title em { font-style: italic; color: var(--amber); }
+.viewer-tabs { display: flex; gap: 3px; }
+.vtab {
+  font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.1em;
+  padding: 8px 16px; cursor: pointer; background: var(--linen-dark); color: var(--ink-soft);
+  border: none; transition: all 0.2s;
+}
+.vtab.active { background: var(--ink); color: var(--amber-light); }
+.vtab:hover:not(.active) { background: var(--concrete-light); }
+.iframe-wrapper {
+  border: 2px solid var(--ink);
+  background: white; display: none;
+}
+.iframe-wrapper.active { display: block; }
+.iframe-wrapper iframe {
+  width: 100%; height: 720px; border: none; display: block;
+}
+.iframe-note { padding: 10px 16px; background: var(--ink); font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.12em; color: rgba(255,255,255,0.45); }
+
+/* FOOTER */
+.footer { background: var(--ink); padding: 28px 64px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); }
+.footer-brand { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--concrete); letter-spacing: 0.15em; }
+.footer-copy { font-size: 10.5px; color: rgba(255,255,255,0.2); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-brand" href="index.html">AREÁL ZA ZASTÁVKOU · PLÁN ZEFEKTIVNĚNÍ</a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Přehled</a>
+    <a class="nav-link" href="faze1.html">Fáze 1</a>
+    <a class="nav-link" href="faze2.html">Fáze 2</a>
+    <a class="nav-link" href="faze3.html">Fáze 3</a>
+    <a class="nav-link" href="analyza.html">Analýza</a>
+    <a class="nav-link active" href="dokumenty.html">Dokumenty</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="ph-eyebrow">PODKLADOVÉ DOKUMENTY · PLÁN ZEFEKTIVNĚNÍ</div>
+  <h1 class="ph-title">Schémata &amp; <em>infografiky</em></h1>
+  <p class="ph-desc">Původní podkladové dokumenty připravené pro jednání s Prahou 15. Interaktivní schéma 3 fází, detailní infografika a interaktivní webová prezentace.</p>
+</div>
+
+<!-- DOC CARDS -->
+<div class="docs-grid">
+
+  <!-- DOC 1: Schema -->
+  <div class="doc-card">
+    <div class="doc-card-preview" style="background: #1c1a16;">
+      <iframe src="schema-original.html" scrolling="no" tabindex="-1"></iframe>
+      <div class="doc-card-preview-overlay"></div>
+    </div>
+    <div class="doc-card-body">
+      <div class="doc-num">DOKUMENT 01</div>
+      <div class="doc-title">Top-Level Schéma 3 fází</div>
+      <div class="doc-desc">Přehledné SVG schéma všech tří fází v jednom pohledu. Klíčové parametry, finanční metriky, rizika a dotační zdroje každé fáze na jedné stránce. Ideální pro první seznámení zastupitelů s konceptem.</div>
+      <div class="doc-meta">
+        <span class="doc-tag tag-html">HTML · SVG</span>
+        <span class="doc-tag tag-schema">PŘEHLEDOVÉ SCHÉMA</span>
+      </div>
+      <a class="doc-btn" href="schema-original.html" target="_blank">Otevřít schéma ↗</a>
+    </div>
+  </div>
+
+  <!-- DOC 2: Infographic -->
+  <div class="doc-card">
+    <div class="doc-card-preview" style="background: #f4efe6;">
+      <iframe src="infografika-original.html" scrolling="no" tabindex="-1"></iframe>
+      <div class="doc-card-preview-overlay"></div>
+    </div>
+    <div class="doc-card-body">
+      <div class="doc-num">DOKUMENT 02</div>
+      <div class="doc-title">Detailní infografika 3 fází</div>
+      <div class="doc-desc">Rozšířená HTML infografika s detailním rozpisem každé fáze, srovnávacími tabulkami, popisem kontejnerového pásu a analýzou povinných oprav. Primární podkladový dokument pro diskuzi.</div>
+      <div class="doc-meta">
+        <span class="doc-tag tag-html">HTML</span>
+        <span class="doc-tag tag-infographic">DETAILNÍ INFOGRAFIKA</span>
+      </div>
+      <a class="doc-btn" href="infografika-original.html" target="_blank">Otevřít infografiku ↗</a>
+    </div>
+  </div>
+
+  <!-- DOC 3: This website -->
+  <div class="doc-card">
+    <div class="doc-card-preview" style="background: #1c1a16; display: flex; align-items: center; justify-content: center;">
+      <div style="text-align: center; color: white; padding: 32px;">
+        <div style="font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: rgba(255,255,255,0.4); margin-bottom: 16px;">WEBOVÁ PREZENTACE</div>
+        <div style="font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; color: #f0b845; line-height: 1.1; margin-bottom: 12px;">Plán<br>Zefektivnění</div>
+        <div style="font-size: 11px; color: rgba(255,255,255,0.5);">5 propojených stránek</div>
+      </div>
+    </div>
+    <div class="doc-card-body">
+      <div class="doc-num">DOKUMENT 03</div>
+      <div class="doc-title">Interaktivní webová prezentace</div>
+      <div class="doc-desc">Tato webová prezentace v 5 stránkách — přehled konceptu, detaily každé fáze a finanční analýza pro zastupitele. S fotogalerií, srovnávacími tabulkami a rozhodovací maticí.</div>
+      <div class="doc-meta">
+        <span class="doc-tag tag-html">HTML</span>
+        <span class="doc-tag tag-web">5 STRÁNEK</span>
+      </div>
+      <a class="doc-btn" href="index.html">Přejít na prezentaci</a>
+      <a class="doc-btn-outline" href="analyza.html">Finanční analýza →</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- INLINE VIEWER -->
+<div class="viewer-section">
+  <div class="viewer-header">
+    <div class="viewer-title">Prohlížeč dokumentů — <em>inline náhled</em></div>
+    <div class="viewer-tabs">
+      <button class="vtab active" onclick="showDoc('schema')">Schéma 3 fází</button>
+      <button class="vtab" onclick="showDoc('infografika')">Infografika</button>
+    </div>
+  </div>
+  <div class="iframe-wrapper active" id="doc-schema">
+    <iframe src="schema-original.html" title="Schéma 3 fází"></iframe>
+    <div class="iframe-note">DOKUMENT 01 · TOP-LEVEL SCHÉMA 3 FÁZÍ · SVG INTERAKTIVNÍ · BALLOON · LIGHT · 2026</div>
+  </div>
+  <div class="iframe-wrapper" id="doc-infografika">
+    <iframe src="infografika-original.html" title="Infografika 3 fází" style="height: 1400px;"></iframe>
+    <div class="iframe-note">DOKUMENT 02 · DETAILNÍ INFOGRAFIKA 3 FÁZÍ · HTML · BALLOON · LIGHT · 2026</div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-brand">BALLOON · LIGHT · PRAHA · AREÁL ZA ZASTÁVKOU 377 · DOLNÍ MĚCHOLUPY · PLÁN ZEFEKTIVNĚNÍ 2026</div>
+  <div class="footer-copy">© 2026 BALLOON · light</div>
+</footer>
+
+<script>
+function showDoc(id) {
+  document.querySelectorAll('.iframe-wrapper').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.vtab').forEach(el => el.classList.remove('active'));
+  document.getElementById('doc-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>

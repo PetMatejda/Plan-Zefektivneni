@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fáze 1 – Řemeslný HUB · Areál Za Zastávkou</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #1c1a16; --ink-soft: #4a4540;
+  --linen: #f4efe6; --linen-dark: #e8e0d2;
+  --amber: #c8860a; --amber-light: #f0b845; --amber-pale: #fdf3de;
+  --concrete: #8a8278; --concrete-light: #c4bdb4;
+  --film: #2c3e50; --film-pale: #e8ecf0;
+  --green: #3d6b4f; --green-pale: #e8f2ec;
+  --corten: #b5611a; --corten-pale: #fdf0e8;
+  --phase: var(--green); --phase-pale: var(--green-pale);
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(--ink); }
+
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--ink); border-bottom: 2px solid var(--green);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 54px;
+}
+.nav-brand { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--amber-light); text-decoration: none; }
+.nav-links { display: flex; gap: 4px; }
+.nav-link { font-size: 11.5px; font-weight: 500; color: rgba(255,255,255,0.65); text-decoration: none; padding: 6px 14px; transition: all 0.2s; }
+.nav-link:hover, .nav-link.active { color: white; background: rgba(255,255,255,0.08); }
+.nav-link.active { color: #86efac; }
+
+/* PHASE HERO */
+.phase-hero {
+  background: var(--green);
+  position: relative; overflow: hidden;
+  padding: 0;
+}
+.phase-hero-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 540px;
+}
+.phase-hero-left {
+  padding: 72px 64px;
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.phase-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255,0.03) 8px, rgba(255,255,255,0.03) 9px);
+}
+.phase-num { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.25em; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+.phase-badge-hero {
+  display: inline-block; font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.2em; padding: 5px 12px; background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3); color: white; margin-bottom: 20px;
+}
+.phase-title { font-family: 'Cormorant Garamond', serif; font-size: 64px; font-weight: 300; line-height: 1.0; color: white; margin-bottom: 6px; }
+.phase-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; color: rgba(255,255,255,0.7); margin-bottom: 24px; }
+.phase-desc { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.75; max-width: 440px; }
+.phase-hero-right {
+  position: relative; overflow: hidden;
+}
+.phase-hero-right img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0.85;
+}
+
+/* KPI ROW */
+.kpi-row {
+  background: var(--ink);
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  border-bottom: 2px solid var(--green);
+}
+.kpi-item {
+  padding: 20px 28px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+.kpi-item:last-child { border-right: none; }
+.kpi-val { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--amber-light); line-height: 1; margin-bottom: 4px; }
+.kpi-label { font-family: 'DM Mono', monospace; font-size: 8.5px; letter-spacing: 0.12em; color: rgba(255,255,255,0.45); }
+.kpi-note { font-size: 10.5px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+
+/* MAIN CONTENT */
+.main { max-width: 1300px; margin: 0 auto; padding: 72px 64px; }
+
+/* SECTION */
+.section { margin-bottom: 72px; }
+.section-label { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: var(--concrete); margin-bottom: 6px; }
+.section-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 400; margin-bottom: 28px; letter-spacing: -0.01em; }
+.section-title em { font-style: italic; color: var(--green); }
+
+/* TWO-COL */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+
+/* CONCEPT BLOCK */
+.concept-block { border: 2px solid var(--linen-dark); padding: 32px; background: white; }
+.concept-block h3 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; margin-bottom: 16px; }
+.concept-block p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.75; margin-bottom: 12px; }
+.concept-block p:last-child { margin-bottom: 0; }
+
+/* FEATURES LIST */
+.features-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.features-list li {
+  display: flex; gap: 14px; align-items: flex-start;
+  font-size: 13.5px; color: var(--ink-soft); line-height: 1.6;
+}
+.feat-icon {
+  flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--green-pale); border: 1.5px solid var(--green);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; color: var(--green); margin-top: 1px;
+}
+
+/* TENANTS */
+.tenant-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+.tenant-card {
+  padding: 24px 20px; background: white; border: 1px solid var(--linen-dark);
+}
+.tenant-icon { font-size: 28px; margin-bottom: 10px; }
+.tenant-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; margin-bottom: 6px; }
+.tenant-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.55; margin-bottom: 10px; }
+.tenant-tag { display: inline-block; font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; padding: 3px 8px; background: var(--green-pale); color: var(--green); border: 1px solid var(--green); }
+
+/* FINANCIALS TABLE */
+.fin-table { width: 100%; border-collapse: collapse; }
+.fin-table th { background: var(--green); color: white; padding: 11px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 0.05em; }
+.fin-table td { padding: 10px 16px; border-bottom: 1px solid var(--linen-dark); font-size: 12.5px; color: var(--ink-soft); vertical-align: top; }
+.fin-table tr:last-child td { border-bottom: none; }
+.fin-table tr:nth-child(even) td { background: rgba(0,0,0,0.02); }
+.fin-table td.row-label { font-weight: 600; color: var(--ink); }
+.fin-table td.highlight { color: var(--green); font-weight: 700; font-family: 'DM Mono', monospace; }
+
+/* RISK BAND */
+.risk-band {
+  background: var(--green-pale); border: 2px solid var(--green);
+  padding: 24px 28px; display: flex; gap: 32px; align-items: center;
+  margin-bottom: 24px;
+}
+.risk-label-main { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: var(--green); margin-bottom: 8px; }
+.risk-dots { display: flex; gap: 4px; }
+.rdot { width: 20px; height: 7px; border-radius: 1px; }
+.rdot.on { background: var(--green); }
+.rdot.off { background: var(--linen-dark); }
+.risk-text { font-size: 13.5px; color: var(--ink-soft); line-height: 1.6; }
+.risk-text strong { color: var(--green); }
+
+/* IMAGE GALLERY */
+.gallery { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3px; }
+.gallery-img {
+  overflow: hidden; position: relative;
+}
+.gallery-img.tall { grid-row: span 2; }
+.gallery-img img { width: 100%; height: 100%; object-fit: cover; display: block; min-height: 200px; transition: transform 0.4s; }
+.gallery-img:hover img { transform: scale(1.04); }
+.gallery-caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 8px 14px;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.8);
+}
+
+/* REFERENCES */
+.ref-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.ref-card {
+  padding: 20px 22px; background: white; border: 1px solid var(--linen-dark);
+  border-left: 3px solid var(--green);
+}
+.ref-name { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+.ref-location { font-family: 'DM Mono', monospace; font-size: 9.5px; color: var(--concrete); letter-spacing: 0.1em; margin-bottom: 8px; }
+.ref-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.55; }
+
+/* CALLOUT */
+.callout {
+  background: var(--green); padding: 36px 40px;
+  display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center;
+}
+.callout-text { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: white; line-height: 1.4; }
+.callout-text em { font-style: italic; color: var(--amber-light); }
+.callout-action { display: flex; flex-direction: column; gap: 10px; }
+.btn {
+  display: inline-block; text-decoration: none; text-align: center;
+  padding: 12px 28px; font-size: 13px; font-weight: 600; transition: all 0.2s;
+}
+.btn-white { background: white; color: var(--green); }
+.btn-white:hover { background: var(--amber-light); color: var(--ink); }
+.btn-outline-white { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.45); }
+.btn-outline-white:hover { border-color: white; background: rgba(255,255,255,0.1); }
+
+/* PHASE NAV */
+.phase-nav {
+  background: var(--ink); padding: 32px 64px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.phase-nav-back { display: flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(255,255,255,0.6); font-size: 12px; transition: color 0.2s; }
+.phase-nav-back:hover { color: white; }
+.phase-nav-next {
+  display: flex; align-items: center; gap: 16px;
+}
+.phase-nav-next-label { text-align: right; }
+.pnn-eyebrow { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.15em; color: rgba(255,255,255,0.4); }
+.pnn-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: white; }
+.btn-next {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--amber); color: white;
+  padding: 12px 22px; font-size: 13px; font-weight: 600;
+  text-decoration: none; transition: all 0.2s;
+}
+.btn-next:hover { background: var(--amber-light); color: var(--ink); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-brand" href="index.html">AREÁL ZA ZASTÁVKOU · PLÁN ZEFEKTIVNĚNÍ</a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Přehled</a>
+    <a class="nav-link active" href="faze1.html">Fáze 1 – HUB</a>
+    <a class="nav-link" href="faze2.html">Fáze 2 – Kampus</a>
+    <a class="nav-link" href="faze3.html">Fáze 3 – Film</a>
+    <a class="nav-link" href="analyza.html">Analýza &amp; Finance</a>
+    <a class="nav-link" href="dokumenty.html">Dokumenty</a>
+  </div>
+</nav>
+
+<!-- PHASE HERO -->
+<div class="phase-hero">
+  <div class="phase-hero-inner">
+    <div class="phase-hero-left">
+      <div class="phase-num">FÁZE 01 · 2025–2027</div>
+      <div class="phase-badge-hero">REALIZOVATELNÉ IHNED · NÍZKÉ RIZIKO</div>
+      <h1 class="phase-title">Řemeslný HUB</h1>
+      <div class="phase-subtitle">Creative Garages & Kontejnerový park</div>
+      <p class="phase-desc">
+        40–60 designových kontejnerů podél ulice Za Zastávkou tvoří živý pás řemeslných
+        dílen, garáží a skladů. Bez přerušení stávajícího příjmu, okamžitě realizovatelné
+        ze současného pachtu. Páteř areálu pro všechny budoucí fáze.
+      </p>
+    </div>
+    <div class="phase-hero-right">
+      <img src="images/f1 koma.jpg" alt="Kontejnerový park — inspirace">
+    </div>
+  </div>
+</div>
+
+<!-- KPI ROW -->
+<div class="kpi-row">
+  <div class="kpi-item">
+    <div class="kpi-val">12–18 mil. Kč</div>
+    <div class="kpi-label">INVESTICE</div>
+    <div class="kpi-note">z toho max. 10 mil. obec</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-val">1,3–2,6 mil./měs.</div>
+    <div class="kpi-label">PŘÍJEM Z NÁJMŮ</div>
+    <div class="kpi-note">vs. stav. 700 tis./měs.</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-val">40–80 Kč/m²/měs.</div>
+    <div class="kpi-label">NÁJEMNÉ KONTEJNERY</div>
+    <div class="kpi-note">tržní standard Praha</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-val">3–6 měsíců</div>
+    <div class="kpi-label">NÁVRATNOST</div>
+    <div class="kpi-note">nejrychlejší ze 3 fází</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-val">40–60 jednotek</div>
+    <div class="kpi-label">POČET KONTEJNERŮ</div>
+    <div class="kpi-note">900–1 350 m² celkem</div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- CONCEPT -->
+  <div class="section">
+    <div class="section-label">KONCEPT A ZÁMĚR</div>
+    <h2 class="section-title">Proč <em>kontejnerový park</em> jako první krok?</h2>
+    <div class="two-col">
+      <div class="concept-block">
+        <h3>Okamžitý efekt bez přerušení provozu</h3>
+        <p>
+          Kontejnery jsou modulární a přemístitelné — lze je instalovat postupně, zatímco
+          areál dál funguje. Není potřeba kompletní rekonstrukce ani dlouhá příprava.
+          Příjem z nájmů začíná plynout od prvního obsazeného kontejneru.
+        </p>
+        <p>
+          Na rozdíl od klasické stavební rekonstrukce nevzniká výpadek příjmu. Investice
+          150–250 tis. Kč na jednu kontejnerovou jednotku se vrátí za méně než rok
+          ze samotného nájemného.
+        </p>
+      </div>
+      <div>
+        <ul class="features-list">
+          <li>
+            <div class="feat-icon">→</div>
+            <span><strong>Páteř areálu</strong> — 300metrový pás podél Za Zastávkou funguje ve všech třech fázích. Kontejnery Fáze 1 se stanou základem pro High Line lávky Fáze 2.</span>
+          </li>
+          <li>
+            <div class="feat-icon">→</div>
+            <span><strong>Zelený pás</strong> — Výsadba stromů a travnaté plochy vzdálené od areálu i ulice. Okamžitý příspěvek ke kvalitě veřejného prostoru Dolních Měcholup.</span>
+          </li>
+          <li>
+            <div class="feat-icon">→</div>
+            <span><strong>Identitní asset</strong> — Za tratí je Metrans, největší kontejnerové překladiště v Evropě. Vizuální kontrast surových vs. designových kontejnerů tvoří silný příběh lokality.</span>
+          </li>
+          <li>
+            <div class="feat-icon">→</div>
+            <span><strong>Flexibilita</strong> — Pokud by se Dolní Měcholupy rozhodly nepokračovat, kontejnery lze prodat nebo přemístit. Nulové irreverzibilní náklady.</span>
+          </li>
+          <li>
+            <div class="feat-icon">→</div>
+            <span><strong>Bez nutnosti prodloužení pachtu</strong> — Fáze 1 je plně realizovatelná v rámci stávajícího pachtu (do února 2035).</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMAGE GALLERY -->
+  <div class="section">
+    <div class="section-label">VIZUÁLNÍ INSPIRACE</div>
+    <h2 class="section-title">Jak může areál vypadat</h2>
+    <div class="gallery">
+      <div class="gallery-img tall">
+        <img src="images/f1 SS-Header-Images-2200x670-External-Storage-Units.jpg" alt="Kontejnerové sklady">
+        <div class="gallery-caption">KONTEJNEROVÝ PÁS · SKLADY &amp; GARÁŽE</div>
+      </div>
+      <div class="gallery-img">
+        <img src="images/f1 koma.jpg" alt="Modulární kontejnery">
+        <div class="gallery-caption">MODULÁRNÍ JEDNOTKY</div>
+      </div>
+      <div class="gallery-img">
+        <img src="images/F1 trees.jpg" alt="Zelený pás">
+        <div class="gallery-caption">ZELENÝ PÁS &amp; VÝSADBA</div>
+      </div>
+      <div class="gallery-img">
+        <img src="images/f1 KelownaNowColumn-MainImage.jpeg" alt="Kreativní garáže">
+        <div class="gallery-caption">KREATIVNÍ GARÁŽE</div>
+      </div>
+      <div class="gallery-img">
+        <img src="images/f1 Modern-Double-Layer-Apartment-Outdoor-Garage-Residence-Stylish-Prefab-Homes-Modular-Prefabricated-House-Container-House.avif" alt="Kontejnerová architektura">
+        <div class="gallery-caption">KONTEJNEROVÁ ARCHITEKTURA</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TARGET TENANTS -->
+  <div class="section">
+    <div class="section-label">CÍLOVÉ NÁJEMNÍ SKUPINY</div>
+    <h2 class="section-title">Kdo bude v areálu <em>pracovat</em>?</h2>
+    <div class="tenant-grid">
+      <div class="tenant-card">
+        <div class="tenant-icon">🔧</div>
+        <div class="tenant-name">Řemeslníci &amp; živnostníci</div>
+        <div class="tenant-desc">Elektrikáři, instalatéři, truhláři, svářeči — živnosti hledající dostupný a dostupný prostor v Praze 15.</div>
+        <span class="tenant-tag">HLAVNÍ CÍLOVÁ SKUPINA</span>
+      </div>
+      <div class="tenant-card">
+        <div class="tenant-icon">🚗</div>
+        <div class="tenant-name">Autoopravny &amp; hobby garáže</div>
+        <div class="tenant-desc">Garážové dílny pro osobní automobily, motocykly, oldtimery. Hobby mechanici bez zázemí.</div>
+        <span class="tenant-tag">VYSOKÁ POPTÁVKA</span>
+      </div>
+      <div class="tenant-card">
+        <div class="tenant-icon">📦</div>
+        <div class="tenant-name">Malé e-shopy &amp; sklady</div>
+        <div class="tenant-desc">Živnostníci a malé e-commerce firmy potřebující skladový prostor blízko Prahy s dopravní dostupností.</div>
+        <span class="tenant-tag">RYCHLÁ OBSAZENOST</span>
+      </div>
+      <div class="tenant-card">
+        <div class="tenant-icon">🎨</div>
+        <div class="tenant-name">Kreativci &amp; designéři</div>
+        <div class="tenant-desc">Sochaři, keramici, grafici — umělci hledající levný ateliér s možností prašného a hlučného provozu.</div>
+        <span class="tenant-tag">KOMUNITNÍ POTENCIÁL</span>
+      </div>
+      <div class="tenant-card">
+        <div class="tenant-icon">🏋️</div>
+        <div class="tenant-name">Sport &amp; fitness</div>
+        <div class="tenant-desc">CrossFit boxy, bojová umění, jóga v industriálním prostoru — rostoucí trend v pražských brownfieldech.</div>
+        <span class="tenant-tag">DOPLŇKOVÁ SKUPINA</span>
+      </div>
+      <div class="tenant-card">
+        <div class="tenant-icon">☕</div>
+        <div class="tenant-name">Kavárna &amp; food truck</div>
+        <div class="tenant-desc">Obsluha nájemníků i kolemjdoucích. Aktivní parter vytváří živost a komunitu. Jedna či dvě jednotky.</div>
+        <span class="tenant-tag">AKTIVACE MÍSTA</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINANCIAL MODEL -->
+  <div class="section">
+    <div class="section-label">FINANČNÍ MODEL</div>
+    <h2 class="section-title">Čísla, která mluví za sebe</h2>
+    <div class="two-col">
+      <div>
+        <table class="fin-table">
+          <thead>
+            <tr>
+              <th>Parametr</th>
+              <th>Konzervativní</th>
+              <th>Optimistický</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="row-label">Počet kontejnerů</td>
+              <td>40 ks</td>
+              <td>60 ks</td>
+            </tr>
+            <tr>
+              <td class="row-label">Plocha celkem</td>
+              <td>900 m²</td>
+              <td>1 350 m²</td>
+            </tr>
+            <tr>
+              <td class="row-label">Průměrné nájemné</td>
+              <td>40 Kč/m²/měs.</td>
+              <td>80 Kč/m²/měs.</td>
+            </tr>
+            <tr>
+              <td class="row-label">Měsíční příjem</td>
+              <td class="highlight">1,3 mil. Kč</td>
+              <td class="highlight">2,6 mil. Kč</td>
+            </tr>
+            <tr>
+              <td class="row-label">Investice na kontejner</td>
+              <td>250 tis. Kč</td>
+              <td>200 tis. Kč</td>
+            </tr>
+            <tr>
+              <td class="row-label">Celková investice</td>
+              <td>10–12 mil. Kč</td>
+              <td>12–18 mil. Kč</td>
+            </tr>
+            <tr>
+              <td class="row-label">Návratnost investice</td>
+              <td class="highlight">6 měsíců</td>
+              <td class="highlight">3 měsíce</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="risk-band">
+          <div>
+            <div class="risk-label-main">ÚROVEŇ RIZIKA</div>
+            <div class="risk-dots">
+              <div class="rdot on"></div>
+              <div class="rdot off"></div>
+              <div class="rdot off"></div>
+              <div class="rdot off"></div>
+              <div class="rdot off"></div>
+            </div>
+          </div>
+          <p class="risk-text">
+            <strong>Nízké riziko.</strong> Kontejnery jsou přemístitelné — v nejhorším případě
+            lze projekt ukončit a kontejnery prodat. Podíl obce maximálně 10 mil. Kč,
+            zbylé financování zajišťuje BALLOON.
+          </p>
+        </div>
+        <ul class="features-list">
+          <li>
+            <div class="feat-icon">✓</div>
+            <span>Dotace OP ŽP SC 1.5 na zelenou infrastrukturu: <strong>40–85 %</strong> nákladů na zeleň</span>
+          </li>
+          <li>
+            <div class="feat-icon">✓</div>
+            <span>SFŽP komunitní sadba: až <strong>80 %</strong> na výsadbu stromů a travnaté plochy</span>
+          </li>
+          <li>
+            <div class="feat-icon">✓</div>
+            <span>Příjem z nájmů začíná okamžitě po instalaci každého kontejneru — <strong>žádný výpadek</strong></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- REFERENCES -->
+  <div class="section">
+    <div class="section-label">INSPIRACE A REFERENCE</div>
+    <h2 class="section-title">Úspěšné projekty, ze kterých čerpáme</h2>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-name">Boxpark Shoreditch</div>
+        <div class="ref-location">LONDÝN · VELKÁ BRITÁNIE · 2011</div>
+        <div class="ref-desc">Pionýrský kontejnerový park v Londýně. 61 kontejnerů přeměněno na módní obchody, kavárny a galerie. Stalo se ikonickým místem kreativní čtvrti Shoreditch.</div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-name">Store-X</div>
+        <div class="ref-location">BERLÍN · NĚMECKO</div>
+        <div class="ref-desc">Modré kontejnery jako designové sklady a mini-dílny v průmyslové zóně. Oblíbený model pro řemeslníky a malé firmy v německých metropolích.</div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-name">Tagus Linear Park</div>
+        <div class="ref-location">LISABON · PORTUGALSKO</div>
+        <div class="ref-desc">Revitalizace průmyslového nábřeží Tagu s kontejnerovými pavilony, zelení a veřejnými prostranstvími. Inspirace pro lineární kompozici podél ulice.</div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-name">Vnitroblock Praha</div>
+        <div class="ref-location">HOLEŠOVICE · PRAHA 7</div>
+        <div class="ref-desc">Pražský příklad industriálního brownfieldu proměněného v kreativní hub s ateliéry, kavárnou a kulturními prostory. Dokazuje poptávku v pražském prostředí.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CALLOUT -->
+  <div class="callout">
+    <div class="callout-text">
+      Fáze 1 je realizovatelná <em>ihned</em> — bez prodloužení pachtu,<br>
+      bez nutnosti zásadního rozhodnutí zastupitelů o budoucím směřování.
+    </div>
+    <div class="callout-action">
+      <a class="btn btn-white" href="faze2.html">Pokračovat na Fázi 2 →</a>
+      <a class="btn btn-outline-white" href="analyza.html">Finanční analýza</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- PHASE NAV -->
+<div class="phase-nav">
+  <a class="phase-nav-back" href="index.html">
+    ← Zpět na přehled konceptu
+  </a>
+  <div class="phase-nav-next">
+    <div class="phase-nav-next-label">
+      <div class="pnn-eyebrow">NÁSLEDUJÍCÍ FÁZE</div>
+      <div class="pnn-name">Smart Campus</div>
+    </div>
+    <a class="btn-next" href="faze2.html">Fáze 2 →</a>
+  </div>
+</div>
+
+</body>
+</html>

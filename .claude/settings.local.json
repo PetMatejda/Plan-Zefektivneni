@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \":*)",
+      "Bash(unzip -p \"3 - detail zastávka_analytický_dokument.docx\" word/document.xml)",
+      "Bash(cp \"C:/Users/petrm/Downloads/Zefektivneni/\"*.jpg \"C:/Users/petrm/OneDrive/Dokumenty/Claude Code/Zefektivneni_v2/images/\")",
+      "Bash(cp \"C:/Users/petrm/Downloads/Zefektivneni/\"*.jpeg \"C:/Users/petrm/OneDrive/Dokumenty/Claude Code/Zefektivneni_v2/images/\")",
+      "Bash(cp \"C:/Users/petrm/Downloads/Zefektivneni/\"*.webp \"C:/Users/petrm/OneDrive/Dokumenty/Claude Code/Zefektivneni_v2/images/\")",
+      "Bash(cp \"C:/Users/petrm/Downloads/Zefektivneni/\"*.avif \"C:/Users/petrm/OneDrive/Dokumenty/Claude Code/Zefektivneni_v2/images/\")",
+      "Bash(cp \"C:/Users/petrm/Downloads/Zefektivneni/1-TOP LEVEL SCHEMA 3faze.html\" \"C:/Users/petrm/OneDrive/Dokumenty/Claude Code/Zefektivneni_v2/schema-original.html\")",
+      "Bash(cp \"C:/Users/petrm/Downloads/Zefektivneni/2 - infografika_3faze.html\" \"C:/Users/petrm/OneDrive/Dokumenty/Claude Code/Zefektivneni_v2/infografika-original.html\")",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(for f:*)",
+      "Bash(do)",
+      "Bash(sed -i -e 's/Praha 15/Dolní Měcholupy/g' -e 's/Prahy 15/Dolních Měcholup/g' -e 's/Prahu 15/Dolní Měcholupy/g' -e 's/zastupitele Dolních Měcholup/zastupitele Dolních Měcholup/g' \"$f\")",
+      "Bash(done)"
+    ]
+  }
+}

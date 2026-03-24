@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fáze 3 – Filmový Park · Areál Za Zastávkou</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #1c1a16; --ink-soft: #4a4540;
+  --linen: #f4efe6; --linen-dark: #e8e0d2;
+  --amber: #c8860a; --amber-light: #f0b845; --amber-pale: #fdf3de;
+  --concrete: #8a8278; --concrete-light: #c4bdb4;
+  --film: #2c3e50; --film-pale: #e8ecf0; --film-mid: #3d5a73;
+  --green: #3d6b4f; --green-pale: #e8f2ec;
+  --corten: #b5611a; --corten-pale: #fdf0e8;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(--ink); }
+
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--ink); border-bottom: 2px solid var(--film-mid);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 54px;
+}
+.nav-brand { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--amber-light); text-decoration: none; }
+.nav-links { display: flex; gap: 4px; }
+.nav-link { font-size: 11.5px; font-weight: 500; color: rgba(255,255,255,0.65); text-decoration: none; padding: 6px 14px; transition: all 0.2s; }
+.nav-link:hover, .nav-link.active { color: white; background: rgba(255,255,255,0.08); }
+.nav-link.active { color: #93c5fd; }
+
+/* CINEMATIC HERO */
+.phase-hero {
+  position: relative; height: 640px;
+  display: flex; align-items: flex-end;
+  overflow: hidden;
+}
+.phase-hero-bg {
+  position: absolute; inset: 0;
+  background: url('images/f3 cinecitta.jpeg') center/cover no-repeat;
+}
+.phase-hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(28,26,22,0.96) 0%, rgba(28,26,22,0.6) 40%, rgba(28,26,22,0.15) 100%);
+}
+.phase-hero-content {
+  position: relative; z-index: 2;
+  padding: 0 64px 64px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end;
+  width: 100%;
+}
+.ph-left {}
+.phase-num { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.25em; color: rgba(255,255,255,0.4); margin-bottom: 10px; }
+.phase-badge-hero {
+  display: inline-block; font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.2em; padding: 5px 12px;
+  background: var(--film); border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.85); margin-bottom: 20px;
+}
+.phase-title { font-family: 'Cormorant Garamond', serif; font-size: 72px; font-weight: 300; line-height: 1.0; color: white; margin-bottom: 6px; }
+.phase-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+.phase-desc { font-size: 13.5px; color: rgba(255,255,255,0.75); line-height: 1.75; }
+.ph-right { display: flex; flex-direction: column; gap: 10px; padding-bottom: 4px; }
+.hero-stat-box { background: rgba(255,255,255,0.06); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); padding: 16px 20px; }
+.hsb-val { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--amber-light); line-height: 1; }
+.hsb-label { font-size: 9.5px; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; margin-top: 3px; }
+
+/* KPI */
+.kpi-row { background: var(--film); display: grid; grid-template-columns: repeat(5, 1fr); border-bottom: 2px solid var(--film-mid); }
+.kpi-item { padding: 20px 28px; border-right: 1px solid rgba(255,255,255,0.08); }
+.kpi-item:last-child { border-right: none; }
+.kpi-val { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--amber-light); line-height: 1; margin-bottom: 4px; }
+.kpi-label { font-family: 'DM Mono', monospace; font-size: 8.5px; letter-spacing: 0.12em; color: rgba(255,255,255,0.45); }
+.kpi-note { font-size: 10.5px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+/* MAIN */
+.main { max-width: 1300px; margin: 0 auto; padding: 72px 64px; }
+.section { margin-bottom: 72px; }
+.section-label { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: var(--concrete); margin-bottom: 6px; }
+.section-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 400; margin-bottom: 28px; letter-spacing: -0.01em; }
+.section-title em { font-style: italic; color: var(--film); }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+/* CONDITION BANNER */
+.condition-banner { background: var(--film); border-left: 4px solid var(--amber-light); padding: 20px 28px; display: flex; gap: 20px; align-items: center; margin-bottom: 40px; }
+.cb-icon { font-size: 28px; }
+.cbt-title { font-weight: 600; color: var(--amber-light); margin-bottom: 4px; }
+.cbt-desc { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.6; }
+
+/* MARKET CRISIS */
+.market-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-bottom: 3px; }
+.market-card { padding: 28px 24px; }
+.mc-crisis { background: #1a1a2e; border: 1px solid rgba(255,255,255,0.08); }
+.mc-opportunity { background: var(--film); }
+.mc-eyebrow { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.15em; color: rgba(255,255,255,0.4); margin-bottom: 12px; }
+.mc-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; color: white; margin-bottom: 16px; }
+.mc-items { display: flex; flex-direction: column; gap: 10px; }
+.mc-item { display: flex; gap: 12px; }
+.mc-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+.mc-dot-red { background: #ef4444; }
+.mc-dot-green { background: #22c55e; }
+.mc-text { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.5; }
+.mc-text strong { color: white; }
+
+/* SFA BANNER */
+.sfa-banner { background: var(--amber); padding: 20px 28px; display: flex; justify-content: space-between; align-items: center; }
+.sfa-left { }
+.sfa-eyebrow { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.15em; color: rgba(255,255,255,0.7); margin-bottom: 6px; }
+.sfa-title { font-size: 18px; font-weight: 600; color: white; }
+.sfa-right { text-align: right; }
+.sfa-val { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 600; color: white; line-height: 1; }
+.sfa-sublabel { font-size: 11px; color: rgba(255,255,255,0.75); }
+
+/* STAGES */
+.stages-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; margin-bottom: 24px; }
+.stage-card { background: var(--film); padding: 24px 18px; text-align: center; }
+.stage-num { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); margin-bottom: 8px; }
+.stage-area { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: var(--amber-light); line-height: 1; }
+.stage-label { font-size: 10px; color: rgba(255,255,255,0.6); margin-top: 4px; }
+.stage-feature { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 10px; line-height: 1.4; }
+
+/* LED VOLUME */
+.led-volume {
+  background: var(--ink); padding: 40px;
+  display: grid; grid-template-columns: 1fr 320px; gap: 40px; align-items: center;
+  border-left: 4px solid var(--amber-light); margin-bottom: 24px;
+  position: relative; overflow: hidden;
+}
+.led-volume::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 80% 50%, rgba(240,184,69,0.06) 0%, transparent 70%);
+}
+.lv-content { position: relative; z-index: 1; }
+.lv-eyebrow { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: var(--amber-light); margin-bottom: 12px; }
+.lv-title { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; color: white; line-height: 1.1; margin-bottom: 16px; }
+.lv-title em { font-style: italic; color: var(--amber-light); }
+.lv-desc { font-size: 13.5px; color: rgba(255,255,255,0.7); line-height: 1.75; }
+.lv-stats { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 3px; }
+.lv-stat { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); padding: 14px 18px; }
+.lv-stat-val { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--amber-light); line-height: 1; }
+.lv-stat-label { font-size: 10.5px; color: rgba(255,255,255,0.45); margin-top: 3px; }
+
+/* GALLERY */
+.gallery { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3px; }
+.gallery-img { overflow: hidden; position: relative; }
+.gallery-img img { width: 100%; height: 240px; object-fit: cover; display: block; transition: transform 0.4s; }
+.gallery-img:hover img { transform: scale(1.04); }
+.gallery-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%); font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: rgba(255,255,255,0.85); }
+.gallery-wide { display: grid; grid-template-columns: 2fr 1fr; gap: 3px; margin-bottom: 3px; }
+
+/* DUAL USE */
+.dual-use-block {
+  background: var(--ink); padding: 48px 56px;
+  position: relative; overflow: hidden;
+}
+.dual-use-block::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.015) 10px, rgba(255,255,255,0.015) 11px);
+}
+.du-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.du-left {}
+.du-eyebrow { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: var(--amber-light); margin-bottom: 14px; }
+.du-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; color: white; line-height: 1.15; margin-bottom: 20px; }
+.du-title em { font-style: italic; color: var(--amber-light); }
+.du-desc { font-size: 13.5px; color: rgba(255,255,255,0.7); line-height: 1.8; }
+.du-right {}
+.du-path { display: flex; flex-direction: column; gap: 3px; }
+.du-step { padding: 18px 22px; display: flex; gap: 16px; align-items: center; }
+.du-step-a { background: rgba(44,62,80,0.8); border: 1px solid rgba(255,255,255,0.1); }
+.du-step-b { background: rgba(200,134,10,0.15); border: 1px solid var(--amber); }
+.du-step-icon { font-size: 24px; flex-shrink: 0; }
+.du-step-content {}
+.du-step-title { font-weight: 600; color: white; font-size: 14px; margin-bottom: 4px; }
+.du-step-desc { font-size: 11.5px; color: rgba(255,255,255,0.55); line-height: 1.5; }
+.du-arrow { text-align: center; color: var(--amber-light); font-size: 20px; padding: 4px; }
+
+/* FIN TABLE */
+.fin-table { width: 100%; border-collapse: collapse; }
+.fin-table th { background: var(--film); color: white; padding: 11px 16px; text-align: left; font-size: 11px; font-weight: 600; }
+.fin-table td { padding: 10px 16px; border-bottom: 1px solid var(--linen-dark); font-size: 12.5px; color: var(--ink-soft); }
+.fin-table tr:last-child td { border-bottom: none; }
+.fin-table tr:nth-child(even) td { background: rgba(0,0,0,0.02); }
+.fin-table td.row-label { font-weight: 600; color: var(--ink); }
+.fin-table td.highlight { color: var(--film); font-weight: 700; font-family: 'DM Mono', monospace; }
+.fin-table td.highlight-amber { color: var(--amber); font-weight: 700; font-family: 'DM Mono', monospace; }
+
+/* RISK */
+.risk-band { background: var(--film-pale); border: 2px solid var(--film); padding: 24px 28px; display: flex; gap: 32px; align-items: center; margin-bottom: 24px; }
+.risk-label-main { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: var(--film); margin-bottom: 8px; }
+.risk-dots { display: flex; gap: 4px; }
+.rdot { width: 20px; height: 7px; border-radius: 1px; }
+.rdot.on { background: var(--corten); }
+.rdot.off { background: var(--linen-dark); }
+.risk-text { font-size: 13.5px; color: var(--ink-soft); line-height: 1.6; }
+.risk-text strong { color: var(--film); }
+
+/* REFERENCES */
+.ref-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.ref-card { padding: 20px 22px; background: white; border: 1px solid var(--linen-dark); border-left: 3px solid var(--film); }
+.ref-name { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+.ref-location { font-family: 'DM Mono', monospace; font-size: 9.5px; color: var(--concrete); letter-spacing: 0.1em; margin-bottom: 8px; }
+.ref-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.55; }
+
+/* CALLOUT */
+.callout { background: var(--film); padding: 44px 48px; display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; position: relative; overflow: hidden; }
+.callout::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255,0.02) 8px, rgba(255,255,255,0.02) 9px); }
+.callout-text { position: relative; z-index: 1; font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: white; line-height: 1.5; }
+.callout-text em { font-style: italic; color: var(--amber-light); }
+.callout-action { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 10px; }
+.btn { display: inline-block; text-decoration: none; text-align: center; padding: 13px 28px; font-size: 13px; font-weight: 600; transition: all 0.2s; }
+.btn-amber { background: var(--amber); color: white; }
+.btn-amber:hover { background: var(--amber-light); color: var(--ink); }
+.btn-outline-white { background: transparent; color: rgba(255,255,255,0.8); border: 1.5px solid rgba(255,255,255,0.3); }
+.btn-outline-white:hover { border-color: white; color: white; background: rgba(255,255,255,0.08); }
+
+/* PHASE NAV */
+.phase-nav { background: var(--ink); padding: 32px 64px; display: flex; justify-content: space-between; align-items: center; }
+.phase-nav-back { display: flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(255,255,255,0.6); font-size: 12px; transition: color 0.2s; }
+.phase-nav-back:hover { color: white; }
+.phase-nav-right { display: flex; gap: 16px; }
+.btn-nav { display: flex; align-items: center; gap: 8px; background: var(--amber); color: white; padding: 12px 22px; font-size: 13px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+.btn-nav:hover { background: var(--amber-light); color: var(--ink); }
+.btn-nav-outline { background: transparent; color: rgba(255,255,255,0.7); border: 1.5px solid rgba(255,255,255,0.2); padding: 12px 22px; font-size: 13px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+.btn-nav-outline:hover { border-color: white; color: white; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-brand" href="index.html">AREÁL ZA ZASTÁVKOU · PLÁN ZEFEKTIVNĚNÍ</a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Přehled</a>
+    <a class="nav-link" href="faze1.html">Fáze 1 – HUB</a>
+    <a class="nav-link" href="faze2.html">Fáze 2 – Kampus</a>
+    <a class="nav-link active" href="faze3.html">Fáze 3 – Film</a>
+    <a class="nav-link" href="analyza.html">Analýza &amp; Finance</a>
+    <a class="nav-link" href="dokumenty.html">Dokumenty</a>
+  </div>
+</nav>
+
+<!-- CINEMATIC HERO -->
+<div class="phase-hero">
+  <div class="phase-hero-bg"></div>
+  <div class="phase-hero-overlay"></div>
+  <div class="phase-hero-content">
+    <div class="ph-left">
+      <div class="phase-num">FÁZE 03 · 2033+</div>
+      <div class="phase-badge-hero">MAXIMALISTICKÁ · DUAL-USE POJISTKA</div>
+      <h1 class="phase-title">Filmový Park</h1>
+      <div class="phase-subtitle">Sound Stages & LED Volume · Celoevropský věhlas</div>
+      <p class="phase-desc">
+        Pět profesionálních zvukových scén, LED Volume Stage pro virtuální produkci
+        a plné zázemí pro mezinárodní filmové produkce — Netflix, Apple, Amazon.
+        Dolní Měcholupy jako nová filmová destinace světového věhlasu, s Dual-Use pojistkou
+        eliminující veškeré zbývající riziko pro obec.
+      </p>
+    </div>
+    <div class="ph-right">
+      <div class="hero-stat-box">
+        <div class="hsb-val">350+ mil. Kč</div>
+        <div class="hsb-label">CELKOVÁ INVESTICE</div>
+      </div>
+      <div class="hero-stat-box">
+        <div class="hsb-val">100–120 mil. Kč/rok</div>
+        <div class="hsb-label">OPTIMISTICKÝ ROČNÍ VÝNOS</div>
+      </div>
+      <div class="hero-stat-box">
+        <div class="hsb-val">5× Sound Stage</div>
+        <div class="hsb-label">KAŽDÁ 1 200 m²</div>
+      </div>
+      <div class="hero-stat-box">
+        <div class="hsb-val">6–17 let (střed ~10)</div>
+        <div class="hsb-label">NÁVRATNOST INVESTICE</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- KPI -->
+<div class="kpi-row">
+  <div class="kpi-item">
+    <div class="kpi-val">350+ mil. Kč</div>
+    <div class="kpi-label">INVESTICE</div>
+    <div class="kpi-note">strategický investor</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-val">40–80 tis./den</div>
+    <div class="kpi-label">PRONÁJEM STAGE</div>
+    <div class="kpi-note">Four Wall rental</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-val">24–120 mil./rok</div>
+    <div class="kpi-label">ROČNÍ VÝNOS</div>
+    <div class="kpi-note">konz. až optimist.</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-val">25–35 %</div>
+    <div class="kpi-label">SFA CASH REBATE</div>
+    <div class="kpi-note">od 1. 1. 2025</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-val">Dual-Use</div>
+    <div class="kpi-label">POJISTKA OBCE</div>
+    <div class="kpi-note">Grade A logistika</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- CONDITION BANNER -->
+  <div class="condition-banner">
+    <div class="cb-icon">📋</div>
+    <div>
+      <div class="cbt-title">Podmínka pro Fázi 3: Pacht 50 let + strategický investor</div>
+      <div class="cbt-desc">Investice 350+ mil. Kč vyžaduje 50letý horizont a soukromého strategického investora. Dual-Use pojistka zaručuje, že i při neúspěchu filmového projektu vznikne hodnotná Grade A logistická hala — plně funkční alternativa pro obec.</div>
+    </div>
+  </div>
+
+  <!-- MARKET CRISIS -->
+  <div class="section">
+    <div class="section-label">TRŽNÍ PŘÍLEŽITOST</div>
+    <h2 class="section-title">Praha stojí před <em>kapacitní krizí</em> filmových studií</h2>
+    <div class="market-grid">
+      <div class="market-card mc-crisis">
+        <div class="mc-eyebrow">AKTUÁLNÍ STAV TRHU</div>
+        <div class="mc-title">Krize kapacit</div>
+        <div class="mc-items">
+          <div class="mc-item">
+            <div class="mc-dot mc-dot-red"></div>
+            <div class="mc-text"><strong>Barrandov:</strong> Plně obsazen od roku 2023, frontlist 12+ měsíců dopředu</div>
+          </div>
+          <div class="mc-item">
+            <div class="mc-dot mc-dot-red"></div>
+            <div class="mc-text"><strong>Prague Studios Letňany:</strong> Na plné kapacitě, bez volných termínů</div>
+          </div>
+          <div class="mc-item">
+            <div class="mc-dot mc-dot-red"></div>
+            <div class="mc-text"><strong>Foundation (Apple TV+):</strong> Točila v provizorních podmínkách nedostatku kapacit</div>
+          </div>
+          <div class="mc-item">
+            <div class="mc-dot mc-dot-red"></div>
+            <div class="mc-text"><strong>Velké produkce odcházejí:</strong> Do Maďarska (Korda Studios) pro nedostatek hal</div>
+          </div>
+        </div>
+      </div>
+      <div class="market-card mc-opportunity">
+        <div class="mc-eyebrow">PŘÍLEŽITOST PRO AREÁL</div>
+        <div class="mc-title">Historické okno</div>
+        <div class="mc-items">
+          <div class="mc-item">
+            <div class="mc-dot mc-dot-green"></div>
+            <div class="mc-text"><strong>SFA cash rebate 25–35 %</strong> od 1. 1. 2025 — ČR je nově nejatraktivnější v regionu</div>
+          </div>
+          <div class="mc-item">
+            <div class="mc-dot mc-dot-green"></div>
+            <div class="mc-text"><strong>Netflix, Amazon, Apple</strong> aktivně hledají nové lokace v CEE pro příštích 5 let</div>
+          </div>
+          <div class="mc-item">
+            <div class="mc-dot mc-dot-green"></div>
+            <div class="mc-text"><strong>BALLOON má síť kontaktů</strong> ve filmovém průmyslu — propojení s Prague Studios</div>
+          </div>
+          <div class="mc-item">
+            <div class="mc-dot mc-dot-green"></div>
+            <div class="mc-text"><strong>33 000 m² areálu</strong> — dostatečná plocha pro 5 stages i kompletní zázemí</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sfa-banner">
+      <div class="sfa-left">
+        <div class="sfa-eyebrow">STÁTNÍ FOND PRO KINEMATOGRAFII · PLATNÉ OD 1. 1. 2025</div>
+        <div class="sfa-title">SFA Filmová infrastruktura &amp; Cash Rebate Program</div>
+      </div>
+      <div class="sfa-right">
+        <div class="sfa-val">25–35 %</div>
+        <div class="sfa-sublabel">cash rebate z uznatelných nákladů produkce</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOUND STAGES -->
+  <div class="section">
+    <div class="section-label">INFRASTRUKTURA STUDIA</div>
+    <h2 class="section-title">Pět profesionálních <em>sound stages</em></h2>
+    <div class="stages-grid">
+      <div class="stage-card">
+        <div class="stage-num">STAGE 01</div>
+        <div class="stage-area">1 200 m²</div>
+        <div class="stage-label">PLOCHA</div>
+        <div class="stage-feature">Standardní produkce, seriály, komerce</div>
+      </div>
+      <div class="stage-card">
+        <div class="stage-num">STAGE 02</div>
+        <div class="stage-area">1 200 m²</div>
+        <div class="stage-label">PLOCHA</div>
+        <div class="stage-feature">Sdružitelná se Stage 01 pro velké produkce</div>
+      </div>
+      <div class="stage-card" style="background: #1a2a3a; border: 1px solid var(--amber);">
+        <div class="stage-num" style="color: var(--amber);">STAGE 03 · PREMIUM</div>
+        <div class="stage-area">1 200 m²</div>
+        <div class="stage-label">LED VOLUME STAGE</div>
+        <div class="stage-feature" style="color: rgba(255,255,255,0.7);">Virtuální produkce · LED stěna 270°</div>
+      </div>
+      <div class="stage-card">
+        <div class="stage-num">STAGE 04</div>
+        <div class="stage-area">1 200 m²</div>
+        <div class="stage-label">PLOCHA</div>
+        <div class="stage-feature">Zázemí, kostymérna, rekvizity</div>
+      </div>
+      <div class="stage-card">
+        <div class="stage-num">STAGE 05</div>
+        <div class="stage-area">1 200 m²</div>
+        <div class="stage-label">PLOCHA</div>
+        <div class="stage-feature">Post-produkce, střižny, VFX</div>
+      </div>
+    </div>
+
+    <!-- LED VOLUME -->
+    <div class="led-volume">
+      <div class="lv-content">
+        <div class="lv-eyebrow">TECHNOLOGICKÁ ŠPIČKA · STAGE 03</div>
+        <h3 class="lv-title">LED Volume Stage —<br><em>budoucnost filmové produkce</em></h3>
+        <p class="lv-desc">
+          LED Volume Stage je nejmodernější technologie virtuální produkce. Namísto green screenu
+          obklopují herce obří LED stěny zobrazující fotorealistické prostředí v reálném čase.
+          Výsledek: nižší náklady, rychlejší natáčení, lepší výkon herců.
+        </p>
+        <p class="lv-desc" style="margin-top: 12px;">
+          Jako první studio tohoto druhu v ČR by areál přilákal produkce hledající
+          technologickou špičku — v prostředí, kde Barrandov takovou infrastrukturu dosud nenabízí.
+        </p>
+      </div>
+      <div class="lv-stats">
+        <div class="lv-stat">
+          <div class="lv-stat-val">270° LED stěna</div>
+          <div class="lv-stat-label">IMERZIVNÍ VIRTUÁLNÍ PROSTŘEDÍ</div>
+        </div>
+        <div class="lv-stat">
+          <div class="lv-stat-val">Jediné v ČR</div>
+          <div class="lv-stat-label">UNIKÁTNÍ KONKURENČNÍ VÝHODA</div>
+        </div>
+        <div class="lv-stat">
+          <div class="lv-stat-val">–30 % nákladů</div>
+          <div class="lv-stat-label">OPROTI KLASICKÉMU NATÁČENÍ</div>
+        </div>
+        <div class="lv-stat">
+          <div class="lv-stat-val">Netflix, Disney, Apple</div>
+          <div class="lv-stat-label">PRIMÁRNÍ ZÁKAZNÍCI LED VOLUME</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="section">
+    <div class="section-label">VIZUÁLNÍ INSPIRACE</div>
+    <h2 class="section-title">Světová filmová studia jako vzor</h2>
+    <div class="gallery-wide">
+      <div class="gallery-img">
+        <img src="images/f3 cinecitta.jpeg" alt="Cinecittà" style="height: 300px;">
+        <div class="gallery-caption">CINECITTÀ · ŘÍM · NEJSLAVNĚJŠÍ EVROPSKÉ STUDIO · VZOR PRO CELÝ PROJEKT</div>
+      </div>
+      <div class="gallery-img">
+        <img src="images/f3 korda studios.jpg" alt="Korda Studios" style="height: 300px;">
+        <div class="gallery-caption">KORDA STUDIOS · BUDAPEŠŤ · NEJVĚTŠÍ KONKURENT PRAHY</div>
+      </div>
+    </div>
+    <div style="height: 3px;"></div>
+    <div class="gallery">
+      <div class="gallery-img">
+        <img src="images/f3 prague studios.webp" alt="Prague Studios">
+        <div class="gallery-caption">PRAGUE STUDIOS LETŇANY · NA PLNÉ KAPACITĚ</div>
+      </div>
+      <div class="gallery-img">
+        <img src="images/f3 T15_Teatro-15-5281.jpg" alt="Teatro 15">
+        <div class="gallery-caption">TEATRO 15 · PROFESIONÁLNÍ SOUND STAGE</div>
+      </div>
+      <div class="gallery-img">
+        <img src="images/f3 Teatro-13-5336-jpg.webp" alt="Teatro 13">
+        <div class="gallery-caption">TEATRO 13 · PRODUKČNÍ ZÁZEMÍ</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DUAL USE -->
+  <div class="section">
+    <div class="section-label">ŘÍZENÍ RIZIKA</div>
+    <h2 class="section-title">Dual-Use pojistka — <em>nulové riziko pro obec</em></h2>
+    <div class="dual-use-block">
+      <div class="du-inner">
+        <div class="du-left">
+          <div class="du-eyebrow">DUAL-USE INSURANCE CONCEPT</div>
+          <h3 class="du-title">Filmový park nebo<br><em>Grade A logistika</em> —<br>obec vítězí v obou scénářích</h3>
+          <p class="du-desc">
+            Sound stages jsou konstrukčně identické s moderními logistickými halami:
+            velký volný půdorys, vysoká světlá výška (12–16 m), zpevněná podlaha,
+            megawattová elektřina, nakládací rampy.
+          </p>
+          <p class="du-desc" style="margin-top: 12px;">
+            Pokud by filmový projekt z jakéhokoliv důvodu nevznikl nebo selhal,
+            budovy lze okamžitě pronajmout jako Grade A logistické haly —
+            za nájemné 150–250 Kč/m²/měs. Investice se neztratí.
+          </p>
+        </div>
+        <div class="du-right">
+          <div class="du-path">
+            <div class="du-step du-step-a">
+              <div class="du-step-icon">🎬</div>
+              <div class="du-step-content">
+                <div class="du-step-title">Scénář A: Filmový park</div>
+                <div class="du-step-desc">Roční výnos 24–120 mil. Kč. Mezinárodní věhlas Dolních Měcholup. Synergie s Prague Studios a BALLOON.</div>
+              </div>
+            </div>
+            <div class="du-arrow">⬇ nebo ⬇</div>
+            <div class="du-step du-step-b">
+              <div class="du-step-icon">📦</div>
+              <div class="du-step-content">
+                <div class="du-step-title">Scénář B: Grade A logistika</div>
+                <div class="du-step-desc">Stejné budovy jako logistické haly. Nájemné 150–250 Kč/m²/měs. Investice v plné hodnotě.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINANCIALS -->
+  <div class="section">
+    <div class="section-label">FINANČNÍ MODEL</div>
+    <h2 class="section-title">Čtyři scénáře výnosů</h2>
+    <div class="two-col">
+      <table class="fin-table">
+        <thead><tr><th>Scénář</th><th>Obsazenost</th><th>Roční výnos</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="row-label">Konzervativní</td>
+            <td>3 stages × 150 dní</td>
+            <td class="highlight">24–32 mil. Kč</td>
+          </tr>
+          <tr>
+            <td class="row-label">Střední</td>
+            <td>4 stages × 200 dní</td>
+            <td class="highlight">56–68 mil. Kč</td>
+          </tr>
+          <tr>
+            <td class="row-label">Optimistický</td>
+            <td>5 stages × 250 dní</td>
+            <td class="highlight-amber">100–120 mil. Kč</td>
+          </tr>
+          <tr>
+            <td class="row-label">Dual-Use (pojistka)</td>
+            <td>Logistika 100 %</td>
+            <td class="highlight">45–60 mil. Kč</td>
+          </tr>
+          <tr><td class="row-label">Denní pronájem stage</td><td colspan="2">40 000–80 000 Kč / stage / den</td></tr>
+          <tr><td class="row-label">Celková investice</td><td colspan="2">350+ mil. Kč (strategický investor)</td></tr>
+          <tr><td class="row-label">Návratnost</td><td colspan="2" class="highlight">6–17 let (střed ~10 let)</td></tr>
+        </tbody>
+      </table>
+      <div>
+        <div class="risk-band">
+          <div>
+            <div class="risk-label-main">ÚROVEŇ RIZIKA</div>
+            <div class="risk-dots">
+              <div class="rdot on"></div>
+              <div class="rdot on"></div>
+              <div class="rdot on"></div>
+              <div class="rdot on"></div>
+              <div class="rdot off"></div>
+            </div>
+          </div>
+          <p class="risk-text"><strong>Vysoké, ale mitigované.</strong> Dual-Use pojistka zajišťuje, že i při neúspěchu filmového projektu vznikne hodnotná logistická hala. Max. riziko obce: 10 mil. Kč ze stávajícího rámce.</p>
+        </div>
+        <div style="padding: 20px 24px; background: white; border: 1px solid var(--linen-dark);">
+          <p style="font-size: 12.5px; color: var(--ink-soft); line-height: 1.7;"><strong>Dostupné dotace:</strong><br>
+          • SFA filmová infrastruktura (schvalování)<br>
+          • NPO Brownfieldy: 3–500 mil. Kč na revitalizaci<br>
+          • SFA cash rebate 25–35 % pro produkce<br>
+          • JESSICA / IROP pro průmyslové areály</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REFERENCES -->
+  <div class="section">
+    <div class="section-label">INSPIRACE A REFERENCE</div>
+    <h2 class="section-title">Studia, která ukazují cestu</h2>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-name">Cinecittà</div>
+        <div class="ref-location">ŘÍM · ITÁLIE · 1937 (zrenovováno 2022)</div>
+        <div class="ref-desc">Nejslavnější evropské filmové studio. Felliho filmy, Gladiátor, Ben-Hur. Po renovaci hostí Netflix originals. Model pro revitalizaci industriálního komplexu na filmové studio.</div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-name">Korda Studios</div>
+        <div class="ref-location">BUDAKESZI · MAĎARSKO</div>
+        <div class="ref-desc">Největší rivalové Barrandova. Přetáhli část Hollywood produkcí díky daňovým pobídkám. Ukazují, že Praha ztrácí produkce do regionální konkurence — okno příležitosti.</div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-name">Barrandov Studios</div>
+        <div class="ref-location">SMÍCHOV · PRAHA 5</div>
+        <div class="ref-desc">Historické pražské studio plně obsazeno od 2023. Čeká 12+ měsíců dopředu. Každá volná kapacita v ČR okamžitě zabrána — trh jasně říká: kapacity chybí.</div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-name">Prague Studios Letňany</div>
+        <div class="ref-location">LETŇANY · PRAHA 9</div>
+        <div class="ref-desc">Moderní studio v brownfieldu. Na plné kapacitě. Synergický partner pro areál Za Zastávkou — dohoda o sdílení zázemí, cross-booking a společný marketing ČR jako destinace.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CALLOUT -->
+  <div class="callout">
+    <div class="callout-text">
+      Dolní Měcholupy může být domovem filmového studia<br>
+      <em>mezinárodního věhlasu</em> — s nulovým zbývajícím rizikem<br>
+      díky Dual-Use pojistce. Historické okno se otevírá právě teď.
+    </div>
+    <div class="callout-action">
+      <a class="btn btn-amber" href="analyza.html">Finanční analýza →</a>
+      <a class="btn btn-outline-white" href="index.html">Zpět na přehled</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- PHASE NAV -->
+<div class="phase-nav">
+  <a class="phase-nav-back" href="faze2.html">← Fáze 2 – Smart Campus</a>
+  <div class="phase-nav-right">
+    <a class="btn-nav-outline" href="index.html">← Přehled konceptu</a>
+    <a class="btn-nav" href="analyza.html">Analýza &amp; Finance →</a>
+  </div>
+</div>
+
+</body>
+</html>
