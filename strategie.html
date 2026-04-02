@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strategie města Prahy · Areál Za Zastávkou</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #1c1a16; --ink-soft: #4a4540;
+  --linen: #f4efe6; --linen-dark: #e8e0d2;
+  --amber: #c8860a; --amber-light: #f0b845; --amber-pale: #fdf3de;
+  --concrete: #8a8278; --concrete-light: #c4bdb4;
+  --film: #2c3e50; --film-pale: #e8ecf0;
+  --green: #3d6b4f; --green-pale: #e8f2ec;
+  --corten: #b5611a; --corten-pale: #fdf0e8;
+  --city: #1a3566; --city-light: #2550a0; --city-pale: #e8eef8;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(--ink); }
+
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--ink); border-bottom: 2px solid var(--amber);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 54px;
+}
+.nav-brand { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--amber-light); text-decoration: none; }
+.nav-links { display: flex; gap: 4px; }
+.nav-link { font-size: 11.5px; font-weight: 500; color: rgba(255,255,255,0.65); text-decoration: none; padding: 6px 14px; transition: all 0.2s; }
+.nav-link:hover, .nav-link.active { color: white; background: rgba(255,255,255,0.08); }
+.nav-link.active { color: var(--amber-light); }
+
+/* HERO */
+.page-hero {
+  background: var(--city);
+  padding: 72px 64px 64px;
+  position: relative; overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255,0.025) 8px, rgba(255,255,255,0.025) 9px);
+}
+.ph-inner { position: relative; z-index: 1; max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: end; }
+.ph-eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: rgba(255,255,255,0.5); margin-bottom: 14px; }
+.ph-title { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; color: white; line-height: 1.05; letter-spacing: -0.02em; }
+.ph-title em { font-style: italic; color: var(--amber-light); }
+.ph-desc { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.8; margin-top: 20px; }
+.ph-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+  padding: 14px 20px; margin-bottom: 24px;
+}
+.ph-badge-icon { font-size: 22px; }
+.ph-badge-text { font-size: 12px; color: rgba(255,255,255,0.75); line-height: 1.5; }
+.ph-badge-text strong { color: white; display: block; margin-bottom: 2px; }
+.ph-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+.ph-stat { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); padding: 20px 24px; }
+.ph-stat-val { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 600; color: var(--amber-light); line-height: 1; margin-bottom: 4px; }
+.ph-stat-label { font-family: 'DM Mono', monospace; font-size: 8.5px; letter-spacing: 0.15em; color: rgba(255,255,255,0.4); }
+.ph-stat-note { font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 3px; }
+
+/* QUOTE STRIP */
+.quote-strip {
+  background: var(--amber);
+  padding: 28px 64px;
+  display: flex; align-items: center; gap: 24px;
+}
+.qs-mark { font-family: 'Cormorant Garamond', serif; font-size: 72px; font-weight: 300; color: rgba(255,255,255,0.3); line-height: 0.6; flex-shrink: 0; margin-top: -10px; }
+.qs-text { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; font-style: italic; color: var(--ink); line-height: 1.45; }
+.qs-source { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.15em; color: rgba(28,26,22,0.6); margin-top: 6px; }
+
+/* MAIN */
+.main { max-width: 1300px; margin: 0 auto; padding: 72px 64px; }
+.section { margin-bottom: 80px; }
+.section-label { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: var(--concrete); margin-bottom: 6px; }
+.section-title { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 400; margin-bottom: 10px; letter-spacing: -0.01em; }
+.section-title em { font-style: italic; color: var(--city-light); }
+.section-desc { font-size: 13.5px; color: var(--ink-soft); line-height: 1.75; margin-bottom: 28px; max-width: 820px; }
+
+/* DOCUMENTS ROW */
+.doc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-bottom: 16px; }
+.doc-card { background: white; border: 1px solid var(--linen-dark); border-top: 3px solid var(--city); padding: 24px 22px; }
+.doc-icon { font-size: 22px; margin-bottom: 10px; }
+.doc-title { font-weight: 700; font-size: 13px; margin-bottom: 4px; color: var(--ink); line-height: 1.4; }
+.doc-sub { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: var(--concrete); margin-bottom: 10px; }
+.doc-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.6; }
+
+/* PILLARS */
+.pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+.pillar { padding: 28px 24px; position: relative; }
+.pillar-city { background: var(--city); }
+.pillar-city-dim { background: rgba(26,53,102,0.08); border: 2px solid rgba(26,53,102,0.2); }
+.pillar-city-dim-2 { background: rgba(26,53,102,0.04); border: 1px solid rgba(26,53,102,0.1); }
+.pillar-num { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.15em; margin-bottom: 8px; }
+.pillar-city .pillar-num { color: rgba(255,255,255,0.4); }
+.pillar-city-dim .pillar-num { color: var(--city-light); }
+.pillar-city-dim-2 .pillar-num { color: var(--concrete); }
+.pillar-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; margin-bottom: 12px; }
+.pillar-city .pillar-name { color: white; }
+.pillar-city-dim .pillar-name { color: var(--city); }
+.pillar-city-dim-2 .pillar-name { color: var(--ink-soft); }
+.pillar-goals { display: flex; flex-direction: column; gap: 6px; }
+.pillar-goal { font-size: 12px; line-height: 1.5; }
+.pillar-city .pillar-goal { color: rgba(255,255,255,0.75); }
+.pillar-city-dim .pillar-goal { color: var(--ink-soft); }
+.pillar-city-dim-2 .pillar-goal { color: var(--concrete); }
+.pillar-goal-code { font-family: 'DM Mono', monospace; font-size: 9px; opacity: 0.6; margin-right: 4px; }
+.pillar-tag {
+  position: absolute; top: 16px; right: 16px;
+  font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 0.1em;
+  padding: 3px 8px; background: var(--amber-light); color: var(--ink);
+}
+
+/* BROWNFIELD STATS */
+.bf-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 3px; margin-bottom: 24px; }
+.bf-stat { background: var(--city); padding: 24px 20px; text-align: center; }
+.bf-val { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 600; color: var(--amber-light); line-height: 1; margin-bottom: 6px; }
+.bf-label { font-family: 'DM Mono', monospace; font-size: 8.5px; letter-spacing: 0.12em; color: rgba(255,255,255,0.45); }
+.bf-note { font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 4px; }
+
+.bf-text-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.bf-block { padding: 24px 28px; background: white; border: 1px solid var(--linen-dark); border-left: 3px solid var(--city-light); }
+.bf-block h4 { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; margin-bottom: 10px; }
+.bf-block p { font-size: 13px; color: var(--ink-soft); line-height: 1.7; }
+
+/* ALIGNMENT MATRIX */
+.align-header { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3px; margin-bottom: 3px; }
+.align-col-head { padding: 10px 14px; font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.12em; font-weight: 600; text-align: center; }
+.align-col-city { background: var(--city); color: white; }
+.align-col-f1 { background: var(--green); color: white; }
+.align-col-f2 { background: var(--amber); color: white; }
+.align-col-f3 { background: var(--film); color: white; }
+
+.align-row { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3px; margin-bottom: 3px; }
+.align-row:nth-child(even) .align-goal { background: rgba(0,0,0,0.02); }
+.align-goal { padding: 14px 16px; background: white; border: 1px solid var(--linen-dark); }
+.align-goal-code { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--city-light); margin-bottom: 3px; }
+.align-goal-name { font-size: 12.5px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+.align-goal-desc { font-size: 11px; color: var(--ink-soft); line-height: 1.5; }
+.align-cell { display: flex; align-items: center; justify-content: center; background: white; border: 1px solid var(--linen-dark); font-size: 16px; }
+.align-cell.yes-f1 { background: var(--green-pale); border-color: var(--green); }
+.align-cell.yes-f2 { background: var(--amber-pale); border-color: var(--amber); }
+.align-cell.yes-f3 { background: var(--film-pale); border-color: var(--film); }
+.align-cell.partial { background: rgba(0,0,0,0.02); }
+
+/* SPECIFIC ALIGNMENT CARDS */
+.goals-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.goal-card { padding: 24px 22px; background: white; border: 1px solid var(--linen-dark); }
+.goal-card-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; }
+.goal-icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.gi-city { background: var(--city-pale); }
+.goal-code { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: var(--city-light); margin-bottom: 3px; }
+.goal-name { font-weight: 700; font-size: 13.5px; color: var(--ink); }
+.goal-body { font-size: 12.5px; color: var(--ink-soft); line-height: 1.65; margin-bottom: 14px; }
+.goal-project { font-size: 12px; color: var(--ink); line-height: 1.55; padding: 10px 14px; background: var(--linen); border-left: 3px solid var(--amber-light); }
+.goal-project strong { color: var(--amber); }
+.goal-phases { display: flex; gap: 4px; margin-top: 10px; }
+.gp-dot { font-family: 'DM Mono', monospace; font-size: 9px; padding: 2px 8px; }
+.gp-f1 { background: var(--green-pale); color: var(--green); }
+.gp-f2 { background: var(--amber-pale); color: var(--amber); }
+.gp-f3 { background: var(--film-pale); color: var(--film); }
+
+/* TOD SECTION */
+.tod-block {
+  background: var(--city); padding: 36px 40px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+}
+.tod-left h3 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: white; margin-bottom: 12px; }
+.tod-left h3 em { font-style: italic; color: var(--amber-light); }
+.tod-left p { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.7; }
+.tod-right { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.tod-item { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); padding: 16px 18px; }
+.tod-val { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--amber-light); line-height: 1; margin-bottom: 4px; }
+.tod-label { font-size: 11px; color: rgba(255,255,255,0.55); line-height: 1.4; }
+
+/* CONCLUSION */
+.conclusion {
+  background: var(--city); padding: 56px 64px;
+  position: relative; overflow: hidden;
+}
+.conclusion::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255,0.015) 8px, rgba(255,255,255,0.015) 9px);
+}
+.conc-inner { position: relative; z-index: 1; max-width: 900px; }
+.conc-eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
+.conc-title { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; color: white; line-height: 1.1; margin-bottom: 24px; }
+.conc-title em { font-style: italic; color: var(--amber-light); }
+.conc-text { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.8; margin-bottom: 16px; }
+.conc-btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 32px; }
+.btn { display: inline-block; text-decoration: none; padding: 13px 28px; font-size: 13px; font-weight: 600; transition: all 0.2s; }
+.btn-amber { background: var(--amber); color: white; }
+.btn-amber:hover { background: var(--amber-light); color: var(--ink); }
+.btn-green { background: var(--green); color: white; }
+.btn-green:hover { background: #4d8a63; }
+.btn-outline { background: transparent; color: rgba(255,255,255,0.7); border: 1.5px solid rgba(255,255,255,0.25); }
+.btn-outline:hover { border-color: white; color: white; }
+
+/* PHASE NAV */
+.phase-nav { background: var(--ink); padding: 32px 64px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.08); }
+.phase-nav-back { display: flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(255,255,255,0.6); font-size: 12px; transition: color 0.2s; }
+.phase-nav-back:hover { color: white; }
+.footer-copy { font-size: 10.5px; color: rgba(255,255,255,0.25); }
+
+/* COMPATIBILITY BANNER */
+.compat-banner {
+  background: var(--ink); border-left: 5px solid var(--amber-light);
+  padding: 28px 36px; margin-bottom: 32px;
+  display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: center;
+}
+.compat-icon { font-size: 32px; }
+.compat-title { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: var(--amber-light); margin-bottom: 6px; }
+.compat-text { font-size: 13.5px; color: rgba(255,255,255,0.8); line-height: 1.65; }
+.compat-text strong { color: white; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-brand" href="index.html">AREÁL ZA ZASTÁVKOU · PLÁN ZEFEKTIVNĚNÍ</a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Přehled</a>
+    <a class="nav-link" href="faze1.html">Fáze 1 – HUB</a>
+    <a class="nav-link" href="faze2.html">Fáze 2 – Kampus</a>
+    <a class="nav-link" href="faze3.html">Fáze 3 – Film</a>
+    <a class="nav-link" href="analyza.html">Analýza &amp; Finance</a>
+    <a class="nav-link active" href="strategie.html">Strategie města</a>
+    <a class="nav-link" href="dokumenty.html">Dokumenty</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="ph-inner">
+    <div>
+      <div class="ph-eyebrow">SOULAD S KONCEPCÍ HL. M. PRAHY · STRATEGICKÁ ANALÝZA</div>
+      <h1 class="ph-title">Náš projekt<br>není jen povolen —<br><em>je přímo mandátem</em><br>strategie města</h1>
+      <p class="ph-desc">
+        Plán Zefektivnění areálu Za Zastávkou naplňuje klíčové cíle Strategického plánu hl. m. Prahy,
+        Metropolitního plánu a klimatické strategie 2030. Každá ze tří fází projektu přímo přispívá
+        k definovaným rozvojovým prioritám Prahy jako prosperující a kreativní metropole.
+      </p>
+    </div>
+    <div>
+      <div class="ph-stat-grid">
+        <div class="ph-stat">
+          <div class="ph-stat-val">55 %</div>
+          <div class="ph-stat-label">BROWNFIELDY Z ROZVOJOVÝCH PLOCH</div>
+          <div class="ph-stat-note">Areál Za Zastávkou je přesně tento typ</div>
+        </div>
+        <div class="ph-stat">
+          <div class="ph-stat-val">75 %</div>
+          <div class="ph-stat-label">KAPACIT NESE BROWNFIELD ÚZEMÍ</div>
+          <div class="ph-stat-note">Klíčové pro „růst dovnitř"</div>
+        </div>
+        <div class="ph-stat">
+          <div class="ph-stat-val">80 %</div>
+          <div class="ph-stat-label">NOVÝCH PLOCH V DOSAHU MHD</div>
+          <div class="ph-stat-note">TOD princip — náš areál splňuje</div>
+        </div>
+        <div class="ph-stat">
+          <div class="ph-stat-val">2028</div>
+          <div class="ph-stat-label">PLATNOST NOVÉHO METROPOLITNÍHO PLÁNU</div>
+          <div class="ph-stat-note">Transformace musí začít nyní</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUOTE -->
+<div class="quote-strip">
+  <div class="qs-mark">"</div>
+  <div>
+    <div class="qs-text">Praha nevyužívá dostatečně plochu, na které stojí. Kdyby se svým územím pracovala efektivněji, dokáže pojmout půl milionu dalších obyvatel.</div>
+    <div class="qs-source">PETR HLAVÁČEK · NÁMĚSTEK PRIMÁTORA HL. M. PRAHY · STRATEGICKÝ PLÁN HMP</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- DOCUMENTS -->
+  <div class="section">
+    <div class="section-label">ZDROJOVÉ DOKUMENTY</div>
+    <h2 class="section-title">Klíčové <em>strategické dokumenty</em> Prahy</h2>
+    <p class="section-desc">Analýza souladu vychází z nejvyšších koncepčních dokumentů hlavního města. Tyto dokumenty závazně definují, jakým směrem se Praha rozvíjí a jaké projekty jsou žádoucí.</p>
+    <div class="doc-grid">
+      <div class="doc-card">
+        <div class="doc-icon">📋</div>
+        <div class="doc-title">Strategický plán hl. m. Prahy</div>
+        <div class="doc-sub">AKTUALIZACE 2016 · NEJVYŠŠÍ KONCEPČNÍ DOKUMENT</div>
+        <div class="doc-desc">Nadřazený dokument definující trajektorii rozvoje Prahy jako sebevědomé a udržitelné metropole. Obsahuje 12 strategických cílů ve třech směrech. Koordinační rámec pro veškeré sektorové politiky.</div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">🗺️</div>
+        <div class="doc-title">Metropolitní plán Prahy</div>
+        <div class="doc-sub">NOVÉ PARADIGMA ÚZEMNÍHO PLÁNOVÁNÍ · PLATNOST OD 2028</div>
+        <div class="doc-desc">Nahrazuje zastaralý územní plán z roku 1999. Zavádí 10 typů stavebních struktur, výškovou regulaci (100 m strop) a ochranu 44 vedut. Definuje typ „Produkční a obchodní" pro plochy jako je areál Za Zastávkou.</div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">🌱</div>
+        <div class="doc-title">Klimatický plán 2030 & Cirkulární Praha</div>
+        <div class="doc-sub">SFŽP · MŽP · PRŮŘEZOVÝ DOKUMENT</div>
+        <div class="doc-desc">Plán uhlíkové neutrality a cirkulárního hospodářství. Definuje cíle pro energetiku, zelenou infrastrukturu a odolnost vůči klimatickým změnám. Přímo ovlivňuje dostupnost dotací pro projekty jako náš.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STRATEGIC PILLARS -->
+  <div class="section">
+    <div class="section-label">STRATEGICKÝ PLÁN HMP · TŘI SMĚRY</div>
+    <h2 class="section-title">Strategické směry Prahy 2030 —<br>kde <em>náš projekt zasahuje nejvýrazněji</em></h2>
+    <p class="section-desc">Strategický plán hl. m. Prahy definuje tři hlavní směry rozvoje. Plán Zefektivnění areálu Za Zastávkou přispívá ke všem třem, primárně pak ke druhému — prosperující a kreativní metropoli.</p>
+    <div class="pillars-grid">
+      <div class="pillar pillar-city">
+        <div class="pillar-tag">PRIMÁRNÍ PŘÍNOS</div>
+        <div class="pillar-num">SMĚR 2</div>
+        <div class="pillar-name">Prosperující &amp; kreativní metropole</div>
+        <div class="pillar-goals">
+          <div class="pillar-goal"><span class="pillar-goal-code">2.1</span>Významný region — pracovní místa, ekonomika</div>
+          <div class="pillar-goal"><span class="pillar-goal-code">2.2</span>Podnikání a inovace — inkubátory, startupy</div>
+          <div class="pillar-goal"><span class="pillar-goal-code">2.3</span>Kulturní značka — film, kreativní průmysly</div>
+          <div class="pillar-goal"><span class="pillar-goal-code">2.4</span>Vzdělávání — workshopy, maker spaces</div>
+        </div>
+      </div>
+      <div class="pillar pillar-city-dim">
+        <div class="pillar-num">SMĚR 1</div>
+        <div class="pillar-name">Soudržná &amp; zdravá metropole</div>
+        <div class="pillar-goals">
+          <div class="pillar-goal"><span class="pillar-goal-code">1.1</span>Soudržné město — místní komunita, veřejný prostor</div>
+          <div class="pillar-goal"><span class="pillar-goal-code">1.2</span>Komunitní život — zelený pás, veřejné aktivity</div>
+          <div class="pillar-goal"><span class="pillar-goal-code">1.3</span>Život ve městě — mixovaná funkce, dostupnost</div>
+          <div class="pillar-goal"><span class="pillar-goal-code">1.4</span>Zdravé město — zeleň, FVE, tepelná čerpadla</div>
+        </div>
+      </div>
+      <div class="pillar pillar-city-dim-2">
+        <div class="pillar-num">SMĚR 3</div>
+        <div class="pillar-name">Dobře spravovaná metropole</div>
+        <div class="pillar-goals">
+          <div class="pillar-goal"><span class="pillar-goal-code">3.1</span>Aktivní role města — pacht, vlastnictví investic</div>
+          <div class="pillar-goal"><span class="pillar-goal-code">3.2</span>Důvěryhodná správa — transparentní plán</div>
+          <div class="pillar-goal"><span class="pillar-goal-code">3.3</span>Odolnost — brownfield bez suburbánní expanze</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BROWNFIELD IMPERATIVE -->
+  <div class="section">
+    <div class="section-label">METROPOLITNÍ PLÁN · BROWNFIELD STRATEGIE</div>
+    <h2 class="section-title">Proč Praha <em>potřebuje</em> právě brownfieldy</h2>
+    <p class="section-desc">Nový Metropolitní plán staví transformaci brownfieldů do centra strategického rozvoje. Areál Za Zastávkou 377 naplňuje definici prioritního rozvojového území.</p>
+    <div class="bf-grid">
+      <div class="bf-stat">
+        <div class="bf-val">55 %</div>
+        <div class="bf-label">BROWNFIELDY Z ROZV. PLOCH</div>
+        <div class="bf-note">Klíčový zdroj kapacit pro Prahu</div>
+      </div>
+      <div class="bf-stat">
+        <div class="bf-val">75 %</div>
+        <div class="bf-label">BUDOUCÍ KAPACITY V BROWNFIELDECH</div>
+        <div class="bf-note">Vyšší hustota = efektivnější město</div>
+      </div>
+      <div class="bf-stat">
+        <div class="bf-val">350 000</div>
+        <div class="bf-label">NOVÝCH BYTŮ CÍLEM PRAHY</div>
+        <div class="bf-note">Pouze přes brownfieldy je to možné</div>
+      </div>
+      <div class="bf-stat">
+        <div class="bf-val">500 000</div>
+        <div class="bf-label">DALŠÍCH OBYVATEL BEZ EXPANZE</div>
+        <div class="bf-note">„Růst dovnitř" jako jediná cesta</div>
+      </div>
+    </div>
+    <div class="bf-text-grid">
+      <div class="bf-block">
+        <h4>Princip „Růstu dovnitř" (Growth Inward)</h4>
+        <p>Metropolitní plán definitivně upouští od suburbanizace a designuje brownfieldy jako primární zdroj rozvojových kapacit. Areál Za Zastávkou — 33 000 m² industriální plochy uprostřed zastavěné Prahy — je přesně typem území, jehož transformaci město strategicky požaduje a systémově podporuje.</p>
+      </div>
+      <div class="bf-block">
+        <h4>Typ struktury „Produkční a obchodní"</h4>
+        <p>Metropolitní plán zavádí 10 typů stavebních struktur. Areál Za Zastávkou spadá do kategorie „Produkční a obchodní" — plochy pro průmysl, logistiku, kreativní výrobu a retail. Tento typ je v novém plánu definován jako transformovatelný, s možností mixu funkcí bez nutnosti individuální změny územního plánu.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOD SECTION -->
+  <div class="section">
+    <div class="tod-block">
+      <div class="tod-left">
+        <h3>Transit-Oriented Development —<br><em>areál splňuje kritéria</em></h3>
+        <p style="margin-top:12px;">Metropolitní plán vyžaduje, aby více než 80 % nových rozvojových ploch bylo v docházkové vzdálenosti od páteřní kolejové dopravy (500–700 m). Areál Za Zastávkou tuto podmínku splňuje — nachází se v bezprostřední blízkosti tramvajových zastávek a v docházkové vzdálenosti od stanic metra.</p>
+        <p style="margin-top:12px; font-size:12px; color:rgba(255,255,255,0.5);">Tento princip zajišťuje, že investice do areálu přitáhne nájemníky i zákazníky bez závislosti na automobilové dopravě — v souladu s konceptem „Města krátkých vzdáleností."</p>
+      </div>
+      <div class="tod-right">
+        <div class="tod-item">
+          <div class="tod-val">500 m</div>
+          <div class="tod-label">Docházková vzdálenost k tramvaji (Za Zastávkou)</div>
+        </div>
+        <div class="tod-item">
+          <div class="tod-val">15 min</div>
+          <div class="tod-label">Cíl MP: veškeré služby dostupné bez auta</div>
+        </div>
+        <div class="tod-item">
+          <div class="tod-val">90 %</div>
+          <div class="tod-label">Obyvatel nových čtvrtí má školu/park do 15 min</div>
+        </div>
+        <div class="tod-item">
+          <div class="tod-val">✓</div>
+          <div class="tod-label">Cíkostezky Dolních Měcholup — aktivní mobilita</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALIGNMENT MATRIX -->
+  <div class="section">
+    <div class="section-label">MATICE SOULADU</div>
+    <h2 class="section-title">Každý cíl SP HMP — <em>přesná vazba na náš projekt</em></h2>
+    <p class="section-desc">Přehled konkrétních strategických cílů Prahy a jejich naplnění v jednotlivých fázích projektu.</p>
+
+    <div class="align-header">
+      <div class="align-col-head align-col-city">CÍL SP HMP</div>
+      <div class="align-col-head align-col-f1">FÁZE 1 · HUB</div>
+      <div class="align-col-head align-col-f2">FÁZE 2 · KAMPUS</div>
+      <div class="align-col-head align-col-f3">FÁZE 3 · FILM</div>
+    </div>
+
+    <div class="align-row">
+      <div class="align-goal">
+        <div class="align-goal-code">2.2 · PODNIKÁNÍ A INOVACE</div>
+        <div class="align-goal-name">Inkubátory a prostory pro živnostníky</div>
+        <div class="align-goal-desc">SP HMP: „Podpora vzniku prostorů pro malé podnikání, dílny a kreativní výrobu v brownfieldech."</div>
+      </div>
+      <div class="align-cell yes-f1">✓</div>
+      <div class="align-cell yes-f2">✓</div>
+      <div class="align-cell partial">—</div>
+    </div>
+
+    <div class="align-row">
+      <div class="align-goal">
+        <div class="align-goal-code">2.3 · KULTURNÍ ZNAČKA MĚSTA</div>
+        <div class="align-goal-name">Filmový průmysl a kreativní export</div>
+        <div class="align-goal-desc">SP HMP: „Rozvoj kulturní značky města, filmových studií a kreativních průmyslů jako ekonomického motoru."</div>
+      </div>
+      <div class="align-cell partial">—</div>
+      <div class="align-cell yes-f2">↗</div>
+      <div class="align-cell yes-f3">✓</div>
+    </div>
+
+    <div class="align-row">
+      <div class="align-goal">
+        <div class="align-goal-code">1.2 · KOMUNITNÍ ŽIVOT</div>
+        <div class="align-goal-name">Veřejný prostor a zelená infrastruktura</div>
+        <div class="align-goal-desc">SP HMP: „Tvorba kvalitního veřejného prostoru a zelené infrastruktury jako základu soudržného města."</div>
+      </div>
+      <div class="align-cell yes-f1">✓</div>
+      <div class="align-cell yes-f2">✓</div>
+      <div class="align-cell partial">↗</div>
+    </div>
+
+    <div class="align-row">
+      <div class="align-goal">
+        <div class="align-goal-code">1.4 · ZDRAVÉ MĚSTO</div>
+        <div class="align-goal-name">Klimatická odolnost, FVE, tepelná čerpadla</div>
+        <div class="align-goal-desc">MP + Klimatický plán 2030: Zelené střechy, FVE, tepelná čerpadla jako standard nové výstavby a revitalizací.</div>
+      </div>
+      <div class="align-cell partial">↗</div>
+      <div class="align-cell yes-f2">✓</div>
+      <div class="align-cell yes-f3">✓</div>
+    </div>
+
+    <div class="align-row">
+      <div class="align-goal">
+        <div class="align-goal-code">2.1 · VÝZNAMNÝ REGION</div>
+        <div class="align-goal-name">Pracovní místa s vyšší přidanou hodnotou</div>
+        <div class="align-goal-desc">SP HMP: „Přitahování investic a pracovních míst do sektorů se střední a vyšší přidanou hodnotou."</div>
+      </div>
+      <div class="align-cell yes-f1">✓</div>
+      <div class="align-cell yes-f2">✓</div>
+      <div class="align-cell yes-f3">✓</div>
+    </div>
+
+    <div class="align-row">
+      <div class="align-goal">
+        <div class="align-goal-code">3.1 · AKTIVNÍ ROLE MĚSTA</div>
+        <div class="align-goal-name">Efektivní správa majetku a investic</div>
+        <div class="align-goal-desc">SP HMP: „Město jako aktivní správce svého majetku — ne pasivní vlastník. Investice plynoucí do obecního vlastnictví."</div>
+      </div>
+      <div class="align-cell yes-f1">✓</div>
+      <div class="align-cell yes-f2">✓</div>
+      <div class="align-cell yes-f3">✓</div>
+    </div>
+
+    <div class="align-row">
+      <div class="align-goal">
+        <div class="align-goal-code">MP · BROWNFIELD TOD</div>
+        <div class="align-goal-name">Transformace v docházkové vzdálenosti od MHD</div>
+        <div class="align-goal-desc">Metropolitní plán: Priorita brownfieldů splňujících TOD princip — docházková vzdálenost 500–700 m od páteřní dopravy.</div>
+      </div>
+      <div class="align-cell yes-f1">✓</div>
+      <div class="align-cell yes-f2">✓</div>
+      <div class="align-cell yes-f3">✓</div>
+    </div>
+  </div>
+
+  <!-- DETAIL GOAL CARDS -->
+  <div class="section">
+    <div class="section-label">SOULAD V DETAILU</div>
+    <h2 class="section-title">Jak přesně <em>naplňujeme</em> priority města</h2>
+    <div class="goals-grid">
+
+      <div class="goal-card">
+        <div class="goal-card-header">
+          <div class="goal-icon gi-city">🏭</div>
+          <div>
+            <div class="goal-code">SP HMP · CÍL 2.2 · PODNIKÁNÍ A INOVACE</div>
+            <div class="goal-name">Kreativní a výrobní brownfield s přidanou hodnotou</div>
+          </div>
+        </div>
+        <div class="goal-body">Strategický plán HMP identifikuje nedostatek dostupných prostorů pro řemeslné a kreativní podnikání v intravilánu Prahy. Živnostníci, malé firmy a kreativci jsou vytlačováni z centra stoupajícími nájmy, přičemž alternativní lokality s dobrou dopravní dostupností chybí.</div>
+        <div class="goal-project"><strong>Náš projekt:</strong> Fáze 1 vytváří 40–60 modulárních jednotek za 40–80 Kč/m²/měs. — dostupné nájemné pro živnostníky v Dolních Měcholupech, kteří jinak nemají kde provozovat dílnu, garáž či sklad s dobrým napojením na dopravu.</div>
+        <div class="goal-phases"><span class="gp-dot gp-f1">FÁZE 1</span><span class="gp-dot gp-f2">FÁZE 2</span></div>
+      </div>
+
+      <div class="goal-card">
+        <div class="goal-card-header">
+          <div class="goal-icon gi-city">🎬</div>
+          <div>
+            <div class="goal-code">SP HMP · CÍL 2.3 · KULTURNÍ ZNAČKA MĚSTA</div>
+            <div class="goal-name">Filmový průmysl jako mezinárodní identita Prahy</div>
+          </div>
+        </div>
+        <div class="goal-body">Praha strategicky buduje pozici filmové a kulturní destinace v evropském měřítku. Barrandov je dlouhodobě plně obsazen a kapacitní krize pražského filmového průmyslu je prokazatelná. SFA cash rebate 25–35 % (od 1. 1. 2025) vytváří bezprecedentní příležitost pro nová studia.</div>
+        <div class="goal-project"><strong>Náš projekt:</strong> Fáze 3 (Filmový Park) buduje 3 sound stages včetně LED Volume Stage. Dolní Měcholupy se stanou součástí pražské filmové mapy — s přímou podporou z dotačního titulu SFA a mezinárodní viditelností.</div>
+        <div class="goal-phases"><span class="gp-dot gp-f3">FÁZE 3</span></div>
+      </div>
+
+      <div class="goal-card">
+        <div class="goal-card-header">
+          <div class="goal-icon gi-city">🌿</div>
+          <div>
+            <div class="goal-code">KLIMATICKÝ PLÁN 2030 · ZELENÁ INFRASTRUKTURA</div>
+            <div class="goal-name">Zelené střechy, FVE a tepelná čerpadla jako standard</div>
+          </div>
+        </div>
+        <div class="goal-body">Klimatický plán 2030 a Cirkulární Praha definují konkrétní technická opatření, která jsou podmínkou pro čerpání dotací z OP ŽP, RES+ Modernizačního fondu a ENERG ETS. Zelené střechy, fotovoltaika a energetická soběstačnost nejsou jen trendem — jsou strategickým požadavkem města.</div>
+        <div class="goal-project"><strong>Náš projekt:</strong> Fáze 2 instaluje FVE 200 kWp, zelené střechy a tepelná čerpadla. Dosažitelná dotace RES+ (50 %) + ENERG ETS (30–50 %) = 5–10 mil. Kč snížení investice v souladu s klimatickými cíli města.</div>
+        <div class="goal-phases"><span class="gp-dot gp-f2">FÁZE 2</span><span class="gp-dot gp-f3">FÁZE 3</span></div>
+      </div>
+
+      <div class="goal-card">
+        <div class="goal-card-header">
+          <div class="goal-icon gi-city">🏛️</div>
+          <div>
+            <div class="goal-code">SP HMP · CÍL 3.1 · AKTIVNÍ ROLE MĚSTA</div>
+            <div class="goal-name">Město jako aktivní správce, ne pasivní vlastník</div>
+          </div>
+        </div>
+        <div class="goal-body">Strategický plán explicitně hovoří o „plánovacích smlouvách" jako nástroji propojení veřejného a soukromého sektoru. Developeři investují do veřejné infrastruktury výměnou za možnost realizovat projekt. Toto je přesně model, který navrhujeme pro Dolní Měcholupy.</div>
+        <div class="goal-project"><strong>Náš projekt:</strong> BALLOON investuje 4–10 mil. Kč vlastních prostředků, obec ručí max. 10 mil. Kč — veškeré investice se stávají majetkem Dolních Měcholup. Přesný model plánovací smlouvy dle SP HMP.</div>
+        <div class="goal-phases"><span class="gp-dot gp-f1">FÁZE 1</span><span class="gp-dot gp-f2">FÁZE 2</span><span class="gp-dot gp-f3">FÁZE 3</span></div>
+      </div>
+
+      <div class="goal-card">
+        <div class="goal-card-header">
+          <div class="goal-icon gi-city">🚇</div>
+          <div>
+            <div class="goal-code">METROPOLITNÍ PLÁN · TOD PRINCIP</div>
+            <div class="goal-name">Rozvoj v docházkové vzdálenosti od páteřní MHD</div>
+          </div>
+        </div>
+        <div class="goal-body">Metropolitní plán vyžaduje, aby 80 % nových rozvojových ploch bylo do 500–700 m od tramvaje, metra nebo vlaku. Tento princip Transit-Oriented Development (TOD) je základní podmínkou pro zařazení projektu do priorit města a pro přístup k rozvojovým dotacím.</div>
+        <div class="goal-project"><strong>Náš projekt:</strong> Areál Za Zastávkou 377 leží v bezprostřední blízkosti tramvajové tratě ul. Za Zastávkou — podmínka TOD je splněna. Napojení na cyklostezky Dolních Měcholup podporuje aktivní mobilitu dle Strategie aktivní mobility Prahy 2022.</div>
+        <div class="goal-phases"><span class="gp-dot gp-f1">FÁZE 1</span><span class="gp-dot gp-f2">FÁZE 2</span><span class="gp-dot gp-f3">FÁZE 3</span></div>
+      </div>
+
+      <div class="goal-card">
+        <div class="goal-card-header">
+          <div class="goal-icon gi-city">🎓</div>
+          <div>
+            <div class="goal-code">SP HMP · CÍL 2.4 · VZDĚLÁVÁNÍ</div>
+            <div class="goal-name">Kreativní kampus a neformální vzdělávání</div>
+          </div>
+        </div>
+        <div class="goal-body">Strategický plán HMP podporuje vznik prostorů pro neformální vzdělávání, maker spaces a kreativní workshopy jako doplněk formálního vzdělávacího systému. Referenční projekt Kampus Hybernská v centru Prahy ukazuje fungující model.</div>
+        <div class="goal-project"><strong>Náš projekt:</strong> Fáze 2 (Smart Campus) vytváří maker space, design studia a vzdělávací prostory dostupné pro komunitu Dolních Měcholup i celé Prahy — v souladu s referenčními projekty SP HMP (Pražské kreativní centrum, Kampus Hybernská).</div>
+        <div class="goal-phases"><span class="gp-dot gp-f2">FÁZE 2</span><span class="gp-dot gp-f3">FÁZE 3</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COMPAT BANNER -->
+  <div class="compat-banner">
+    <div class="compat-icon">⚖️</div>
+    <div>
+      <div class="compat-title">SOULAD S METROPOLITNÍM PLÁNEM · ÚZEMNÍ PŘÍPUSTNOST</div>
+      <div class="compat-text">Areál Za Zastávkou 377 je v Metropolitním plánu zařazen do kategorie <strong>„Produkční a obchodní"</strong> — stavební struktura definovaná pro průmysl, logistiku, kreativní výrobu a retail. Všechny tři fáze projektu jsou v tomto vymezení přípustné <strong>bez nutnosti individuální změny územního plánu</strong>. Fáze 1 (kontejnery, zelený pás) a Fáze 2 (kampus, FVE) nevyžadují ani stavební povolení v plném rozsahu — postačí ohlášení nebo zjednodušené řízení dle nového stavebního zákona.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CONCLUSION -->
+<div class="conclusion">
+  <div class="conc-inner">
+    <div class="conc-eyebrow">ZÁVĚR · STRATEGICKÁ POLOHA PROJEKTU</div>
+    <h2 class="conc-title">Dolní Měcholupy mohou být<br><em>vzorovým příkladem</em> toho,<br>jak Praha roste dovnitř</h2>
+    <p class="conc-text">
+      Plán Zefektivnění areálu Za Zastávkou není jen ekonomicky výhodná investice — je to projekt,
+      který Praha strategicky potřebuje a systémově podporuje. Každý cíl Strategického plánu HMP,
+      každý princip Metropolitního plánu i každá priorita Klimatického plánu 2030 nachází
+      v našem konceptu svou přímou odpověď.
+    </p>
+    <p class="conc-text">
+      Brownfield v docházkové vzdálenosti od tramvaje, proměněný na kreativní hub s kreativní
+      ekonomikou, filmovým studiem, fotovoltaikou a zelenou infrastrukturou — to je přesně typ projektu,
+      pro který Praha vytvořila svůj strategický rámec. Dolní Měcholupy mají příležitost být
+      jeho vzorovým příkladem.
+    </p>
+    <div class="conc-btns">
+      <a class="btn btn-amber" href="analyza.html">Finanční analýza →</a>
+      <a class="btn btn-green" href="faze1.html">Začít s Fází 1 →</a>
+      <a class="btn btn-outline" href="index.html">← Zpět na přehled</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER NAV -->
+<div class="phase-nav">
+  <a class="phase-nav-back" href="dokumenty.html">← Podkladové dokumenty</a>
+  <div class="footer-copy">BALLOON · light · Praha · Areál Za Zastávkou 377 · Dolní Měcholupy · Plán Zefektivnění 2026</div>
+</div>
+
+</body>
+</html>
