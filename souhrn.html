@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Souhrn konceptu · Areál Za Zastávkou</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #1c1a16; --ink-soft: #4a4540;
+  --linen: #f4efe6; --linen-dark: #e8e0d2;
+  --amber: #c8860a; --amber-light: #f0b845; --amber-pale: #fdf3de;
+  --concrete: #8a8278; --concrete-light: #c4bdb4;
+  --film: #2c3e50; --film-pale: #e8ecf0;
+  --green: #3d6b4f; --green-pale: #e8f2ec;
+  --corten: #b5611a; --corten-pale: #fdf0e8;
+  --city: #1a3566; --city-pale: #e8eef8;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(--ink); }
+
+/* NAV */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--ink); border-bottom: 2px solid var(--amber);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 54px;
+}
+.nav-brand { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--amber-light); text-decoration: none; }
+.nav-links { display: flex; gap: 4px; }
+.nav-link { font-size: 11.5px; font-weight: 500; color: rgba(255,255,255,0.65); text-decoration: none; padding: 6px 14px; transition: all 0.2s; }
+.nav-link:hover, .nav-link.active { color: white; background: rgba(255,255,255,0.08); }
+.nav-link.active { color: var(--amber-light); }
+
+/* HERO */
+.hero {
+  background: var(--ink);
+  padding: 80px 64px 72px;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255,0.02) 8px, rgba(255,255,255,0.02) 9px);
+}
+.hero-inner { position: relative; z-index: 1; max-width: 1300px; margin: 0 auto; }
+.hero-eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.25em; color: var(--amber-light); margin-bottom: 20px; }
+.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 6vw, 76px); font-weight: 300; color: white; line-height: 1.0; letter-spacing: -0.02em; margin-bottom: 28px; }
+.hero-title em { font-style: italic; color: var(--amber-light); }
+.hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.75; max-width: 680px; margin-bottom: 40px; }
+
+.hero-facts { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; }
+.hf-item { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); padding: 18px 20px; }
+.hf-val { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--amber-light); line-height: 1; margin-bottom: 4px; }
+.hf-label { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 0.12em; color: rgba(255,255,255,0.35); }
+.hf-note { font-size: 10.5px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+/* SECTION COMMON */
+.section { max-width: 1300px; margin: 0 auto; padding: 64px 64px 0; }
+.section-last { padding-bottom: 80px; }
+.label { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: var(--concrete); margin-bottom: 6px; }
+.title { font-family: 'Cormorant Garamond', serif; font-size: clamp(26px, 3vw, 36px); font-weight: 400; margin-bottom: 10px; }
+.title em { font-style: italic; }
+.body-text { font-size: 14px; color: var(--ink-soft); line-height: 1.8; }
+
+/* DIVIDER */
+.divider { max-width: 1300px; margin: 56px auto 0; padding: 0 64px; }
+.divider-line { height: 1px; background: var(--linen-dark); }
+
+/* WHY NOW — full-width amber banner */
+.why-now {
+  background: var(--amber);
+  padding: 48px 64px;
+  margin-top: 56px;
+}
+.wn-inner { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
+.wn-item {}
+.wn-icon { font-size: 28px; margin-bottom: 12px; }
+.wn-title { font-weight: 700; font-size: 14px; color: var(--ink); margin-bottom: 8px; }
+.wn-text { font-size: 13px; color: rgba(28,26,22,0.7); line-height: 1.65; }
+.wn-head { grid-column: 1/-1; margin-bottom: 8px; }
+.wn-head .label { color: rgba(28,26,22,0.5); }
+.wn-head .title { color: var(--ink); }
+.wn-head .title em { color: white; }
+
+/* PRINCIPLES */
+.principles-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; margin-top: 24px; }
+.principle { background: white; border: 1px solid var(--linen-dark); border-top: 3px solid; padding: 24px 20px; }
+.principle.p-green { border-top-color: var(--green); }
+.principle.p-amber { border-top-color: var(--amber); }
+.principle.p-film { border-top-color: var(--film); }
+.principle.p-city { border-top-color: var(--city); }
+.principle-num { font-family: 'DM Mono', monospace; font-size: 28px; font-weight: 400; line-height: 1; margin-bottom: 10px; }
+.p-green .principle-num { color: var(--green); }
+.p-amber .principle-num { color: var(--amber); }
+.p-film .principle-num { color: var(--film); }
+.p-city .principle-num { color: var(--city); }
+.principle-name { font-weight: 700; font-size: 13.5px; margin-bottom: 8px; }
+.principle-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.6; }
+
+/* PHASES */
+.phases-full { margin-top: 28px; display: flex; flex-direction: column; gap: 3px; }
+.phase-row {
+  display: grid; grid-template-columns: 200px 1fr 1fr 1fr 1fr 160px;
+  gap: 3px; align-items: stretch;
+}
+.phase-head { padding: 20px 24px; color: white; display: flex; flex-direction: column; justify-content: center; }
+.ph-f1 { background: var(--green); }
+.ph-f2 { background: var(--amber); }
+.ph-f3 { background: var(--film); }
+.phase-head-num { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.15em; opacity: 0.6; margin-bottom: 4px; }
+.phase-head-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; line-height: 1.1; }
+.phase-head-tag { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 0.1em; margin-top: 6px; opacity: 0.7; }
+.phase-cell { background: white; border: 1px solid var(--linen-dark); padding: 16px 18px; display: flex; flex-direction: column; justify-content: center; }
+.phase-cell-label { font-family: 'DM Mono', monospace; font-size: 8.5px; letter-spacing: 0.1em; color: var(--concrete); margin-bottom: 4px; }
+.phase-cell-val { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--ink); line-height: 1.1; }
+.phase-cell-val.v-f1 { color: var(--green); }
+.phase-cell-val.v-f2 { color: var(--amber); }
+.phase-cell-val.v-f3 { color: var(--film); }
+.phase-cell-sub { font-size: 10.5px; color: var(--concrete); margin-top: 2px; }
+.phase-cell-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.55; }
+.phase-link { background: var(--ink); border: none; padding: 16px 18px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.12em; color: rgba(255,255,255,0.6); transition: all 0.2s; text-align: center; }
+.phase-link:hover { color: white; background: rgba(255,255,255,0.1); }
+.phase-col-head { padding: 10px 18px; background: var(--ink); }
+.phase-col-head-text { font-family: 'DM Mono', monospace; font-size: 8.5px; letter-spacing: 0.12em; color: rgba(255,255,255,0.4); }
+.phase-row-head { display: grid; grid-template-columns: 200px 1fr 1fr 1fr 1fr 160px; gap: 3px; margin-bottom: 3px; }
+
+/* HALA 5 */
+.hala5-block {
+  margin-top: 24px;
+  background: var(--ink); border-left: 5px solid var(--amber-light);
+  padding: 28px 36px;
+  display: grid; grid-template-columns: auto 1fr auto; gap: 28px; align-items: center;
+}
+.h5-icon { font-size: 36px; }
+.h5-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.18em; color: var(--amber-light); margin-bottom: 6px; }
+.h5-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: white; margin-bottom: 8px; }
+.h5-text { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.65; }
+.h5-badges { display: flex; gap: 6px; flex-direction: column; }
+.h5-badge { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; padding: 5px 10px; text-align: center; white-space: nowrap; }
+.h5b-f1 { background: var(--green-pale); color: var(--green); }
+.h5b-f2 { background: var(--amber-pale); color: var(--amber); }
+.h5b-f3 { background: var(--film-pale); color: var(--film); }
+
+/* RISK TABLE */
+.risk-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-top: 24px; }
+.risk-card { padding: 28px 24px; background: white; border: 1px solid var(--linen-dark); }
+.risk-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.risk-level { width: 10px; border-radius: 2px; align-self: stretch; flex-shrink: 0; }
+.rl-low { background: var(--green); }
+.rl-mid { background: var(--amber); }
+.rl-high { background: var(--film); }
+.risk-phase { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; }
+.risk-tag { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 0.1em; padding: 3px 8px; }
+.rt-low { background: var(--green-pale); color: var(--green); }
+.rt-mid { background: var(--amber-pale); color: var(--amber); }
+.rt-high { background: var(--film-pale); color: var(--film); }
+.risk-items { display: flex; flex-direction: column; gap: 8px; }
+.risk-item { font-size: 12.5px; color: var(--ink-soft); line-height: 1.55; padding-left: 14px; position: relative; }
+.risk-item::before { content: '▸'; position: absolute; left: 0; font-size: 10px; color: var(--concrete); top: 2px; }
+.risk-mitigation { margin-top: 14px; padding: 12px 14px; font-size: 12px; line-height: 1.55; border-radius: 1px; }
+.rm-low { background: var(--green-pale); color: var(--green); }
+.rm-mid { background: var(--amber-pale); color: var(--amber); }
+.rm-high { background: var(--film-pale); color: var(--film); }
+
+/* ADVANTAGES */
+.adv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-top: 24px; }
+.adv-item { background: white; border: 1px solid var(--linen-dark); padding: 22px 24px; display: grid; grid-template-columns: 36px 1fr; gap: 14px; align-items: start; }
+.adv-icon { font-size: 20px; margin-top: 2px; }
+.adv-title { font-weight: 700; font-size: 13.5px; margin-bottom: 5px; }
+.adv-text { font-size: 12.5px; color: var(--ink-soft); line-height: 1.6; }
+
+/* DECISION STRIP */
+.decision-strip { background: var(--city); margin-top: 56px; padding: 56px 64px; }
+.ds-inner { max-width: 1300px; margin: 0 auto; }
+.ds-label { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: rgba(255,255,255,0.4); margin-bottom: 8px; }
+.ds-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; color: white; margin-bottom: 28px; }
+.ds-title em { font-style: italic; color: var(--amber-light); }
+.decisions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+.decision { padding: 24px 22px; }
+.d1 { background: rgba(61,107,79,0.25); border: 2px solid var(--green); }
+.d2 { background: rgba(200,134,10,0.15); border: 2px solid var(--amber); }
+.d3 { background: rgba(44,62,80,0.25); border: 2px solid var(--film); }
+.d-level { font-family: 'DM Mono', monospace; font-size: 8.5px; letter-spacing: 0.15em; margin-bottom: 8px; }
+.d1 .d-level { color: #86efac; }
+.d2 .d-level { color: var(--amber-light); }
+.d3 .d-level { color: rgba(255,255,255,0.5); }
+.d-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: white; margin-bottom: 12px; line-height: 1.2; }
+.d-condition { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; margin-bottom: 14px; }
+.d1 .d-condition { color: #86efac; }
+.d2 .d-condition { color: var(--amber-light); }
+.d3 .d-condition { color: rgba(255,255,255,0.4); }
+.d-items { display: flex; flex-direction: column; gap: 6px; }
+.d-item { font-size: 12px; color: rgba(255,255,255,0.75); display: flex; gap: 8px; line-height: 1.5; }
+.d-check { flex-shrink: 0; }
+
+/* STRATEGY STRIP */
+.strategy-strip {
+  background: var(--linen-dark);
+  padding: 48px 64px;
+}
+.ss-inner { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1fr 2fr; gap: 48px; align-items: start; }
+.ss-left .label { color: var(--city); }
+.ss-left .title { color: var(--city); }
+.ss-left .title em { color: var(--ink); }
+.ss-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; }
+.ss-pill { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; padding: 5px 12px; border: 1px solid var(--city); color: var(--city); background: white; }
+.ss-right { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.ss-item { background: white; border: 1px solid rgba(26,53,102,0.15); padding: 16px 18px; }
+.ss-item-code { font-family: 'DM Mono', monospace; font-size: 8.5px; letter-spacing: 0.1em; color: var(--city); margin-bottom: 4px; }
+.ss-item-name { font-size: 12.5px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.ss-item-desc { font-size: 11.5px; color: var(--ink-soft); line-height: 1.5; }
+
+/* CONCLUSION */
+.conclusion {
+  background: var(--ink); padding: 72px 64px;
+  position: relative; overflow: hidden;
+}
+.conclusion::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255,0.015) 8px, rgba(255,255,255,0.015) 9px);
+}
+.cl-inner { position: relative; z-index: 1; max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.cl-left {}
+.cl-eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--amber-light); margin-bottom: 16px; }
+.cl-title { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; color: white; line-height: 1.1; margin-bottom: 24px; }
+.cl-title em { font-style: italic; color: var(--amber-light); }
+.cl-text { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.8; margin-bottom: 14px; }
+.cl-btns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 32px; }
+.btn { display: inline-block; text-decoration: none; padding: 12px 24px; font-size: 12.5px; font-weight: 600; transition: all 0.2s; }
+.btn-amber { background: var(--amber); color: white; }
+.btn-amber:hover { background: var(--amber-light); color: var(--ink); }
+.btn-green { background: var(--green); color: white; }
+.btn-green:hover { background: #4d8a63; }
+.btn-film { background: var(--film); color: white; }
+.btn-film:hover { background: #3d5a73; }
+.btn-outline { background: transparent; color: rgba(255,255,255,0.6); border: 1.5px solid rgba(255,255,255,0.2); }
+.btn-outline:hover { border-color: white; color: white; }
+.cl-right {}
+.cl-checklist { display: flex; flex-direction: column; gap: 3px; }
+.cl-check-item { display: flex; gap: 14px; padding: 16px 18px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); align-items: flex-start; }
+.cl-check-mark { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.cl-check-title { font-weight: 600; font-size: 13px; color: white; margin-bottom: 3px; }
+.cl-check-desc { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+/* FOOTER */
+.phase-nav { background: rgba(0,0,0,0.2); padding: 24px 64px; display: flex; justify-content: space-between; align-items: center; }
+.phase-nav-back { text-decoration: none; color: rgba(255,255,255,0.4); font-size: 12px; transition: color 0.2s; }
+.phase-nav-back:hover { color: white; }
+.footer-copy { font-size: 10.5px; color: rgba(255,255,255,0.2); }
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+  .hero-facts { grid-template-columns: repeat(3, 1fr); }
+  .phase-row, .phase-row-head { grid-template-columns: 160px 1fr 1fr 1fr; }
+  .phase-row .phase-cell:nth-child(6), .phase-row .phase-link,
+  .phase-row-head .phase-col-head:nth-child(6) { display: none; }
+  .principles-grid { grid-template-columns: 1fr 1fr; }
+  .cl-inner { grid-template-columns: 1fr; }
+  .ss-inner { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hero, .section, .divider, .decision-strip, .strategy-strip, .conclusion { padding-left: 24px; padding-right: 24px; }
+  .why-now { padding: 36px 24px; }
+  .wn-inner { grid-template-columns: 1fr; }
+  .hero-facts { grid-template-columns: 1fr 1fr; }
+  .phase-row, .phase-row-head { grid-template-columns: 1fr; }
+  .phase-head, .phase-col-head { display: none; }
+  .phases-full .phase-row .phase-cell:first-child { display: block; }
+  .principles-grid { grid-template-columns: 1fr; }
+  .risk-grid { grid-template-columns: 1fr; }
+  .adv-grid { grid-template-columns: 1fr; }
+  .decisions { grid-template-columns: 1fr; }
+  .ss-right { grid-template-columns: 1fr; }
+  .hala5-block { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-brand" href="index.html">AREÁL ZA ZASTÁVKOU · PLÁN ZEFEKTIVNĚNÍ</a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Přehled</a>
+    <a class="nav-link" href="strategie.html">Strategie města</a>
+    <a class="nav-link" href="faze1.html">Fáze 1 – HUB</a>
+    <a class="nav-link" href="faze2.html">Fáze 2 – Kampus</a>
+    <a class="nav-link" href="faze3.html">Fáze 3 – Film</a>
+    <a class="nav-link" href="analyza.html">Analýza &amp; Finance</a>
+    <a class="nav-link" href="dokumenty.html">Dokumenty</a>
+    <a class="nav-link active" href="souhrn.html">Souhrn</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">PLÁN ZEFEKTIVNĚNÍ · AREÁL ZA ZASTÁVKOU 377 · DOLNÍ MĚCHOLUPY · SOUHRN PRO ZASTUPITELE</div>
+    <h1 class="hero-title">Brownfield,<br>který <em>čeká na nový život</em> —<br>a příležitost, která<br>nepočká</h1>
+    <p class="hero-sub">
+      33 000 m² industriálního areálu v srdci Dolních Měcholup. Stávající pacht výrazně pod tržní hodnotou.
+      Tři fáze transformace — od okamžitě realizovatelného řemeslného hubu až po filmové studio mezinárodního věhlasu.
+      Každá fáze samostatně životaschopná. Max. riziko obce 10 mil. Kč.
+    </p>
+    <div class="hero-facts">
+      <div class="hf-item">
+        <div class="hf-val">33 000 m²</div>
+        <div class="hf-label">PLOCHA AREÁLU</div>
+        <div class="hf-note">Za Zastávkou 377, DM</div>
+      </div>
+      <div class="hf-item">
+        <div class="hf-val">700 tis./měs.</div>
+        <div class="hf-label">STÁVAJÍCÍ PACHT</div>
+        <div class="hf-note">do února 2035</div>
+      </div>
+      <div class="hf-item">
+        <div class="hf-val">10 mil. Kč</div>
+        <div class="hf-label">MAX. RIZIKO OBCE</div>
+        <div class="hf-note">ve všech 3 fázích</div>
+      </div>
+      <div class="hf-item">
+        <div class="hf-val">3 fáze</div>
+        <div class="hf-label">POSTUPNÝ ROZVOJ</div>
+        <div class="hf-note">každá samostatně</div>
+      </div>
+      <div class="hf-item">
+        <div class="hf-val">20 mil. Kč</div>
+        <div class="hf-label">INVEST. LIMIT SMLOUVY</div>
+        <div class="hf-note">obec max. 10 mil.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY NOW -->
+<div class="why-now">
+  <div class="wn-inner">
+    <div class="wn-head">
+      <div class="label">PROČ PRÁVĚ TEĎ</div>
+      <h2 class="title">Tři nezávislá okna příležitosti — <em>všechna se otevírají najednou</em></h2>
+    </div>
+    <div class="wn-item">
+      <div class="wn-icon">🎬</div>
+      <div class="wn-title">Kapacitní krize pražských studií</div>
+      <div class="wn-text">Barrandov je plně obsazen od roku 2023. SFA cash rebate 25–35 % (od 1. 1. 2025) dělá z ČR atraktivní produkční destinaci. Netflix, Apple, Amazon hledají kapacity — a nemohou je v Praze najít.</div>
+    </div>
+    <div class="wn-item">
+      <div class="wn-icon">🏙️</div>
+      <div class="wn-title">Metropolitní plán Prahy</div>
+      <div class="wn-text">Nový plán (platnost od 2028) staví brownfieldy do centra rozvoje. 55 % rozvojových ploch, 75 % kapacit. Areál Za Zastávkou splňuje TOD princip — transformace bez změny ÚP.</div>
+    </div>
+    <div class="wn-item">
+      <div class="wn-icon">📅</div>
+      <div class="wn-title">Stávající pacht jako startovní čára</div>
+      <div class="wn-text">Fáze 1 je realizovatelná ihned — bez nutnosti prodloužení pachtu, bez hlasování zastupitelů o budoucím směřování. Příjem od prvního kontejneru. Výpadek příjmu: nulový.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PRINCIPLES -->
+<div class="section" style="margin-top:56px;">
+  <div class="label">ZÁKLADNÍ PRINCIPY KONCEPTU</div>
+  <h2 class="title">Na čem je celý plán <em>postaven</em></h2>
+  <div class="principles-grid">
+    <div class="principle p-green">
+      <div class="principle-num">01</div>
+      <div class="principle-name">Každá fáze samostatně životaschopná</div>
+      <div class="principle-desc">Dolní Měcholupy mohou vstoupit na libovolné úrovni. Fáze 1 funguje bez Fáze 2. Fáze 2 funguje bez Fáze 3. Žádná z fází není podmíněna úspěchem té předchozí.</div>
+    </div>
+    <div class="principle p-green">
+      <div class="principle-num">02</div>
+      <div class="principle-name">Max. riziko obce 10 mil. Kč</div>
+      <div class="principle-desc">Ve všech třech fázích platí stejný princip: obec investuje max. 10 mil. Kč. Veškeré přesahy zajišťuje BALLOON nebo strategický investor. Investice se stávají majetkem Dolních Měcholup.</div>
+    </div>
+    <div class="principle p-amber">
+      <div class="principle-num">03</div>
+      <div class="principle-name">Žádný výpadek stávajícího příjmu</div>
+      <div class="principle-desc">Fáze 1 využívá modulární přemístitelné kontejnery — instalace probíhá postupně, areál dál funguje. Příjem z nájmů začíná od prvního obsazeného kontejneru.</div>
+    </div>
+    <div class="principle p-film">
+      <div class="principle-num">04</div>
+      <div class="principle-name">Dual-Use pojistka pro Fázi 3</div>
+      <div class="principle-desc">Sound stages jsou konstrukčně identické s Grade A logistickými halami. Pokud filmový park nevyjde, vzniknou nejžádanější průmyslové prostory v Praze — investice není ztracena.</div>
+    </div>
+  </div>
+</div>
+
+<!-- DIVIDER -->
+<div class="divider" style="margin-top:48px;"><div class="divider-line"></div></div>
+
+<!-- PHASES -->
+<div class="section" style="margin-top:48px;">
+  <div class="label">TŘI FÁZE ROZVOJE</div>
+  <h2 class="title">Přehled fází — <em>klíčové parametry</em></h2>
+  <p class="body-text" style="margin-top:4px; margin-bottom:0;">Každá fáze má vlastní finanční model, časový horizont a podmínky realizace. Kliknutím přejdete na detailní stránku fáze.</p>
+
+  <div class="phase-row-head" style="margin-top:20px;">
+    <div class="phase-col-head"><span class="phase-col-head-text">FÁZE</span></div>
+    <div class="phase-col-head"><span class="phase-col-head-text">INVESTICE</span></div>
+    <div class="phase-col-head"><span class="phase-col-head-text">PŘÍJEM</span></div>
+    <div class="phase-col-head"><span class="phase-col-head-text">NÁVRATNOST</span></div>
+    <div class="phase-col-head"><span class="phase-col-head-text">PODMÍNKA</span></div>
+    <div class="phase-col-head"><span class="phase-col-head-text">DETAIL</span></div>
+  </div>
+
+  <div class="phases-full">
+    <div class="phase-row">
+      <div class="phase-head ph-f1">
+        <div class="phase-head-num">FÁZE 01 · 2025–2027</div>
+        <div class="phase-head-name">Řemeslný HUB</div>
+        <div class="phase-head-tag">REALIZOVATELNÉ IHNED</div>
+      </div>
+      <div class="phase-cell">
+        <div class="phase-cell-label">CELKOVÁ INVESTICE</div>
+        <div class="phase-cell-val v-f1">14–20 mil. Kč</div>
+        <div class="phase-cell-sub">obec max. 10 mil.</div>
+      </div>
+      <div class="phase-cell">
+        <div class="phase-cell-label">MĚSÍČNÍ PŘÍJEM</div>
+        <div class="phase-cell-val v-f1">1,3–2,6 mil.</div>
+        <div class="phase-cell-sub">vs. stávající 0,7 mil.</div>
+      </div>
+      <div class="phase-cell">
+        <div class="phase-cell-label">NÁVRATNOST</div>
+        <div class="phase-cell-val v-f1">3–8 měsíců</div>
+        <div class="phase-cell-sub">nejrychlejší ze 3 fází</div>
+      </div>
+      <div class="phase-cell">
+        <div class="phase-cell-label">PODMÍNKA</div>
+        <div class="phase-cell-val" style="font-size:14px; color:var(--green);">Žádná</div>
+        <div class="phase-cell-sub">stávající pacht do 2035</div>
+      </div>
+      <a class="phase-link" href="faze1.html">DETAIL →<br>FÁZE 1</a>
+    </div>
+
+    <div class="phase-row">
+      <div class="phase-head ph-f2">
+        <div class="phase-head-num">FÁZE 02 · 2028–2033</div>
+        <div class="phase-head-name">Smart Campus</div>
+        <div class="phase-head-tag">★ ZLATÝ STŘED</div>
+      </div>
+      <div class="phase-cell">
+        <div class="phase-cell-label">CELKOVÁ INVESTICE</div>
+        <div class="phase-cell-val v-f2">45–70 mil. Kč</div>
+        <div class="phase-cell-sub">dotace 20–30 mil.</div>
+      </div>
+      <div class="phase-cell">
+        <div class="phase-cell-label">MĚSÍČNÍ PŘÍJEM</div>
+        <div class="phase-cell-val v-f2">2,6–5,0 mil.</div>
+        <div class="phase-cell-sub">3,7× více než dnes</div>
+      </div>
+      <div class="phase-cell">
+        <div class="phase-cell-label">NÁVRATNOST</div>
+        <div class="phase-cell-val v-f2">7–12 let</div>
+        <div class="phase-cell-sub">zkrátit dotacemi</div>
+      </div>
+      <div class="phase-cell">
+        <div class="phase-cell-label">PODMÍNKA</div>
+        <div class="phase-cell-val" style="font-size:14px; color:var(--amber);">Pacht 20+ let</div>
+        <div class="phase-cell-sub">zastupitelé hlasují</div>
+      </div>
+      <a class="phase-link" href="faze2.html">DETAIL →<br>FÁZE 2</a>
+    </div>
+
+    <div class="phase-row">
+      <div class="phase-head ph-f3">
+        <div class="phase-head-num">FÁZE 03 · 2033+</div>
+        <div class="phase-head-name">Filmový Park</div>
+        <div class="phase-head-tag">VIZIONÁŘSKÁ</div>
+      </div>
+      <div class="phase-cell">
+        <div class="phase-cell-label">CELKOVÁ INVESTICE</div>
+        <div class="phase-cell-val v-f3">350+ mil. Kč</div>
+        <div class="phase-cell-sub">strategický investor</div>
+      </div>
+      <div class="phase-cell">
+        <div class="phase-cell-label">ROČNÍ VÝNOS</div>
+        <div class="phase-cell-val v-f3">60–90 mil./rok</div>
+        <div class="phase-cell-sub">3 sound stages</div>
+      </div>
+      <div class="phase-cell">
+        <div class="phase-cell-label">NÁVRATNOST</div>
+        <div class="phase-cell-val v-f3">6–17 let</div>
+        <div class="phase-cell-sub">Dual-Use pojistka</div>
+      </div>
+      <div class="phase-cell">
+        <div class="phase-cell-label">PODMÍNKA</div>
+        <div class="phase-cell-val" style="font-size:14px; color:var(--film);">Pacht 50 let + investor</div>
+        <div class="phase-cell-sub">připravit ihned</div>
+      </div>
+      <a class="phase-link" href="faze3.html">DETAIL →<br>FÁZE 3</a>
+    </div>
+  </div>
+</div>
+
+<!-- HALA 5 -->
+<div class="section" style="margin-top:32px;" id="hala5">
+  <div class="hala5-block">
+    <div class="h5-icon">🏭</div>
+    <div>
+      <div class="h5-label">PRIORITNÍ INVESTICE FÁZE 1 · INFRASTRUKTURA</div>
+      <div class="h5-title">Hala č. 5 — jediná hala areálu neplánovaná ke zbourání</div>
+      <div class="h5-text">V rámci Fáze 1 navrhujeme provést <strong style="color:white;">zateplení haly a zavedení plynového vytápění</strong>. Tato investice (2–3 mil. Kč) není ohrožena žádnou budoucí přestavbou — hala plně splňuje podmínky pro všechny tři fáze. Je to jediná kapitálová investice do stávající stavby s garantovanou dlouhodobou hodnotou.</div>
+    </div>
+    <div class="h5-badges">
+      <span class="h5-badge h5b-f1">F1 · DÍLNY</span>
+      <span class="h5-badge h5b-f2">F2 · MAKERSPACE</span>
+      <span class="h5-badge h5b-f3">F3 · ZÁZEMÍ STUDIA</span>
+    </div>
+  </div>
+</div>
+
+<!-- ADVANTAGES -->
+<div class="section" style="margin-top:48px;">
+  <div class="label">KLÍČOVÉ VÝHODY PROJEKTU</div>
+  <h2 class="title">Proč je to <em>dobrá investice pro Dolní Měcholupy</em></h2>
+  <div class="adv-grid">
+    <div class="adv-item">
+      <div class="adv-icon">📈</div>
+      <div>
+        <div class="adv-title">Okamžité zvýšení příjmu</div>
+        <div class="adv-text">Fáze 1 zvýší měsíční příjem ze 700 tis. na 1,3–2,6 mil. Kč — tedy 1,9–3,7× více. Příjem plyne od prvního obsazeného kontejneru, bez čekání na dokončení celé fáze.</div>
+      </div>
+    </div>
+    <div class="adv-item">
+      <div class="adv-icon">🏛️</div>
+      <div>
+        <div class="adv-title">Investice majetkem obce</div>
+        <div class="adv-text">Veškeré investice — kontejnery, zelený pás, rekonstrukce hal, FVE, sound stages — se automaticky stávají majetkem Dolních Měcholup. Dolní Měcholupy nevkládají jen pacht, ale budují trvalé aktivum.</div>
+      </div>
+    </div>
+    <div class="adv-item">
+      <div class="adv-icon">↩️</div>
+      <div>
+        <div class="adv-title">Reversibilita Fáze 1</div>
+        <div class="adv-text">Modulární kontejnery jsou přemístitelné — pokud by zastupitelé rozhodli nepokračovat, kontejnery lze prodat nebo přesunout. Nulové nevratné náklady v nejhorším scénáři Fáze 1.</div>
+      </div>
+    </div>
+    <div class="adv-item">
+      <div class="adv-icon">🌿</div>
+      <div>
+        <div class="adv-title">Dotační potenciál 20–30 mil. Kč</div>
+        <div class="adv-text">OP ŽP (zelená infrastruktura), SFŽP (sadba), RES+ (FVE 50 %), ENERG ETS (tepelná čerpadla 30–50 %), NPO Brownfieldy, SFA (filmová infrastruktura). Přehled na <a href="analyza.html" style="color:var(--amber);">stránce Analýzy</a>.</div>
+      </div>
+    </div>
+    <div class="adv-item">
+      <div class="adv-icon">🗺️</div>
+      <div>
+        <div class="adv-title">Soulad se strategií HMP</div>
+        <div class="adv-text">Projekt naplňuje cíle Strategického plánu HMP (2.2 Podnikání a inovace, 2.3 Kulturní značka), Metropolitního plánu (TOD, typ Produkční a obchodní) i Klimatického plánu 2030. <a href="strategie.html" style="color:var(--amber);">Detail →</a></div>
+      </div>
+    </div>
+    <div class="adv-item">
+      <div class="adv-icon">🎬</div>
+      <div>
+        <div class="adv-title">Identita Dolních Měcholup</div>
+        <div class="adv-text">Kreativní hub, filmové studio, zelený pás — projekt tvoří novou identitu čtvrti. Fáze 2 přináší „Smart Campus" jako ikonu nových Dolních Měcholup. Fáze 3 je mezinárodní filmová destinace.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DIVIDER -->
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- RISKS -->
+<div class="section section-last" style="margin-top:48px;">
+  <div class="label">RIZIKA A JEJICH MITIGACE</div>
+  <h2 class="title">Co se může pokazit —<br>a <em>jak jsme to ošetřili</em></h2>
+  <div class="risk-grid">
+    <div class="risk-card">
+      <div class="risk-header">
+        <div class="risk-level rl-low"></div>
+        <div>
+          <div class="risk-phase">Fáze 1 · Řemeslný HUB</div>
+          <span class="risk-tag rt-low">NÍZKÉ RIZIKO ●○○○○</span>
+        </div>
+      </div>
+      <div class="risk-items">
+        <div class="risk-item">Nízká obsazenost kontejnerů v prvních měsících</div>
+        <div class="risk-item">Vandalizmus nebo poškození jednotek</div>
+        <div class="risk-item">Nedostupnost dotací OP ŽP pro zelený pás</div>
+      </div>
+      <div class="risk-mitigation rm-low">
+        <strong>Mitigace:</strong> Kontejnery přemístitelné a prodejné. Obsazenost se plní postupně — příjem roste organicky. Dotace OP ŽP jsou průběžné výzvy s vysokou mírou schválení. Pojistka: bez dotací zelený pás levnější alternativou.
+      </div>
+    </div>
+    <div class="risk-card">
+      <div class="risk-header">
+        <div class="risk-level rl-mid"></div>
+        <div>
+          <div class="risk-phase">Fáze 2 · Smart Campus</div>
+          <span class="risk-tag rt-mid">STŘEDNÍ RIZIKO ●●●○○</span>
+        </div>
+      </div>
+      <div class="risk-items">
+        <div class="risk-item">Zastupitelé neprodlouží pacht na 20+ let</div>
+        <div class="risk-item">Delší doba obsazování kreativního kampusu</div>
+        <div class="risk-item">Neschválení části dotací (RES+, ENERG ETS)</div>
+      </div>
+      <div class="risk-mitigation rm-mid">
+        <strong>Mitigace:</strong> Fáze 1 prokáže hodnotu projektu před hlasováním o pachtu. Dotace jsou podávány průběžně — i částečné schválení výrazně pomáhá. Kreativní kampusy v ČR mají průkaz poptávky (DEPO2015, Pragovka, Vnitroblock).
+      </div>
+    </div>
+    <div class="risk-card">
+      <div class="risk-header">
+        <div class="risk-level rl-high"></div>
+        <div>
+          <div class="risk-phase">Fáze 3 · Filmový Park</div>
+          <span class="risk-tag rt-high">VYSOKÉ RIZIKO ●●●●○</span>
+        </div>
+      </div>
+      <div class="risk-items">
+        <div class="risk-item">Neprodloužení pachtu na 50 let</div>
+        <div class="risk-item">Nenalezení strategického investora</div>
+        <div class="risk-item">Změna trhu — pokles poptávky po studiích</div>
+      </div>
+      <div class="risk-mitigation rm-high">
+        <strong>Dual-Use pojistka:</strong> Sound stages = Grade A logistické haly. V nejhorším případě vzniknou nejžádanější průmyslové prostory v Praze. Investice není ztracena — jen jinak využita. Obec riskuje max. 10 mil. Kč.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STRATEGY STRIP -->
+<div class="strategy-strip">
+  <div class="ss-inner">
+    <div class="ss-left">
+      <div class="label">SOULAD SE STRATEGIÍ PRAHY</div>
+      <h3 class="title" style="font-size:24px;">Projekt naplňuje <em>závazné cíle</em> Prahy</h3>
+      <p style="font-size:13px; color:var(--ink-soft); line-height:1.7; margin-top:10px;">Tři klíčové dokumenty HMP přímo mandátují projekty jako náš. Nejde jen o soulad — bez brownfieldů jako Za Zastávkou Praha svých cílů nedosáhne.</p>
+      <div class="ss-pills">
+        <span class="ss-pill">SP HMP 2030</span>
+        <span class="ss-pill">Metropolitní plán</span>
+        <span class="ss-pill">Klimatický plán 2030</span>
+        <span class="ss-pill">TOD princip</span>
+        <span class="ss-pill">Typ „Produkční a obchodní"</span>
+      </div>
+      <div style="margin-top:20px;">
+        <a href="strategie.html" style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.15em; color:var(--city); text-decoration:none; border-bottom:1px solid var(--city); padding-bottom:2px;">KOMPLETNÍ ANALÝZA SOULADU →</a>
+      </div>
+    </div>
+    <div class="ss-right">
+      <div class="ss-item">
+        <div class="ss-item-code">SP HMP · CÍL 2.2</div>
+        <div class="ss-item-name">Podnikání a inovace</div>
+        <div class="ss-item-desc">Kontejnerový hub + kreativní kampus jako prostory pro živnostníky a inovativní firmy.</div>
+      </div>
+      <div class="ss-item">
+        <div class="ss-item-code">SP HMP · CÍL 2.3</div>
+        <div class="ss-item-name">Kulturní značka města</div>
+        <div class="ss-item-desc">Filmový park jako součást pražské filmové mapy a kulturní identity města.</div>
+      </div>
+      <div class="ss-item">
+        <div class="ss-item-code">METROPOLITNÍ PLÁN · TOD</div>
+        <div class="ss-item-name">Transit-Oriented Development</div>
+        <div class="ss-item-desc">Areál v docházkové vzdálenosti tramvaje — splňuje 80% podmínku pro prioritní území.</div>
+      </div>
+      <div class="ss-item">
+        <div class="ss-item-code">KLIMATICKÝ PLÁN 2030</div>
+        <div class="ss-item-name">FVE + tepelná čerpadla + zeleň</div>
+        <div class="ss-item-desc">Fáze 2 instaluje FVE 200 kWp, zelené střechy a tepelná čerpadla dle klimatické strategie.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DECISION STRIP -->
+<div class="decision-strip">
+  <div class="ds-inner">
+    <div class="ds-label">CO ZASTUPITELÉ ROZHODUJÍ</div>
+    <h2 class="ds-title">Tři úrovně souhlasu — <em>každá přináší jiný výsledek</em></h2>
+    <div class="decisions">
+      <div class="decision d1">
+        <div class="d-level">SOUHLAS ÚROVNĚ 1 · STÁVAJÍCÍ PACHT</div>
+        <div class="d-title">Fáze 1 ihned + příprava dalších fází</div>
+        <div class="d-condition">PODMÍNKA: ŽÁDNÁ · BEZ HLASOVÁNÍ</div>
+        <div class="d-items">
+          <div class="d-item"><span class="d-check">✓</span><span>Kontejnerový park — příjem od 1. dne</span></div>
+          <div class="d-item"><span class="d-check">✓</span><span>Hala č. 5 zateplení + plyn</span></div>
+          <div class="d-item"><span class="d-check">✓</span><span>Zelený pás pro Dolní Měcholupy</span></div>
+          <div class="d-item"><span class="d-check">✓</span><span>Architektonická studie, průzkumy, dotace</span></div>
+          <div class="d-item"><span class="d-check">✓</span><span>Max. riziko: <strong style="color:white;">10 mil. Kč</strong></span></div>
+        </div>
+      </div>
+      <div class="decision d2">
+        <div class="d-level">SOUHLAS ÚROVNĚ 2 · ZLATÝ STŘED ★</div>
+        <div class="d-title">Prodloužení pachtu 20+ let → Fáze 1 + 2</div>
+        <div class="d-condition">PODMÍNKA: ZASTUPITELÉ HLASUJÍ</div>
+        <div class="d-items">
+          <div class="d-item"><span class="d-check">✓</span><span>Vše z Úrovně 1</span></div>
+          <div class="d-item"><span class="d-check">✓</span><span>Smart Campus — kreativní kampus Prahy</span></div>
+          <div class="d-item"><span class="d-check">✓</span><span>FVE 200 kWp, LED komín, doplnění zeleně</span></div>
+          <div class="d-item"><span class="d-check">✓</span><span>Příjem 2,6–5,0 mil. Kč/měs.</span></div>
+          <div class="d-item"><span class="d-check">✓</span><span>Dotace 20–30 mil. Kč (RES+, ENERG, OP ŽP)</span></div>
+        </div>
+      </div>
+      <div class="decision d3">
+        <div class="d-level">SOUHLAS ÚROVNĚ 3 · VIZIONÁŘSKÝ</div>
+        <div class="d-title">Prodloužení pachtu 50 let → všechny 3 fáze</div>
+        <div class="d-condition">PODMÍNKA: PACHT 50 LET + INVESTOR</div>
+        <div class="d-items">
+          <div class="d-item"><span class="d-check">✓</span><span>Vše z Úrovně 1 a 2</span></div>
+          <div class="d-item"><span class="d-check">✓</span><span>3× Sound Stage — filmová destinace Evropy</span></div>
+          <div class="d-item"><span class="d-check">✓</span><span>Výnos 60–90 mil. Kč/rok</span></div>
+          <div class="d-item"><span class="d-check">✓</span><span>SFA dotace, mezinárodní investoři</span></div>
+          <div class="d-item"><span class="d-check">✓</span><span>Dual-Use pojistka — nulové irr. riziko</span></div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:20px; padding:16px 20px; background:rgba(240,184,69,0.12); border:1px solid rgba(240,184,69,0.3);">
+      <p style="font-size:13px; color:rgba(255,255,255,0.7); line-height:1.65;">
+        💡 <strong style="color:var(--amber-light);">Klíčový princip:</strong>
+        Souhlas Úrovně 1 je navrhován okamžitě a probíhá souběžně s přípravou na Úroveň 2 a 3.
+        Až zastupitelé rozhodnou o prodloužení pachtu, veškerá příprava je hotová — projekt pokračuje bez prodlení.
+        Celková finanční analýza a rozhodovací matice: <a href="analyza.html" style="color:var(--amber-light);">Analýza &amp; Finance →</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- CONCLUSION -->
+<div class="conclusion">
+  <div class="cl-inner">
+    <div class="cl-left">
+      <div class="cl-eyebrow">ZÁVĚR · PLÁN ZEFEKTIVNĚNÍ 2026</div>
+      <h2 class="cl-title">Areál Za Zastávkou<br>je <em>unikátní příležitost</em>,<br>která se neopakuje</h2>
+      <p class="cl-text">Brownfield 33 000 m² s pachtem do 2035, tramvajovým spojením, vyřešenou infrastrukturou a třemi jasnými fázemi rozvoje — to se v Praze vyskytuje jednou za generaci. Fáze 1 je realizovatelná dnes.</p>
+      <p class="cl-text">Dolní Měcholupy mohou zvolit libovolnou úroveň ambice — od okamžitého příjmu přes kreativní kampus světové úrovně až k filmovému studiu mezinárodního věhlasu. Nebo jen Fázi 1 a uvidět.</p>
+      <div class="cl-btns">
+        <a class="btn btn-green" href="faze1.html">Fáze 1 — ihned →</a>
+        <a class="btn btn-amber" href="analyza.html">Finanční analýza →</a>
+        <a class="btn btn-film" href="faze3.html">Fáze 3 — filmový park →</a>
+        <a class="btn btn-outline" href="strategie.html">Strategie města →</a>
+      </div>
+    </div>
+    <div class="cl-right">
+      <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.15em; color:rgba(255,255,255,0.35); margin-bottom:14px;">KLÍČOVÉ BODY K ZAPAMATOVÁNÍ</div>
+      <div class="cl-checklist">
+        <div class="cl-check-item">
+          <div class="cl-check-mark">🟢</div>
+          <div><div class="cl-check-title">Fáze 1 nevyžaduje žádné rozhodnutí zastupitelů</div><div class="cl-check-desc">Realizovatelná ze stávajícího pachtu, s investicí 14–20 mil. Kč, bez hlasování.</div></div>
+        </div>
+        <div class="cl-check-item">
+          <div class="cl-check-mark">💰</div>
+          <div><div class="cl-check-title">Max. riziko obce 10 mil. Kč ve všech fázích</div><div class="cl-check-desc">Zbylé financování zajišťuje BALLOON nebo strategický investor.</div></div>
+        </div>
+        <div class="cl-check-item">
+          <div class="cl-check-mark">🏭</div>
+          <div><div class="cl-check-title">Hala č. 5 je bezpečná investice pro všechny scénáře</div><div class="cl-check-desc">Jediná hala neplánovaná ke zbourání — zateplení + plyn se vždy zhodnotí.</div></div>
+        </div>
+        <div class="cl-check-item">
+          <div class="cl-check-mark">↩️</div>
+          <div><div class="cl-check-title">Fáze 1 je plně reversibilní</div><div class="cl-check-desc">Kontejnery přemístitelné — v nejhorším scénáři bez ztráty kapitálu.</div></div>
+        </div>
+        <div class="cl-check-item">
+          <div class="cl-check-mark">⚡</div>
+          <div><div class="cl-check-title">Časový tlak: pacht do února 2035</div><div class="cl-check-desc">Fáze 3 startuje 2033 = 2 roky před koncem pachtu. Vyjednávání nutné zahájit ihned.</div></div>
+        </div>
+        <div class="cl-check-item">
+          <div class="cl-check-mark">🎬</div>
+          <div><div class="cl-check-title">Barrandov plně obsazen od 2023</div><div class="cl-check-desc">Filmová kapacitní krize Prahy je prokazatelná. Okno se otevírá právě nyní.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase-nav">
+    <a class="phase-nav-back" href="dokumenty.html">← Dokumenty</a>
+    <div class="footer-copy">BALLOON · light · Praha · Areál Za Zastávkou 377 · Dolní Měcholupy · Plán Zefektivnění 2026</div>
+  </div>
+</div>
+
+</body>
+</html>
