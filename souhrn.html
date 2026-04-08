@@ -250,6 +250,54 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 .phase-nav-back:hover { color: white; }
 .footer-copy { font-size: 10.5px; color: rgba(255,255,255,0.2); }
 
+/* INCOME CHART */
+.income-section {
+  background: var(--ink); padding: 48px 64px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.income-inner { max-width: 1300px; margin: 0 auto; }
+.income-label { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: rgba(255,255,255,0.35); margin-bottom: 6px; }
+.income-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: white; margin-bottom: 32px; }
+.income-title em { font-style: italic; color: var(--amber-light); }
+.income-bars { display: flex; flex-direction: column; gap: 16px; }
+.income-row { display: grid; grid-template-columns: 180px 1fr 120px; gap: 16px; align-items: center; }
+.income-row-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: rgba(255,255,255,0.5); }
+.income-bar-track { background: rgba(255,255,255,0.05); border-radius: 2px; height: 36px; position: relative; overflow: hidden; }
+.income-bar-fill { height: 100%; border-radius: 2px; display: flex; align-items: center; padding-left: 12px; transition: width 1s ease; }
+.income-bar-text { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.08em; color: white; font-weight: 500; white-space: nowrap; }
+.ib-current { background: rgba(138,130,120,0.5); width: 9.3%; }
+.ib-f1 { background: linear-gradient(90deg, var(--green), #5da575); width: 25%; }
+.ib-f2 { background: linear-gradient(90deg, var(--amber), #e8a020); width: 50%; }
+.ib-f3 { background: linear-gradient(90deg, var(--film), #3a5f7a); width: 87%; }
+.income-val { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: white; text-align: right; }
+.income-val small { font-family: 'DM Mono', monospace; font-size: 9px; display: block; color: rgba(255,255,255,0.4); letter-spacing: 0.08em; margin-top: 2px; }
+.income-note { margin-top: 16px; font-size: 11.5px; color: rgba(255,255,255,0.35); }
+
+/* PHASE TIMELINE */
+.timeline-wrap { margin-top: 20px; margin-bottom: 28px; overflow: hidden; }
+
+/* SCHEMA EMBED */
+.schema-section { background: var(--linen-dark); padding: 48px 64px; }
+.schema-inner { max-width: 1300px; margin: 0 auto; }
+.schema-frame { border: 2px solid var(--ink); background: white; margin-top: 20px; }
+.schema-frame iframe { width: 100%; height: 520px; border: none; display: block; }
+.schema-note { padding: 10px 16px; background: var(--ink); font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.12em; color: rgba(255,255,255,0.45); }
+
+/* SITE MAP */
+.sitemap-block { margin-top: 28px; }
+
+@media (max-width: 1100px) {
+  .income-row { grid-template-columns: 130px 1fr 100px; }
+  .schema-section { padding: 36px 40px; }
+  .income-section { padding: 40px 40px; }
+}
+@media (max-width: 768px) {
+  .income-section { padding: 32px 24px; }
+  .income-row { grid-template-columns: 100px 1fr 80px; gap: 10px; }
+  .schema-section { padding: 32px 24px; }
+  .schema-frame iframe { height: 320px; }
+}
+
 /* RESPONSIVE */
 @media (max-width: 1100px) {
   .hero-facts { grid-template-columns: repeat(3, 1fr); }
@@ -290,8 +338,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
     <a class="nav-link" href="faze2.html">Fáze 2 – Kampus</a>
     <a class="nav-link" href="faze3.html">Fáze 3 – Film</a>
     <a class="nav-link" href="analyza.html">Analýza &amp; Finance</a>
-    <a class="nav-link" href="dokumenty.html">Dokumenty</a>
-    <a class="nav-link active" href="souhrn.html">Souhrn</a>
+    <a class="nav-link active" href="dokumenty.html">Dokumenty</a>
   </div>
 </nav>
 
@@ -305,6 +352,69 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
       Tři fáze transformace — od okamžitě realizovatelného řemeslného hubu až po filmové studio mezinárodního věhlasu.
       Každá fáze samostatně životaschopná. Max. riziko obce 10 mil. Kč.
     </p>
+    <!-- Visual site layout -->
+    <div style="margin-bottom: 32px; position: relative;">
+      <div style="font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.15em; color: rgba(255,255,255,0.3); margin-bottom: 10px;">SCHÉMATICKÝ PŘEHLED AREÁLU · DOLNÍ MĚCHOLUPY</div>
+      <svg viewBox="0 0 900 120" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:900px; height:auto; display:block;">
+        <!-- Background -->
+        <rect x="0" y="0" width="900" height="120" fill="rgba(255,255,255,0.03)" rx="2"/>
+
+        <!-- Street label -->
+        <text x="450" y="12" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)" text-anchor="middle">ULICE ZA ZASTÁVKOU (sever)</text>
+
+        <!-- Zelený pás strip (top) -->
+        <rect x="20" y="18" width="860" height="14" rx="1" fill="#3d6b4f" opacity="0.7"/>
+        <text x="450" y="29" font-family="monospace" font-size="8" fill="white" text-anchor="middle">ZELENÝ PÁS + KONTEJNEROVÝ PARK · 300m</text>
+
+        <!-- Budovy label -->
+        <text x="450" y="50" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.25)" text-anchor="middle">HALY AREÁLU</text>
+
+        <!-- Hala 1 (F2/F3 demolice) -->
+        <rect x="20" y="55" width="100" height="40" rx="1" fill="rgba(44,62,80,0.5)" stroke="rgba(44,62,80,0.8)" stroke-width="1"/>
+        <text x="70" y="72" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.5)" text-anchor="middle">HALA 1</text>
+        <text x="70" y="83" font-family="monospace" font-size="6" fill="rgba(255,255,255,0.3)" text-anchor="middle">F2/F3</text>
+
+        <!-- Hala 2 -->
+        <rect x="130" y="55" width="120" height="40" rx="1" fill="rgba(44,62,80,0.5)" stroke="rgba(44,62,80,0.8)" stroke-width="1"/>
+        <text x="190" y="72" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.5)" text-anchor="middle">HALA 2</text>
+        <text x="190" y="83" font-family="monospace" font-size="6" fill="rgba(255,255,255,0.3)" text-anchor="middle">Sound Stage</text>
+
+        <!-- Hala 3 -->
+        <rect x="260" y="55" width="120" height="40" rx="1" fill="rgba(44,62,80,0.5)" stroke="rgba(44,62,80,0.8)" stroke-width="1"/>
+        <text x="320" y="72" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.5)" text-anchor="middle">HALA 3</text>
+        <text x="320" y="83" font-family="monospace" font-size="6" fill="rgba(255,255,255,0.3)" text-anchor="middle">Sound Stage</text>
+
+        <!-- Hala 4 -->
+        <rect x="390" y="55" width="140" height="40" rx="1" fill="rgba(44,62,80,0.5)" stroke="rgba(44,62,80,0.8)" stroke-width="1"/>
+        <text x="460" y="72" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.5)" text-anchor="middle">HALA 4</text>
+        <text x="460" y="83" font-family="monospace" font-size="6" fill="rgba(255,255,255,0.3)" text-anchor="middle">Kampus F2</text>
+
+        <!-- Hala 5 — highlighted -->
+        <rect x="540" y="50" width="160" height="52" rx="2" fill="rgba(200,134,10,0.3)" stroke="#f0b845" stroke-width="2"/>
+        <text x="620" y="69" font-family="monospace" font-size="8" fill="#f0b845" text-anchor="middle" font-weight="bold">HALA č. 5</text>
+        <text x="620" y="81" font-family="monospace" font-size="7" fill="rgba(240,184,69,0.7)" text-anchor="middle">TRVALÁ · F1+F2+F3</text>
+        <text x="620" y="92" font-family="monospace" font-size="6" fill="rgba(240,184,69,0.5)" text-anchor="middle">zateplení + plyn</text>
+
+        <!-- Hala 6 -->
+        <rect x="710" y="55" width="90" height="40" rx="1" fill="rgba(44,62,80,0.5)" stroke="rgba(44,62,80,0.8)" stroke-width="1"/>
+        <text x="755" y="72" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.5)" text-anchor="middle">ZÁZEMÍ</text>
+        <text x="755" y="83" font-family="monospace" font-size="6" fill="rgba(255,255,255,0.3)" text-anchor="middle">F3 Studio</text>
+
+        <!-- Tramvaj / trať -->
+        <line x1="820" y1="18" x2="820" y2="120" stroke="rgba(255,255,255,0.15)" stroke-width="6"/>
+        <text x="860" y="70" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.25)" text-anchor="middle">TRAMVAJ</text>
+        <text x="860" y="80" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.25)" text-anchor="middle">/ TRAŤ</text>
+
+        <!-- Legend -->
+        <rect x="20" y="105" width="10" height="8" fill="#f0b845" rx="1"/>
+        <text x="36" y="113" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.4)">Hala č. 5 (trvalá)</text>
+        <rect x="180" y="105" width="10" height="8" fill="rgba(44,62,80,0.7)" rx="1"/>
+        <text x="196" y="113" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.4)">Ostatní haly (F2/F3 plán)</text>
+        <rect x="400" y="105" width="10" height="8" fill="#3d6b4f" rx="1"/>
+        <text x="416" y="113" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.4)">Zelený pás + kontejnery (F1)</text>
+      </svg>
+    </div>
+
     <div class="hero-facts">
       <div class="hf-item">
         <div class="hf-val">33 000 m²</div>
@@ -335,6 +445,53 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
   </div>
 </div>
 
+<!-- INCOME COMPARISON CHART -->
+<div class="income-section">
+  <div class="income-inner">
+    <div class="income-label">SROVNÁNÍ PŘÍJMU · VŠECHNY FÁZE</div>
+    <h2 class="income-title">Od 700 tis. k <em>5–7,5 mil. Kč měsíčně</em> — vizualizace potenciálu</h2>
+    <div class="income-bars">
+      <div class="income-row">
+        <div class="income-row-label">STÁVAJÍCÍ PACHT</div>
+        <div class="income-bar-track">
+          <div class="income-bar-fill ib-current">
+            <span class="income-bar-text">700 tis./měs.</span>
+          </div>
+        </div>
+        <div class="income-val">700 tis.<small>DNES · PACHT</small></div>
+      </div>
+      <div class="income-row">
+        <div class="income-row-label">FÁZE 1 · 2025–27</div>
+        <div class="income-bar-track">
+          <div class="income-bar-fill ib-f1">
+            <span class="income-bar-text">1,3 – 2,6 mil.</span>
+          </div>
+        </div>
+        <div class="income-val" style="color:var(--green);">1,3–2,6 mil.<small>ŘEMESLNÝ HUB</small></div>
+      </div>
+      <div class="income-row">
+        <div class="income-row-label">FÁZE 2 · 2028–33</div>
+        <div class="income-bar-track">
+          <div class="income-bar-fill ib-f2">
+            <span class="income-bar-text">2,6 – 5,0 mil.</span>
+          </div>
+        </div>
+        <div class="income-val" style="color:var(--amber-light);">2,6–5,0 mil.<small>SMART CAMPUS</small></div>
+      </div>
+      <div class="income-row">
+        <div class="income-row-label">FÁZE 3 · 2033+</div>
+        <div class="income-bar-track">
+          <div class="income-bar-fill ib-f3">
+            <span class="income-bar-text">5 – 7,5 mil. / měs. (60–90 mil. ročně)</span>
+          </div>
+        </div>
+        <div class="income-val" style="color:#7fa8c4;">5–7,5 mil.<small>FILMOVÝ PARK</small></div>
+      </div>
+    </div>
+    <p class="income-note">Hodnoty jsou měsíční příjmy z pachtu a nájmů. Fáze 3 uvádí měsíční průměr ročního výnosu 60–90 mil. Kč. Max. riziko obce: 10 mil. Kč v každé fázi.</p>
+  </div>
+</div>
+
 <!-- WHY NOW -->
 <div class="why-now">
   <div class="wn-inner">
@@ -355,7 +512,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
     <div class="wn-item">
       <div class="wn-icon">📅</div>
       <div class="wn-title">Stávající pacht jako startovní čára</div>
-      <div class="wn-text">Fáze 1 je realizovatelná ihned — bez nutnosti prodloužení pachtu, bez hlasování zastupitelů o budoucím směřování. Příjem od prvního kontejneru. Výpadek příjmu: nulový.</div>
+      <div class="wn-text">Fáze 1 je realizovatelná ihned — bez nutnosti prodloužení pachtu, bez hlasování zastupitelů o budoucím směřování. Příjem od prvního kontejneru. Výpadek příjmu: minimální.</div>
     </div>
   </div>
 </div>
@@ -377,7 +534,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
     </div>
     <div class="principle p-amber">
       <div class="principle-num">03</div>
-      <div class="principle-name">Žádný výpadek stávajícího příjmu</div>
+      <div class="principle-name">Minimalizovaný výpadek příjmu</div>
       <div class="principle-desc">Fáze 1 využívá modulární přemístitelné kontejnery — instalace probíhá postupně, areál dál funguje. Příjem z nájmů začíná od prvního obsazeného kontejneru.</div>
     </div>
     <div class="principle p-film">
@@ -397,7 +554,47 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
   <h2 class="title">Přehled fází — <em>klíčové parametry</em></h2>
   <p class="body-text" style="margin-top:4px; margin-bottom:0;">Každá fáze má vlastní finanční model, časový horizont a podmínky realizace. Kliknutím přejdete na detailní stránku fáze.</p>
 
-  <div class="phase-row-head" style="margin-top:20px;">
+  <!-- Phase timeline SVG -->
+  <div class="timeline-wrap">
+    <svg viewBox="0 0 1100 90" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;margin-top:28px;">
+      <!-- Base line -->
+      <line x1="40" y1="44" x2="1060" y2="44" stroke="#c4bdb4" stroke-width="2"/>
+      <!-- Arrow -->
+      <polygon points="1060,38 1075,44 1060,50" fill="#c4bdb4"/>
+
+      <!-- F1 segment -->
+      <rect x="40" y="30" width="290" height="28" rx="2" fill="#3d6b4f" opacity="0.9"/>
+      <text x="185" y="48" font-family="monospace" font-size="11" fill="white" text-anchor="middle" font-weight="bold">FÁZE 1 · ŘEMESLNÝ HUB</text>
+
+      <!-- F2 segment -->
+      <rect x="336" y="30" width="290" height="28" rx="2" fill="#c8860a" opacity="0.9"/>
+      <text x="481" y="48" font-family="monospace" font-size="11" fill="white" text-anchor="middle" font-weight="bold">FÁZE 2 · SMART CAMPUS</text>
+
+      <!-- F3 segment -->
+      <rect x="632" y="30" width="380" height="28" rx="2" fill="#2c3e50" opacity="0.9"/>
+      <text x="822" y="48" font-family="monospace" font-size="11" fill="white" text-anchor="middle" font-weight="bold">FÁZE 3 · FILMOVÝ PARK</text>
+
+      <!-- Year markers -->
+      <line x1="40" y1="58" x2="40" y2="70" stroke="#8a8278" stroke-width="1.5"/>
+      <text x="40" y="82" font-family="monospace" font-size="10" fill="#8a8278" text-anchor="middle">2025</text>
+
+      <line x1="330" y1="58" x2="330" y2="70" stroke="#8a8278" stroke-width="1.5"/>
+      <text x="330" y="82" font-family="monospace" font-size="10" fill="#8a8278" text-anchor="middle">2028</text>
+
+      <line x1="626" y1="58" x2="626" y2="70" stroke="#8a8278" stroke-width="1.5"/>
+      <text x="626" y="82" font-family="monospace" font-size="10" fill="#8a8278" text-anchor="middle">2033</text>
+
+      <line x1="820" y1="58" x2="820" y2="70" stroke="#e8e0d2" stroke-width="1.5" stroke-dasharray="3,2"/>
+      <text x="820" y="82" font-family="monospace" font-size="10" fill="#e8e0d2" text-anchor="middle">2035</text>
+
+      <text x="870" y="16" font-family="monospace" font-size="9" fill="#c4bdb4" text-anchor="middle">konec stáv. pachtu</text>
+      <line x1="820" y1="18" x2="820" y2="28" stroke="#c4bdb4" stroke-width="1" stroke-dasharray="2,2"/>
+
+      <text x="1070" y="82" font-family="monospace" font-size="10" fill="#8a8278" text-anchor="middle">→</text>
+    </svg>
+  </div>
+
+  <div class="phase-row-head" style="margin-top:8px;">
     <div class="phase-col-head"><span class="phase-col-head-text">FÁZE</span></div>
     <div class="phase-col-head"><span class="phase-col-head-text">INVESTICE</span></div>
     <div class="phase-col-head"><span class="phase-col-head-text">PŘÍJEM</span></div>
@@ -496,6 +693,19 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
   </div>
 </div>
 
+<!-- SCHEMA EMBED -->
+<div class="schema-section">
+  <div class="schema-inner">
+    <div class="label" style="color:var(--ink-soft);">INTERAKTIVNÍ SCHÉMA · PŘEHLED VŠECH 3 FÁZÍ</div>
+    <h2 class="title" style="color:var(--ink);">Kompletní plán areálu — <em>vizuální přehled</em></h2>
+    <p style="font-size:13px; color:var(--ink-soft); line-height:1.7; margin-top:6px; max-width:680px;">Původní podkladové schéma všech tří fází areálu Za Zastávkou — finanční metriky, klíčové parametry a rizika každé fáze v jednom pohledu.</p>
+    <div class="schema-frame">
+      <iframe src="schema-original.html" title="Schéma 3 fází areálu Za Zastávkou" scrolling="no"></iframe>
+      <div class="schema-note">INTERAKTIVNÍ SCHÉMA 3 FÁZÍ · AREÁL ZA ZASTÁVKOU · DOLNÍ MĚCHOLUPY · 2026 · <a href="dokumenty.html" style="color:rgba(255,255,255,0.5);">PLNÁ VERZE V DOKUMENTECH →</a></div>
+    </div>
+  </div>
+</div>
+
 <!-- HALA 5 -->
 <div class="section" style="margin-top:32px;" id="hala5">
   <div class="hala5-block">
@@ -521,7 +731,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
     <div class="adv-item">
       <div class="adv-icon">📈</div>
       <div>
-        <div class="adv-title">Okamžité zvýšení příjmu</div>
+        <div class="adv-title">Rychlé zvýšení příjmu</div>
         <div class="adv-text">Fáze 1 zvýší měsíční příjem ze 700 tis. na 1,3–2,6 mil. Kč — tedy 1,9–3,7× více. Příjem plyne od prvního obsazeného kontejneru, bez čekání na dokončení celé fáze.</div>
       </div>
     </div>
