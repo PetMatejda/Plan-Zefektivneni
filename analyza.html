@@ -74,6 +74,8 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 .rg-title { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid; }
 .rg-title.always { color: var(--green); border-color: var(--green); }
 .rg-title.skip { color: var(--corten); border-color: var(--corten); }
+.rg-subtitle { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; margin: 14px 0 8px; color: var(--concrete); border-top: 1px solid var(--linen-dark); padding-top: 10px; }
+.r-icon-skip { background: var(--film-pale); border: 1.5px solid var(--film); color: var(--film); }
 .repair-item { display: flex; gap: 10px; margin-bottom: 10px; align-items: flex-start; }
 .r-icon { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; margin-top: 1px; }
 .r-icon-yes { background: var(--green-pale); border: 1.5px solid var(--green); color: var(--green); }
@@ -317,19 +319,11 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
     <h2 class="section-title">Co opravit, co <em>vynechat</em> nebo zredukovat</h2>
     <p class="section-desc">
       Příloha č. 2 pachtu definuje 14 povinných oprav v celkové výši 11–20 mil. Kč.
-      Z analytického dokumentu je detailně rozebráno 10 položek — u 3 z nich doporučujeme snížit standard a ušetřit 3–5 mil. Kč přesměrováním na smysluplnější investice.
+      Všech 14 položek je nyní rozebráno: 7 provést vždy, 3 snížit standard nebo přesměrovat, 4 neprovádět (dotčeny budoucí výstavbou). Celková možná úspora: 3–5 mil. Kč přesměrovat na smysluplnější investice.
     </p>
     <div class="repairs-grid">
       <div class="repair-group">
-        <div class="rg-title always">✓ Vždy provést — 7 kritických oprav (pol. 2, 3, 4, 7, 9, 11, 13)</div>
-        <div class="repair-item">
-          <div class="r-icon r-icon-yes">✓</div>
-          <div class="r-content">
-            <div class="r-name"><span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--concrete);margin-right:8px;">#2</span>Hlavní rozvaděč výtopny</div>
-            <div class="r-desc">Nutné vždy. Fáze 2: dimenzovat pro silné napájení hi-tech dílen. Fáze 3: dimenzovat na megawatty pro sound stages.</div>
-            <div class="r-cost">Odh. náklady: 300–800 tis. Kč</div>
-          </div>
-        </div>
+        <div class="rg-title always">✓ Vždy provést — 7 kritických oprav (pol. 3, 4, 7, 9, 11, 12, 13)</div>
         <div class="repair-item">
           <div class="r-icon r-icon-yes">✓</div>
           <div class="r-content">
@@ -378,9 +372,53 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
             <div class="r-cost">Odh. náklady: 200–400 tis. Kč</div>
           </div>
         </div>
+        <div class="repair-item">
+          <div class="r-icon r-icon-yes">✓</div>
+          <div class="r-content">
+            <div class="r-name"><span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--concrete);margin-right:8px;">#12</span>Ochozy komínu — oprava a vyčištění</div>
+            <div class="r-desc">Zákonná povinnost — bezpečnost. Oprava a vyčištění 2 ochozů komínu na poz. 642/22, celkem 28 bm. Riziko uvolnění zdiva. Komín zůstává ve všech fázích rozvoje.</div>
+            <div class="r-cost">Odh. náklady: 50 tis. Kč</div>
+          </div>
+        </div>
       </div>
       <div class="repair-group">
-        <div class="rg-title skip">↓ Snížit standard nebo přesměrovat — 3 položky (pol. 1, 6, 8)</div>
+        <div class="rg-title skip">↓ Neprovádět nebo snížit standard — 7 položek (pol. 1, 2, 5, 6, 8, 10, 14)</div>
+
+        <div class="rg-subtitle">✗ Neprovádět — dotčeno budoucí výstavbou (pol. 2, 5, 10, 14)</div>
+        <div class="repair-item">
+          <div class="r-icon r-icon-skip">✗</div>
+          <div class="r-content">
+            <div class="r-name"><span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--concrete);margin-right:8px;">#2</span>Hlavní rozvaděč výtopny</div>
+            <div class="r-desc">Výtopna je při Fázi 3 určena k demolici nebo přestavbě na sound stage. Nový rozvaděč by byl součástí nové výstavby. Investice teď = vyhozené peníze.</div>
+            <div class="r-cost">Odh. náklady: 300–800 tis. Kč · <strong>Doporučení: neprovádět</strong></div>
+          </div>
+        </div>
+        <div class="repair-item">
+          <div class="r-icon r-icon-skip">✗</div>
+          <div class="r-content">
+            <div class="r-name"><span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--concrete);margin-right:8px;">#5</span>Střecha olejového hospodářství (642/24)</div>
+            <div class="r-desc">Budova olejového hospodářství na poz. 642/24 (148 m²) je dotčena plánovanou výstavbou Fáze 2/3. Generální oprava střechy (EPS + fóliová krytina) by byla ve Fázi 2 nebo 3 zbořena nebo přestavěna.</div>
+            <div class="r-cost">Odh. náklady: 250 tis. Kč · <strong>Doporučení: neprovádět</strong></div>
+          </div>
+        </div>
+        <div class="repair-item">
+          <div class="r-icon r-icon-skip">✗</div>
+          <div class="r-content">
+            <div class="r-name"><span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--concrete);margin-right:8px;">#10</span>Oprava střech — objekty 642/26, 27</div>
+            <div class="r-desc">Menší objekty na poz. 642/26 a 642/27 (asfaltové pásy, 73 a 90 m²) jsou dotčeny budoucí výstavbou kampusu nebo filmového parku. Oprava střech by byla v dalších fázích zbytečná.</div>
+            <div class="r-cost">Odh. náklady: 100 tis. Kč · <strong>Doporučení: neprovádět</strong></div>
+          </div>
+        </div>
+        <div class="repair-item">
+          <div class="r-icon r-icon-skip">✗</div>
+          <div class="r-content">
+            <div class="r-name"><span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--concrete);margin-right:8px;">#14</span>Oplocení a vrata (400 bm, 5 vrat)</div>
+            <div class="r-desc">Perimetr areálu bude plně rekonstruován v rámci Fáze 2 (nové vstupy pro kampus) a Fáze 3 (filmový park). Oprava stávajícího oplocení nyní = náklady navíc před plánovanou rekonstrukcí perimetru.</div>
+            <div class="r-cost">Odh. náklady: 250 tis. Kč · <strong>Doporučení: neprovádět</strong></div>
+          </div>
+        </div>
+
+        <div class="rg-subtitle">↓ Snížit standard nebo přesměrovat (pol. 1, 6, 8)</div>
         <div class="repair-item">
           <div class="r-icon r-icon-no">↓</div>
           <div class="r-content">
@@ -405,15 +443,12 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
             <div class="r-cost">Orientační náklady kotlů: 600 tis. – 1 mil. Kč · <strong>Stejná investice, lepší alokace</strong></div>
           </div>
         </div>
-        <div style="margin-top:16px; padding:14px 18px; background:rgba(0,0,0,0.03); border:1px solid var(--linen-dark); font-size:12px; color:var(--ink-soft); line-height:1.65;">
-          <strong>Položky #5, #10, #12, #14</strong> — zbývající 4 z celkových 14 oprav dle Přílohy č. 2 nejsou v analytickém dokumentu specificky rozebírány. Předpokládá se jejich standardní provedení dle zadání smlouvy.
-        </div>
       </div>
     </div>
     <div class="savings-banner">
       <div class="sb-item">
         <div class="sb-val">3–5 mil. Kč</div>
-        <div class="sb-label">CELKOVÁ MOŽNÁ ÚSPORA (pol. 1 + 6)</div>
+        <div class="sb-label">CELKOVÁ MOŽNÁ ÚSPORA (pol. 1, 6 + neprovádění 2, 5, 10, 14)</div>
       </div>
       <div class="sb-item">
         <div class="sb-val">→ Architektonická studie</div>
