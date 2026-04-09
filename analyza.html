@@ -75,6 +75,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 .rg-title.always { color: var(--green); border-color: var(--green); }
 .rg-title.skip { color: var(--corten); border-color: var(--corten); }
 .rg-subtitle { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; margin: 14px 0 8px; color: var(--concrete); border-top: 1px solid var(--linen-dark); padding-top: 10px; }
+.rg-title.none { color: var(--film); border-color: var(--film); }
 .r-icon-skip { background: var(--film-pale); border: 1.5px solid var(--film); color: var(--film); }
 .repair-item { display: flex; gap: 10px; margin-bottom: 10px; align-items: flex-start; }
 .r-icon { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; margin-top: 1px; }
@@ -319,7 +320,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
     <h2 class="section-title">Co opravit, co <em>vynechat</em> nebo zredukovat</h2>
     <p class="section-desc">
       Příloha č. 2 pachtu definuje 14 povinných oprav v celkové výši 11–20 mil. Kč.
-      Všech 14 položek je nyní rozebráno: 7 provést vždy, 3 snížit standard nebo přesměrovat, 4 neprovádět (dotčeny budoucí výstavbou). Celková možná úspora: 3,5–5,5 mil. Kč přesměrovat na smysluplnější investice.
+      Všech 14 položek je nyní rozebráno: 7 provést vždy, 7 neprovádět (dotčeny budoucí výstavbou). Celková možná úspora: 5–8 mil. Kč přesměrovat na smysluplnější investice.
     </p>
     <div class="repairs-grid">
       <div class="repair-group">
@@ -382,9 +383,15 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
         </div>
       </div>
       <div class="repair-group">
-        <div class="rg-title skip">↓ Neprovádět nebo snížit standard — 7 položek (pol. 1, 2, 5, 6, 8, 10, 14)</div>
-
-        <div class="rg-subtitle">✗ Neprovádět — dotčeno budoucí výstavbou (pol. 2, 5, 10, 14)</div>
+        <div class="rg-title none">✗ Neprovádět — 7 položek dotčených budoucí výstavbou (pol. 1, 2, 5, 6, 8, 10, 14)</div>
+        <div class="repair-item">
+          <div class="r-icon r-icon-skip">✗</div>
+          <div class="r-content">
+            <div class="r-name"><span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--concrete);margin-right:8px;">#1</span>Střecha výtopny (1 289 m²)</div>
+            <div class="r-desc">Výtopna je při Fázi 3 určena k demolici nebo přestavbě na sound stage. Jakákoliv oprava střechy — plná i přípravná — je investicí do budovy, která zanikne. Doporučení: neprovádět vůbec.</div>
+            <div class="r-cost">Odh. náklady: 3,2–4,5 mil. Kč · <strong>Doporučení: neprovádět</strong></div>
+          </div>
+        </div>
         <div class="repair-item">
           <div class="r-icon r-icon-skip">✗</div>
           <div class="r-content">
@@ -397,8 +404,24 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
           <div class="r-icon r-icon-skip">✗</div>
           <div class="r-content">
             <div class="r-name"><span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--concrete);margin-right:8px;">#5</span>Střecha olejového hospodářství (642/24)</div>
-            <div class="r-desc">Budova olejového hospodářství na poz. 642/24 (148 m²) je dotčena plánovanou výstavbou Fáze 2/3. Generální oprava střechy (EPS + fóliová krytina) by byla ve Fázi 2 nebo 3 zbořena nebo přestavěna.</div>
+            <div class="r-desc">Budova olejového hospodářství na poz. 642/24 (148 m²) je dotčena plánovanou výstavbou Fáze 2/3. Generální oprava střechy by byla ve Fázi 2 nebo 3 zbořena nebo přestavěna.</div>
             <div class="r-cost">Odh. náklady: 250 tis. Kč · <strong>Doporučení: neprovádět</strong></div>
+          </div>
+        </div>
+        <div class="repair-item">
+          <div class="r-icon r-icon-skip">✗</div>
+          <div class="r-content">
+            <div class="r-name"><span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--concrete);margin-right:8px;">#6</span>Interiér výtopny — omítky, schodiště, WC</div>
+            <div class="r-desc">Výtopna je určena k demolici nebo přestavbě na sound stage (Fáze 3). Jakékoliv interiérové opravy — omítky, schodiště, WC zázemí — jsou investicí do prostoru, který zanikne nebo bude kompletně přebudován.</div>
+            <div class="r-cost">Odh. náklady: 600 tis. – 1,2 mil. Kč · <strong>Doporučení: neprovádět</strong></div>
+          </div>
+        </div>
+        <div class="repair-item">
+          <div class="r-icon r-icon-skip">✗</div>
+          <div class="r-content">
+            <div class="r-name"><span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--concrete);margin-right:8px;">#8</span>Plynové kotelny — výměna 6 kotlů</div>
+            <div class="r-desc">Kotelny se nachází v budově výtopny, která je určena k demolici nebo přestavbě na sound stage (Fáze 3). Nové plynové kotle ani tepelná čerpadla nemají smysl instalovat do budovy, která zanikne. Energetika bude řešena v rámci nové výstavby.</div>
+            <div class="r-cost">Odh. náklady: 600 tis. – 1 mil. Kč · <strong>Doporučení: neprovádět</strong></div>
           </div>
         </div>
         <div class="repair-item">
@@ -417,38 +440,12 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
             <div class="r-cost">Odh. náklady: 250 tis. Kč · <strong>Doporučení: neprovádět</strong></div>
           </div>
         </div>
-
-        <div class="rg-subtitle">↓ Snížit standard nebo přesměrovat (pol. 1, 6, 8)</div>
-        <div class="repair-item">
-          <div class="r-icon r-icon-no">↓</div>
-          <div class="r-content">
-            <div class="r-name"><span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--concrete);margin-right:8px;">#1</span>Střecha výtopny — plná rekonstrukce</div>
-            <div class="r-desc">Výtopna (1 289 m²) je při Fázi 3 určena k demolici nebo přestavbě na sound stage. Plná rekonstrukce EPS + fóliová krytina = z 80 % vyhozené peníze. Postačí přípravná fáze: statika pro budoucí rigging, kabelové průchodky.</div>
-            <div class="r-cost">Orientační náklady plné opravy: 3,2–4,5 mil. Kč · <strong>Úspora: 2–3 mil. Kč</strong></div>
-          </div>
-        </div>
-        <div class="repair-item">
-          <div class="r-icon r-icon-no">↓</div>
-          <div class="r-content">
-            <div class="r-name"><span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--concrete);margin-right:8px;">#6</span>Interiér výtopny — standardní omítky a malby</div>
-            <div class="r-desc">Sound stage vyžaduje průmyslový, surový charakter (beton + budoucí akustické panely). Standardní omítky by musely být odstraněny. Opravit jen schodiště a WC zázemí v HO1/HO2. Zachovat industriální charakter.</div>
-            <div class="r-cost"><strong>Úspora: 500 tis. – 1 mil. Kč</strong></div>
-          </div>
-        </div>
-        <div class="repair-item">
-          <div class="r-icon r-icon-no">↓</div>
-          <div class="r-content">
-            <div class="r-name"><span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--concrete);margin-right:8px;">#8</span>Plynové kotelny — výměna 6 kotlů</div>
-            <div class="r-desc">Smart Campus (Fáze 2) cílí na energetickou soběstačnost. Filmový Park potřebuje přesnou klimatizaci, ne plynové topení. Nové plynové kotle = kontraproduktivní investice. Nahradit hybridními tepelnými čerpadly (kaskáda + plynová záloha). Dotace Modernizační fond ENERG ETS 30–50 %.</div>
-            <div class="r-cost">Orientační náklady kotlů: 600 tis. – 1 mil. Kč · <strong>Stejná investice, lepší alokace</strong></div>
-          </div>
-        </div>
       </div>
     </div>
     <div class="savings-banner">
       <div class="sb-item">
-        <div class="sb-val">3,5–5,5 mil. Kč</div>
-        <div class="sb-label">CELKOVÁ MOŽNÁ ÚSPORA (pol. 1, 6 + neprovádění 2, 5, 10, 14)</div>
+        <div class="sb-val">5–8 mil. Kč</div>
+        <div class="sb-label">CELKOVÁ MOŽNÁ ÚSPORA (neprovádění pol. 1, 2, 5, 6, 8, 10, 14)</div>
       </div>
       <div class="sb-item">
         <div class="sb-val">→ Architektonická studie</div>
@@ -583,7 +580,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
           <div class="tl-event-tag tag-prep">OPRAVY</div>
         </div>
         <div class="tl-event-title">Prioritní povinné opravy + Hala č. 5</div>
-        <div class="tl-event-desc">Realizace kritických oprav z Přílohy č. 2: elektroměrové rozvaděče (#7), hromosvod, LED osvětlení, trafostanice, komín. Přesměrování úspor (3,5–5,5 mil.) do přípravy Fáze 1. <strong>Zateplení a zavedení plynového vytápění Haly č. 5</strong> — jediné haly areálu neplánované ke zbourání, vhodné pro všechny tři fáze rozvoje.</div>
+        <div class="tl-event-desc">Realizace kritických oprav z Přílohy č. 2: elektroměrové rozvaděče (#7), hromosvod, LED osvětlení, trafostanice, komín. Přesměrování úspor (5–8 mil.) do přípravy Fáze 1. <strong>Zateplení a zavedení plynového vytápění Haly č. 5</strong> — jediné haly areálu neplánované ke zbourání, vhodné pro všechny tři fáze rozvoje.</div>
       </div>
       <div class="tl-event ev-f1">
         <div class="tl-event-header">
