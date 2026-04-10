@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="cs">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fáze 2 – Smart Campus · Areál Za Zastávkou</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -58,8 +58,8 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
   background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4);
   color: white; margin-bottom: 20px;
 }
-.phase-title { font-family: 'Cormorant Garamond', serif; font-size: 64px; font-weight: 300; line-height: 1.0; color: white; margin-bottom: 6px; }
-.phase-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; color: rgba(255,255,255,0.75); margin-bottom: 24px; }
+.phase-title { font-family: 'Playfair Display', serif; font-size: 64px; font-weight: 300; line-height: 1.0; color: white; margin-bottom: 6px; }
+.phase-subtitle { font-family: 'Playfair Display', serif; font-size: 20px; font-style: italic; color: rgba(255,255,255,0.75); margin-bottom: 24px; }
 .phase-desc { font-size: 14px; color: rgba(255,255,255,0.85); line-height: 1.75; max-width: 440px; }
 .phase-hero-right { position: relative; overflow: hidden; }
 .phase-hero-right img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -80,7 +80,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 }
 .kpi-item { padding: 20px 28px; border-right: 1px solid rgba(255,255,255,0.08); }
 .kpi-item:last-child { border-right: none; }
-.kpi-val { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--amber-light); line-height: 1; margin-bottom: 4px; }
+.kpi-val { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 600; color: var(--amber-light); line-height: 1; margin-bottom: 4px; }
 .kpi-label { font-family: 'DM Mono', monospace; font-size: 8.5px; letter-spacing: 0.12em; color: rgba(255,255,255,0.45); }
 .kpi-note { font-size: 10.5px; color: rgba(255,255,255,0.55); margin-top: 2px; }
 
@@ -88,7 +88,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 .main { max-width: 1300px; margin: 0 auto; padding: 72px 64px; }
 .section { margin-bottom: 72px; }
 .section-label { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: var(--concrete); margin-bottom: 6px; }
-.section-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 400; margin-bottom: 28px; letter-spacing: -0.01em; }
+.section-title { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 400; margin-bottom: 28px; letter-spacing: -0.01em; }
 .section-title em { font-style: italic; color: var(--amber); }
 
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
@@ -100,7 +100,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
   border-top: 3px solid var(--amber);
 }
 .fc-icon { font-size: 32px; margin-bottom: 14px; }
-.fc-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; margin-bottom: 10px; }
+.fc-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; margin-bottom: 10px; }
 .fc-desc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.65; }
 
 /* HIGH LINE FEATURE */
@@ -109,12 +109,12 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
   padding: 36px 40px; margin-bottom: 24px;
   display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
 }
-.hb-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; margin-bottom: 12px; }
+.hb-title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; margin-bottom: 12px; }
 .hb-title em { font-style: italic; color: var(--amber); }
 .hb-desc { font-size: 13.5px; color: var(--ink-soft); line-height: 1.75; }
 .hb-right { border-left: 2px solid var(--amber); padding-left: 28px; }
 .hb-fact { margin-bottom: 16px; }
-.hb-fact-val { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 600; color: var(--amber); line-height: 1; }
+.hb-fact-val { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: var(--amber); line-height: 1; }
 .hb-fact-label { font-size: 11px; color: var(--ink-soft); margin-top: 4px; }
 
 /* GALLERY */
@@ -132,7 +132,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 }
 .sc-icon { font-size: 28px; margin-bottom: 10px; }
 .sc-title { font-weight: 600; font-size: 15px; margin-bottom: 6px; }
-.sc-val { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: var(--green); margin-bottom: 6px; }
+.sc-val { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; color: var(--green); margin-bottom: 6px; }
 .sc-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.55; }
 
 /* CHIMNEY */
@@ -148,12 +148,12 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 }
 .cb-content { position: relative; z-index: 1; }
 .cb-eyebrow { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: var(--amber-light); margin-bottom: 12px; }
-.cb-title { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; color: white; line-height: 1.1; margin-bottom: 16px; }
+.cb-title { font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 300; color: white; line-height: 1.1; margin-bottom: 16px; }
 .cb-title em { font-style: italic; color: var(--amber-light); }
 .cb-desc { font-size: 13.5px; color: rgba(255,255,255,0.7); line-height: 1.75; }
 .cb-visual { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 12px; }
 .cb-stat { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); padding: 16px 20px; }
-.cb-stat-val { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; color: var(--amber-light); }
+.cb-stat-val { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 600; color: var(--amber-light); }
 .cb-stat-label { font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 0.05em; }
 
 /* FIN TABLE */
@@ -184,7 +184,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 
 /* CALLOUT */
 .callout { background: var(--amber); padding: 36px 40px; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; }
-.callout-text { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: white; line-height: 1.4; }
+.callout-text { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 300; color: white; line-height: 1.4; }
 .callout-text em { font-style: italic; color: var(--amber-light); }
 .callout-action { display: flex; flex-direction: column; gap: 10px; }
 .btn { display: inline-block; text-decoration: none; text-align: center; padding: 12px 28px; font-size: 13px; font-weight: 600; transition: all 0.2s; }
@@ -211,7 +211,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 .phase-nav-next { display: flex; align-items: center; gap: 16px; }
 .phase-nav-next-label { text-align: right; }
 .pnn-eyebrow { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.15em; color: rgba(255,255,255,0.4); }
-.pnn-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: white; }
+.pnn-name { font-family: 'Playfair Display', serif; font-size: 20px; color: white; }
 .btn-next { display: flex; align-items: center; gap: 8px; background: var(--amber); color: white; padding: 12px 22px; font-size: 13px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
 .btn-next:hover { background: var(--amber-light); color: var(--ink); }
 .features-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
@@ -363,37 +363,37 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
     <div class="tenant-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:3px;">
       <div style="padding:24px 20px; background:white; border:1px solid var(--linen-dark);">
         <div style="font-size:28px; margin-bottom:10px;">💻</div>
-        <div style="font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:600; margin-bottom:6px;">Tech startupy &amp; IoT firmy</div>
+        <div style="font-family:'Playfair Display',serif; font-size:18px; font-weight:600; margin-bottom:6px;">Tech startupy &amp; IoT firmy</div>
         <div style="font-size:12px; color:var(--ink-soft); line-height:1.55; margin-bottom:10px;">Hardware startupy, IoT, robotika — firmy hledající sdílený prostor s přístupem k CNC strojům, 3D tiskárnám a elektronickým laboratořím.</div>
         <span style="display:inline-block; font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.1em; padding:3px 8px; background:var(--amber-pale); color:var(--amber); border:1px solid var(--amber);">HLAVNÍ CÍLOVÁ SKUPINA</span>
       </div>
       <div style="padding:24px 20px; background:white; border:1px solid var(--linen-dark);">
         <div style="font-size:28px; margin-bottom:10px;">🎨</div>
-        <div style="font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:600; margin-bottom:6px;">Design studia &amp; agentury</div>
+        <div style="font-family:'Playfair Display',serif; font-size:18px; font-weight:600; margin-bottom:6px;">Design studia &amp; agentury</div>
         <div style="font-size:12px; color:var(--ink-soft); line-height:1.55; margin-bottom:10px;">Grafická, produktová a architektonická studia. Vzdušné kancelářské ateliéry s industriální atmosférou, 80–120 Kč/m²/měs.</div>
         <span style="display:inline-block; font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.1em; padding:3px 8px; background:var(--amber-pale); color:var(--amber); border:1px solid var(--amber);">VYSOKÁ POPTÁVKA</span>
       </div>
       <div style="padding:24px 20px; background:white; border:1px solid var(--linen-dark);">
         <div style="font-size:28px; margin-bottom:10px;">🎭</div>
-        <div style="font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:600; margin-bottom:6px;">Kulturní &amp; komunitní aktéři</div>
+        <div style="font-family:'Playfair Display',serif; font-size:18px; font-weight:600; margin-bottom:6px;">Kulturní &amp; komunitní aktéři</div>
         <div style="font-size:12px; color:var(--ink-soft); line-height:1.55; margin-bottom:10px;">Neziskové organizace, kulturní centra, zkušebny pro kapely, taneční sály. Oživení veřejného parteru a střech.</div>
         <span style="display:inline-block; font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.1em; padding:3px 8px; background:var(--amber-pale); color:var(--amber); border:1px solid var(--amber);">KOMUNITNÍ KOTVA</span>
       </div>
       <div style="padding:24px 20px; background:white; border:1px solid var(--linen-dark);">
         <div style="font-size:28px; margin-bottom:10px;">☕</div>
-        <div style="font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:600; margin-bottom:6px;">Gastronomie &amp; kavárny</div>
+        <div style="font-family:'Playfair Display',serif; font-size:18px; font-weight:600; margin-bottom:6px;">Gastronomie &amp; kavárny</div>
         <div style="font-size:12px; color:var(--ink-soft); line-height:1.55; margin-bottom:10px;">Kavárny, bary, pop-up restaurace na pochozích střechách a v parteru. Generátor návštěvnosti pro celý areál.</div>
         <span style="display:inline-block; font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.1em; padding:3px 8px; background:var(--amber-pale); color:var(--amber); border:1px solid var(--amber);">AKTIVACE MÍSTA</span>
       </div>
       <div style="padding:24px 20px; background:white; border:1px solid var(--linen-dark);">
         <div style="font-size:28px; margin-bottom:10px;">🌱</div>
-        <div style="font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:600; margin-bottom:6px;">Vzdělávání &amp; coworking</div>
+        <div style="font-family:'Playfair Display',serif; font-size:18px; font-weight:600; margin-bottom:6px;">Vzdělávání &amp; coworking</div>
         <div style="font-size:12px; color:var(--ink-soft); line-height:1.55; margin-bottom:10px;">Vzdělávací programy, workshopy, coworkingové prostory. Synergie se zelennými střechami jako místem pro komunitní setkávání.</div>
         <span style="display:inline-block; font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.1em; padding:3px 8px; background:var(--amber-pale); color:var(--amber); border:1px solid var(--amber);">ROSTOUCÍ SEGMENT</span>
       </div>
       <div style="padding:24px 20px; background:white; border:1px solid var(--linen-dark);">
         <div style="font-size:28px; margin-bottom:10px;">🏋️</div>
-        <div style="font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:600; margin-bottom:6px;">Sport &amp; wellness</div>
+        <div style="font-family:'Playfair Display',serif; font-size:18px; font-weight:600; margin-bottom:6px;">Sport &amp; wellness</div>
         <div style="font-size:12px; color:var(--ink-soft); line-height:1.55; margin-bottom:10px;">Fitness, jóga, bojová umění v industriálním prostředí. Rozšiřuje spádovou oblast areálu na rezidenty celých Dolních Měcholup.</div>
         <span style="display:inline-block; font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.1em; padding:3px 8px; background:var(--amber-pale); color:var(--amber); border:1px solid var(--amber);">DOPLŇKOVÁ SKUPINA</span>
       </div>

@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="cs">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Finanční analýza & Podklady · Areál Za Zastávkou</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -31,7 +31,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 .page-hero::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255,0.02) 8px, rgba(255,255,255,0.02) 9px); }
 .ph-inner { position: relative; z-index: 1; max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; }
 .ph-eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--amber-light); margin-bottom: 14px; }
-.ph-title { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; color: white; line-height: 1.05; letter-spacing: -0.02em; }
+.ph-title { font-family: 'Playfair Display', serif; font-size: 52px; font-weight: 300; color: white; line-height: 1.05; letter-spacing: -0.02em; }
 .ph-title em { font-style: italic; color: var(--amber-light); }
 .ph-desc { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.8; }
 .ph-links { display: flex; flex-direction: column; gap: 3px; }
@@ -44,7 +44,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 .main { max-width: 1300px; margin: 0 auto; padding: 72px 64px; }
 .section { margin-bottom: 80px; }
 .section-label { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: var(--concrete); margin-bottom: 6px; }
-.section-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 400; margin-bottom: 8px; }
+.section-title { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 400; margin-bottom: 8px; }
 .section-title em { font-style: italic; color: var(--amber); }
 .section-desc { font-size: 13.5px; color: var(--ink-soft); line-height: 1.7; margin-bottom: 28px; }
 
@@ -89,7 +89,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 /* REPAIRS SAVINGS */
 .savings-banner { background: var(--green); padding: 24px 28px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-top: 20px; }
 .sb-item { text-align: center; }
-.sb-val { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 600; color: white; line-height: 1; }
+.sb-val { font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 600; color: white; line-height: 1; }
 .sb-label { font-size: 10.5px; color: rgba(255,255,255,0.7); margin-top: 5px; }
 
 /* FUNDING TABLE */
@@ -102,7 +102,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 .fc-badge-green { background: var(--green-pale); color: var(--green); border: 1px solid var(--green); }
 .fc-badge-amber { background: var(--amber-pale); color: var(--amber); border: 1px solid var(--amber); }
 .fc-badge-film { background: var(--film-pale); color: var(--film); border: 1px solid var(--film); }
-.fc-amount { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; color: var(--amber); margin-bottom: 8px; }
+.fc-amount { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 600; color: var(--amber); margin-bottom: 8px; }
 .fc-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.55; }
 .fc-phases { display: flex; gap: 4px; margin-top: 10px; }
 .fc-phase-dot { font-family: 'DM Mono', monospace; font-size: 9px; padding: 2px 7px; border-radius: 1px; }
@@ -138,7 +138,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 .dc-f1 .dc-header { color: var(--green); }
 .dc-f2 .dc-header { color: var(--amber); }
 .dc-f3 .dc-header { color: var(--film); }
-.dc-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; margin-bottom: 16px; }
+.dc-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; margin-bottom: 16px; }
 .dc-items { display: flex; flex-direction: column; gap: 8px; }
 .dc-item { font-size: 12.5px; color: var(--ink-soft); display: flex; gap: 8px; }
 .dc-check { flex-shrink: 0; font-size: 14px; }
@@ -152,7 +152,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 .conclusion::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255,0.015) 8px, rgba(255,255,255,0.015) 9px); }
 .conc-inner { position: relative; z-index: 1; max-width: 900px; }
 .conc-eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--amber-light); margin-bottom: 16px; }
-.conc-title { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; color: white; line-height: 1.1; margin-bottom: 24px; }
+.conc-title { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 300; color: white; line-height: 1.1; margin-bottom: 24px; }
 .conc-title em { font-style: italic; color: var(--amber-light); }
 .conc-text { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.8; margin-bottom: 16px; }
 .conc-btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 32px; }

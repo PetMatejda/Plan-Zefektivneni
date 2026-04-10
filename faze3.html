@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="cs">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fáze 3 – Filmový Park · Areál Za Zastávkou</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -59,19 +59,19 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
   background: var(--film); border: 1px solid rgba(255,255,255,0.2);
   color: rgba(255,255,255,0.85); margin-bottom: 20px;
 }
-.phase-title { font-family: 'Cormorant Garamond', serif; font-size: 72px; font-weight: 300; line-height: 1.0; color: white; margin-bottom: 6px; }
-.phase-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+.phase-title { font-family: 'Playfair Display', serif; font-size: 72px; font-weight: 300; line-height: 1.0; color: white; margin-bottom: 6px; }
+.phase-subtitle { font-family: 'Playfair Display', serif; font-size: 20px; font-style: italic; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
 .phase-desc { font-size: 13.5px; color: rgba(255,255,255,0.75); line-height: 1.75; }
 .ph-right { display: flex; flex-direction: column; gap: 10px; padding-bottom: 4px; }
 .hero-stat-box { background: rgba(255,255,255,0.06); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); padding: 16px 20px; }
-.hsb-val { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--amber-light); line-height: 1; }
+.hsb-val { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 600; color: var(--amber-light); line-height: 1; }
 .hsb-label { font-size: 9.5px; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; margin-top: 3px; }
 
 /* KPI */
 .kpi-row { background: var(--film); display: grid; grid-template-columns: repeat(5, 1fr); border-bottom: 2px solid var(--film-mid); }
 .kpi-item { padding: 20px 28px; border-right: 1px solid rgba(255,255,255,0.08); }
 .kpi-item:last-child { border-right: none; }
-.kpi-val { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--amber-light); line-height: 1; margin-bottom: 4px; }
+.kpi-val { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 600; color: var(--amber-light); line-height: 1; margin-bottom: 4px; }
 .kpi-label { font-family: 'DM Mono', monospace; font-size: 8.5px; letter-spacing: 0.12em; color: rgba(255,255,255,0.45); }
 .kpi-note { font-size: 10.5px; color: rgba(255,255,255,0.5); margin-top: 2px; }
 
@@ -79,7 +79,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 .main { max-width: 1300px; margin: 0 auto; padding: 72px 64px; }
 .section { margin-bottom: 72px; }
 .section-label { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: var(--concrete); margin-bottom: 6px; }
-.section-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 400; margin-bottom: 28px; letter-spacing: -0.01em; }
+.section-title { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 400; margin-bottom: 28px; letter-spacing: -0.01em; }
 .section-title em { font-style: italic; color: var(--film); }
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
 .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
@@ -96,7 +96,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 .mc-crisis { background: #1a1a2e; border: 1px solid rgba(255,255,255,0.08); }
 .mc-opportunity { background: var(--film); }
 .mc-eyebrow { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.15em; color: rgba(255,255,255,0.4); margin-bottom: 12px; }
-.mc-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; color: white; margin-bottom: 16px; }
+.mc-title { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 600; color: white; margin-bottom: 16px; }
 .mc-items { display: flex; flex-direction: column; gap: 10px; }
 .mc-item { display: flex; gap: 12px; }
 .mc-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
@@ -111,14 +111,14 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 .sfa-eyebrow { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.15em; color: rgba(255,255,255,0.7); margin-bottom: 6px; }
 .sfa-title { font-size: 18px; font-weight: 600; color: white; }
 .sfa-right { text-align: right; }
-.sfa-val { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 600; color: white; line-height: 1; }
+.sfa-val { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 600; color: white; line-height: 1; }
 .sfa-sublabel { font-size: 11px; color: rgba(255,255,255,0.75); }
 
 /* STAGES */
 .stages-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; margin-bottom: 24px; }
 .stage-card { background: var(--film); padding: 24px 18px; text-align: center; }
 .stage-num { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); margin-bottom: 8px; }
-.stage-area { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: var(--amber-light); line-height: 1; }
+.stage-area { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; color: var(--amber-light); line-height: 1; }
 .stage-label { font-size: 10px; color: rgba(255,255,255,0.6); margin-top: 4px; }
 .stage-feature { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 10px; line-height: 1.4; }
 
@@ -135,12 +135,12 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 }
 .lv-content { position: relative; z-index: 1; }
 .lv-eyebrow { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: var(--amber-light); margin-bottom: 12px; }
-.lv-title { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; color: white; line-height: 1.1; margin-bottom: 16px; }
+.lv-title { font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 300; color: white; line-height: 1.1; margin-bottom: 16px; }
 .lv-title em { font-style: italic; color: var(--amber-light); }
 .lv-desc { font-size: 13.5px; color: rgba(255,255,255,0.7); line-height: 1.75; }
 .lv-stats { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 3px; }
 .lv-stat { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); padding: 14px 18px; }
-.lv-stat-val { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--amber-light); line-height: 1; }
+.lv-stat-val { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: var(--amber-light); line-height: 1; }
 .lv-stat-label { font-size: 10.5px; color: rgba(255,255,255,0.45); margin-top: 3px; }
 
 /* GALLERY */
@@ -163,7 +163,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 .du-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
 .du-left {}
 .du-eyebrow { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: var(--amber-light); margin-bottom: 14px; }
-.du-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; color: white; line-height: 1.15; margin-bottom: 20px; }
+.du-title { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 300; color: white; line-height: 1.15; margin-bottom: 20px; }
 .du-title em { font-style: italic; color: var(--amber-light); }
 .du-desc { font-size: 13.5px; color: rgba(255,255,255,0.7); line-height: 1.8; }
 .du-right {}
@@ -207,7 +207,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 /* CALLOUT */
 .callout { background: var(--film); padding: 44px 48px; display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; position: relative; overflow: hidden; }
 .callout::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255,0.02) 8px, rgba(255,255,255,0.02) 9px); }
-.callout-text { position: relative; z-index: 1; font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: white; line-height: 1.5; }
+.callout-text { position: relative; z-index: 1; font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 300; color: white; line-height: 1.5; }
 .callout-text em { font-style: italic; color: var(--amber-light); }
 .callout-action { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 10px; }
 .btn { display: inline-block; text-decoration: none; text-align: center; padding: 13px 28px; font-size: 13px; font-weight: 600; transition: all 0.2s; }
@@ -583,19 +583,19 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
     <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:3px;">
       <div style="padding:24px 20px; background:var(--film); border:1px solid rgba(255,255,255,0.1);">
         <div style="font-size:28px; margin-bottom:10px;">🎬</div>
-        <div style="font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:600; margin-bottom:6px; color:white;">Velké streamovací platformy</div>
+        <div style="font-family:'Playfair Display',serif; font-size:18px; font-weight:600; margin-bottom:6px; color:white;">Velké streamovací platformy</div>
         <div style="font-size:12px; color:rgba(255,255,255,0.65); line-height:1.55; margin-bottom:10px;">Netflix, Amazon Prime, Apple TV+, Disney+ — aktivně hledají kapacity v CEE pro střednědobé kontrakty. Přítomnost SFA cash rebate 25–35 % je klíčová.</div>
         <span style="display:inline-block; font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.1em; padding:3px 8px; background:rgba(240,184,69,0.2); color:var(--amber-light); border:1px solid var(--amber);">HLAVNÍ CÍLOVÁ SKUPINA</span>
       </div>
       <div style="padding:24px 20px; background:var(--film); border:1px solid rgba(255,255,255,0.1);">
         <div style="font-size:28px; margin-bottom:10px;">🎥</div>
-        <div style="font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:600; margin-bottom:6px; color:white;">Tuzemské filmové produkce</div>
+        <div style="font-family:'Playfair Display',serif; font-size:18px; font-weight:600; margin-bottom:6px; color:white;">Tuzemské filmové produkce</div>
         <div style="font-size:12px; color:rgba(255,255,255,0.65); line-height:1.55; margin-bottom:10px;">Česká a slovenská produkční studia hledající dostupné, moderně vybavené sound stages v Praze. Celoroční využití v době, kdy zahraniční produkce nejsou přítomné.</div>
         <span style="display:inline-block; font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.1em; padding:3px 8px; background:rgba(240,184,69,0.2); color:var(--amber-light); border:1px solid var(--amber);">STABILNÍ ZÁKLAD</span>
       </div>
       <div style="padding:24px 20px; background:var(--film); border:1px solid rgba(255,255,255,0.1);">
         <div style="font-size:28px; margin-bottom:10px;">📺</div>
-        <div style="font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:600; margin-bottom:6px; color:white;">Reklamní &amp; komerční produkce</div>
+        <div style="font-family:'Playfair Display',serif; font-size:18px; font-weight:600; margin-bottom:6px; color:white;">Reklamní &amp; komerční produkce</div>
         <div style="font-size:12px; color:rgba(255,255,255,0.65); line-height:1.55; margin-bottom:10px;">TV reklamy, videoklipy, korporátní filmy. Kratší pronájmy 2–5 dní s vyšší denní sazbou. Základní obsazenost i mimo sezónu.</div>
         <span style="display:inline-block; font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.1em; padding:3px 8px; background:rgba(240,184,69,0.2); color:var(--amber-light); border:1px solid var(--amber);">DOPLŇKOVÁ OBSAZENOST</span>
       </div>
