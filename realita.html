@@ -234,14 +234,14 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
     </div>
     <div class="hero-stats">
       <div class="hs-item">
-        <div class="hs-val">6–10 mil.</div>
+        <div class="hs-val">7–12 mil.</div>
         <div class="hs-label">KANALIZACE · CELKOVÝ DOPAD</div>
-        <div class="hs-note">stavba + výpadek příjmu</div>
+        <div class="hs-note">stavba + výpadek + churn nájemníků</div>
       </div>
       <div class="hs-item">
-        <div class="hs-val">~0 Kč</div>
+        <div class="hs-val">~0 / 10–18 mil.</div>
         <div class="hs-label">STL PLYNOVOD</div>
-        <div class="hs-note">souhlas distributora, přeložka zbytná</div>
+        <div class="hs-note">se souhlasem 0 Kč · záložní přeložka vč. výpadku</div>
       </div>
       <div class="hs-item">
         <div class="hs-val">~0 Kč</div>
@@ -272,8 +272,8 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
           <div class="infra-sev-label">HLAVNÍ PROBLÉM</div>
         </div>
         <div class="infra-name">Kanalizace</div>
-        <p class="infra-desc">Splašková kanalizace existuje pouze v zadní části areálu (budoucí F3). Do přední a střední části (F1, F2) zavedena není. Pro kancelářský a kreativní provoz F2 je kanalizace nezbytná.</p>
-        <div class="infra-impact">Stavba 300 m: 4–6 mil. Kč · výpadek příjmu: 2–4 mil. Kč</div>
+        <p class="infra-desc">Splašková kanalizace existuje pouze v zadní části areálu (budoucí F3). Do přední a střední části (F1, F2) zavedena není. Pro kancelářský a kreativní provoz F2 je kanalizace nezbytná. Výkop probíhá přes pronajatý areál — zasahuje stejné nájemníky jako případná přeložka STL.</p>
+        <div class="infra-impact">Stavba 300 m: 4–6 mil. Kč · výpadek provozu 2–4 měs. · část nájemníků může odejít</div>
       </div>
 
       <div class="infra-card sev-mid">
@@ -314,60 +314,85 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
   <div class="section">
     <div class="section-label">FINANČNÍ DOPAD</div>
     <h2 class="section-title">Infrastruktura <em>není v rozpočtu fází</em></h2>
-    <p class="section-desc">Finanční modely Fáze 1 (14–20 mil. Kč) a Fáze 2 (45–70 mil. Kč) počítají s tím, že infrastruktura je připravena. Vyřešení kanalizace pro přední část areálu tvoří samostatný nákladový blok:</p>
+    <p class="section-desc">Finanční modely Fáze 1 (14–20 mil. Kč) a Fáze 2 (45–70 mil. Kč) počítají s tím, že infrastruktura je připravena. Níže jsou náklady navíc. Kanalizace a STL přeložka zasahují stejné nájemníky — výpadek příjmu a churn se proto počítají jednou, nikoliv součtem za každou stavbu zvlášť.</p>
 
     <table class="fin-impact-table">
       <thead>
         <tr>
           <th>Položka</th>
-          <th>Stavba</th>
-          <th>Výpadek příjmu</th>
-          <th>Celkem</th>
+          <th>Stavební náklad</th>
+          <th>Celkem stavba</th>
           <th>Poznámka</th>
         </tr>
       </thead>
       <tbody>
+        <!-- STAVEBNÍ NÁKLADY -->
+        <tr>
+          <td colspan="4" style="padding:10px 16px 4px; font-family:'DM Mono',monospace; font-size:8.5px; letter-spacing:0.15em; color:var(--concrete); background:var(--linen-dark);">STAVEBNÍ NÁKLADY</td>
+        </tr>
         <tr>
           <td class="row-label">Kanalizace 300 m</td>
           <td><span class="amt amt-high">4–6 mil. Kč</span></td>
-          <td><span class="amt amt-high">2–4 mil. Kč</span></td>
-          <td><span class="amt amt-high">6–10 mil. Kč</span></td>
-          <td class="note-cell">Výkop přes aktivní nájmy, 2–4 měs. omezený provoz</td>
+          <td><span class="amt amt-high">4–6 mil. Kč</span></td>
+          <td class="note-cell">Výkop přes areál, 2–4 měs. aktivní stavba</td>
         </tr>
         <tr>
-          <td class="row-label">STL plynovod<br><span style="font-weight:400; font-size:11px; color:var(--concrete);">se souhlasem distributora</span></td>
-          <td><span class="amt amt-zero">0 Kč</span></td>
+          <td class="row-label">STL plynovod — se souhlasem distributora</td>
           <td><span class="amt amt-zero">0 Kč</span></td>
           <td><span class="amt amt-zero">0 Kč</span></td>
           <td class="note-cell">Otevřená konstrukce — souhlas standardně udělován</td>
         </tr>
-        <tr style="opacity:0.65;">
-          <td class="row-label">STL plynovod<br><span style="font-weight:400; font-size:11px; color:var(--concrete);">záložní scénář: přeložka</span></td>
+        <tr style="opacity:0.7;">
+          <td class="row-label">STL plynovod — záložní scénář: přeložka<br><span style="font-weight:400;font-size:11px;color:var(--concrete);">pouze pokud distributor souhlas neudělí</span></td>
           <td><span class="amt amt-mid">3–5,5 mil. Kč</span></td>
-          <td><span class="amt amt-mid">1–3 mil. Kč</span></td>
-          <td><span class="amt amt-mid">4–8,5 mil. Kč</span></td>
-          <td class="note-cell">Pokud distributor souhlas neudělí · realizace 6–12 měs.</td>
+          <td><span class="amt amt-mid">3–5,5 mil. Kč</span></td>
+          <td class="note-cell">Realizace 6–12 měs. · souběžně s kanalizací</td>
         </tr>
         <tr>
-          <td class="row-label">Kolektory</td>
-          <td><span class="amt amt-zero">~0 Kč</span></td>
-          <td><span class="amt amt-zero">~0 Kč</span></td>
-          <td><span class="amt amt-zero">~0 Kč</span></td>
-          <td class="note-cell">Koordinační vyjádření, statický posudek</td>
+          <td class="row-label">Kolektory + elektro a voda</td>
+          <td><span class="amt amt-zero">~0 / k upřesnění</span></td>
+          <td><span class="amt amt-zero">~0 / k upřesnění</span></td>
+          <td class="note-cell">Koordinace, posudky · rozsah elektra prověřit</td>
+        </tr>
+
+        <!-- PROVOZNÍ DOPADY -->
+        <tr>
+          <td colspan="4" style="padding:10px 16px 4px; font-family:'DM Mono',monospace; font-size:8.5px; letter-spacing:0.15em; color:var(--concrete); background:var(--linen-dark);">PROVOZNÍ DOPADY — počítáno jednou (kanalizace + STL zasahují stejné nájemníky)</td>
         </tr>
         <tr>
-          <td class="row-label">Elektro a voda</td>
-          <td><span class="amt amt-mid">k upřesnění</span></td>
-          <td><span class="amt amt-mid">minimální</span></td>
-          <td><span class="amt amt-mid">k upřesnění</span></td>
-          <td class="note-cell">Závisí na stávajícím stavu přípojek</td>
+          <td class="row-label">Výpadek příjmu za dobu stavby<br><span style="font-weight:400;font-size:11px;color:var(--concrete);">preferovaný scénář: jen kanalizace, 2–4 měs., snížení 40–50 %</span></td>
+          <td><span class="amt amt-high">1,5–3 mil. Kč</span></td>
+          <td><span class="amt amt-high">1,5–3 mil. Kč</span></td>
+          <td class="note-cell">Stejní nájemníci — nepočítá se znovu pro STL</td>
+        </tr>
+        <tr style="opacity:0.7;">
+          <td class="row-label">Výpadek příjmu za dobu stavby<br><span style="font-weight:400;font-size:11px;color:var(--concrete);">záložní scénář: kanalizace + STL souběžně, 3–5 měs., snížení 40–50 %</span></td>
+          <td><span class="amt amt-mid">2–4 mil. Kč</span></td>
+          <td><span class="amt amt-mid">2–4 mil. Kč</span></td>
+          <td class="note-cell">Delší stavba, ne součet dvou výpadků</td>
+        </tr>
+        <tr>
+          <td class="row-label">Odchod části nájemníků + hledání náhrady<br><span style="font-weight:400;font-size:11px;color:var(--concrete);">odhad 10–25 % nájemníků, 3–5 měs. obsazování</span></td>
+          <td><span class="amt amt-high">0,5–3 mil. Kč</span></td>
+          <td><span class="amt amt-high">0,5–3 mil. Kč</span></td>
+          <td class="note-cell">Vyšší ve scénáři s delší stavbou · záleží na typu nájemníků a délce smluv</td>
+        </tr>
+
+        <!-- CELKOVÉ SOUČTY -->
+        <tr>
+          <td colspan="4" style="padding:10px 16px 4px; font-family:'DM Mono',monospace; font-size:8.5px; letter-spacing:0.15em; color:var(--concrete); background:var(--linen-dark);">CELKOVÉ DOPADY</td>
         </tr>
         <tr class="total-row">
-          <td class="row-label">CELKEM (bez elektra a vody)</td>
+          <td class="row-label">Preferovaný scénář — kanalizace, souhlas pro STL</td>
           <td></td>
+          <td><span class="amt amt-total">7–12 mil. Kč</span></td>
+          <td class="note-cell">Stavba 4–6 + výpadek 1,5–3 + churn 0,5–3</td>
+        </tr>
+        <tr class="total-row" style="opacity:0.8;">
+          <td class="row-label">Záložní scénář — kanalizace + přeložka STL</td>
           <td></td>
-          <td><span class="amt amt-total">6–10 mil. Kč</span></td>
-          <td class="note-cell">Navíc nad rámec investic F1 a F2</td>
+          <td><span class="amt" style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--corten);">10–18 mil. Kč</span></td>
+          <td class="note-cell">Stavba 7–11,5 + výpadek 2–4 + churn 1–3 (sdílený)</td>
         </tr>
       </tbody>
     </table>
@@ -377,7 +402,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
   <div class="pacht-banner">
     <div class="pb-icon">📋</div>
     <div class="pb-text">
-      <strong>Současný pacht toto financovat neumožňuje.</strong> Investiční limit pachtu je 20 mil. Kč celkem (obec max. 10 mil. Kč). Přidání 6–10 mil. Kč za infrastrukturu by vyčerpalo velkou část limitu ještě před realizací F1. Vyřešení kanalizace před zahájením F1 nebo F2 vyžaduje buď <strong>změnu podmínek pachtu</strong>, nebo <strong>změnu pořadí výstavby</strong>.
+      <strong>Současný pacht toto financovat neumožňuje.</strong> Investiční limit pachtu je 20 mil. Kč celkem (obec max. 10 mil. Kč). Infrastrukturní náklady 7–12 mil. Kč (preferovaný scénář) nebo 10–18 mil. Kč (záložní) by vyčerpaly prakticky celý limit ještě před realizací F1 — a to bez jediného kontejneru, haly nebo nájemníka. Vyřešení kanalizace vyžaduje buď <strong>změnu podmínek pachtu</strong>, nebo <strong>změnu pořadí výstavby</strong>.
     </div>
   </div>
 
