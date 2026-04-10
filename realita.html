@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reality Check · Areál Za Zastávkou</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #1c1a16; --ink-soft: #4a4540;
+  --linen: #f4efe6; --linen-dark: #e8e0d2;
+  --amber: #c8860a; --amber-light: #f0b845; --amber-pale: #fdf3de;
+  --concrete: #8a8278; --concrete-light: #c4bdb4;
+  --film: #2c3e50; --film-pale: #e8ecf0;
+  --green: #3d6b4f; --green-pale: #e8f2ec;
+  --corten: #b5611a; --corten-pale: #fdf0e8; --corten-dark: #8a4512;
+  --city: #1a3566; --city-pale: #e8eef8;
+  --warn: #b5611a;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(--ink); }
+
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--ink); border-bottom: 2px solid var(--corten);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 54px;
+}
+.nav-brand { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--amber-light); text-decoration: none; }
+.nav-links { display: flex; gap: 4px; }
+.nav-link { font-size: 11.5px; font-weight: 500; color: rgba(255,255,255,0.65); text-decoration: none; padding: 6px 14px; transition: all 0.2s; }
+.nav-link:hover { color: white; background: rgba(255,255,255,0.08); }
+.nav-link.active { color: #fca97a; background: rgba(181,97,26,0.2); }
+
+/* HERO */
+.hero {
+  background: var(--corten-dark);
+  position: relative; overflow: hidden;
+  padding: 72px 64px 60px;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    -45deg, transparent, transparent 10px,
+    rgba(0,0,0,0.06) 10px, rgba(0,0,0,0.06) 11px
+  );
+}
+.hero-inner { position: relative; z-index: 1; max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.hero-eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.25em; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
+.hero-title { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; color: white; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 20px; }
+.hero-title em { font-style: italic; color: #fca97a; }
+.hero-desc { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.8; max-width: 520px; }
+.hero-note {
+  background: rgba(0,0,0,0.25); border-left: 3px solid #fca97a;
+  padding: 20px 24px; margin-top: 28px;
+}
+.hero-note-text { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.7; }
+.hero-note-text strong { color: white; }
+
+.hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+.hs-item { background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.08); padding: 22px 20px; }
+.hs-val { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 600; color: #fca97a; line-height: 1; margin-bottom: 4px; }
+.hs-label { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 0.15em; color: rgba(255,255,255,0.4); }
+.hs-note { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+
+/* MAIN */
+.main { max-width: 1300px; margin: 0 auto; padding: 72px 64px; }
+.section { margin-bottom: 80px; }
+.section-label { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: var(--concrete); margin-bottom: 6px; }
+.section-title { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 400; margin-bottom: 10px; letter-spacing: -0.01em; }
+.section-title em { font-style: italic; color: var(--corten); }
+.section-desc { font-size: 13.5px; color: var(--ink-soft); line-height: 1.75; margin-bottom: 32px; max-width: 820px; }
+
+/* INFRA CARDS */
+.infra-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; margin-bottom: 8px; }
+.infra-card { background: white; border: 1px solid var(--linen-dark); border-top: 4px solid var(--concrete); padding: 24px 20px; }
+.infra-card.sev-high { border-top-color: #c0392b; }
+.infra-card.sev-mid { border-top-color: var(--amber); }
+.infra-card.sev-low { border-top-color: var(--green); }
+.infra-sev { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 12px; }
+.infra-sev-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.sev-high .infra-sev-dot { background: #c0392b; }
+.sev-mid .infra-sev-dot { background: var(--amber); }
+.sev-low .infra-sev-dot { background: var(--green); }
+.infra-sev-label { font-family: 'DM Mono', monospace; font-size: 8.5px; letter-spacing: 0.15em; color: var(--concrete); }
+.infra-name { font-weight: 700; font-size: 14px; margin-bottom: 8px; color: var(--ink); }
+.infra-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.65; margin-bottom: 12px; }
+.infra-impact { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--corten); }
+.sev-low .infra-impact { color: var(--green); }
+.sev-mid .infra-impact { color: var(--amber); }
+
+/* FINANCIAL TABLE */
+.fin-impact-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+.fin-impact-table th { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.12em; color: var(--concrete); text-align: left; padding: 10px 16px; border-bottom: 2px solid var(--linen-dark); }
+.fin-impact-table td { padding: 12px 16px; font-size: 13px; border-bottom: 1px solid var(--linen-dark); vertical-align: top; }
+.fin-impact-table tr:last-child td { border-bottom: none; }
+.fin-impact-table .row-label { font-weight: 600; color: var(--ink); }
+.fin-impact-table .amt { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; }
+.amt-high { color: #c0392b; }
+.amt-mid { color: var(--amber); }
+.amt-zero { color: var(--green); }
+.amt-total { color: var(--corten); font-size: 22px; }
+.total-row td { background: var(--corten-pale); font-weight: 700; border-top: 2px solid var(--corten); }
+.note-cell { font-size: 11.5px; color: var(--ink-soft); }
+
+/* PACHT BANNER */
+.pacht-banner {
+  background: var(--film); color: white;
+  padding: 28px 36px; margin-bottom: 60px;
+  display: flex; align-items: center; gap: 28px;
+}
+.pb-icon { font-size: 32px; flex-shrink: 0; }
+.pb-text { font-size: 13.5px; line-height: 1.7; color: rgba(255,255,255,0.75); }
+.pb-text strong { color: white; }
+
+/* VARIANTS */
+.variants-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-bottom: 48px; }
+.variant-card { padding: 36px 32px; }
+.variant-a { background: var(--city-pale); border: 2px solid var(--city); }
+.variant-b { background: var(--corten-pale); border: 2px solid var(--corten); }
+.variant-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; margin-bottom: 6px; }
+.variant-a .variant-label { color: var(--city); }
+.variant-b .variant-label { color: var(--corten); }
+.variant-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; margin-bottom: 12px; }
+.variant-a .variant-title { color: var(--city); }
+.variant-b .variant-title { color: var(--corten-dark); }
+.variant-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.7; margin-bottom: 20px; }
+.variant-steps { display: flex; flex-direction: column; gap: 8px; }
+.vstep { display: flex; align-items: flex-start; gap: 12px; font-size: 12.5px; color: var(--ink-soft); line-height: 1.5; }
+.vstep-num { font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 600; min-width: 20px; margin-top: 1px; }
+.variant-a .vstep-num { color: var(--city); }
+.variant-b .vstep-num { color: var(--corten); }
+.variant-cost { margin-top: 20px; padding: 14px 16px; }
+.variant-a .variant-cost { background: rgba(26,53,102,0.07); }
+.variant-b .variant-cost { background: rgba(181,97,26,0.08); }
+.vc-label { font-family: 'DM Mono', monospace; font-size: 8.5px; letter-spacing: 0.12em; color: var(--concrete); margin-bottom: 4px; }
+.vc-val { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; }
+.variant-a .vc-val { color: var(--city); }
+.variant-b .vc-val { color: var(--corten); }
+
+/* ARCADE SECTION */
+.arcade-section { background: var(--ink); padding: 64px; margin: 0 -64px 80px; }
+.arcade-inner { max-width: 1300px; margin: 0 auto; }
+.arcade-label { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: rgba(255,255,255,0.4); margin-bottom: 8px; }
+.arcade-title { font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 300; color: white; line-height: 1.1; margin-bottom: 12px; }
+.arcade-title em { font-style: italic; color: #fca97a; }
+.arcade-desc { font-size: 13.5px; color: rgba(255,255,255,0.65); line-height: 1.8; max-width: 760px; margin-bottom: 40px; }
+.arcade-images { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3px; margin-bottom: 32px; }
+.arcade-img-wrap { position: relative; overflow: hidden; }
+.arcade-img-wrap img { width: 100%; height: 260px; object-fit: cover; display: block; filter: brightness(0.85); transition: filter 0.3s; }
+.arcade-img-wrap:hover img { filter: brightness(1); }
+.arcade-img-caption { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.75)); padding: 16px 14px 12px; }
+.aic-title { font-weight: 600; font-size: 12px; color: white; }
+.aic-sub { font-family: 'DM Mono', monospace; font-size: 9px; color: rgba(255,255,255,0.6); margin-top: 2px; }
+.arcade-specs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
+.aspec { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); padding: 20px 18px; }
+.aspec-val { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: #fca97a; margin-bottom: 4px; }
+.aspec-label { font-family: 'DM Mono', monospace; font-size: 8.5px; letter-spacing: 0.12em; color: rgba(255,255,255,0.4); }
+.aspec-note { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 3px; }
+
+/* ARCADE CONCEPT SVG */
+.arcade-diagram { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 32px; margin-bottom: 32px; }
+.arcade-diagram-title { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: rgba(255,255,255,0.35); margin-bottom: 20px; }
+
+/* REFERENCES */
+.ref-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-top: 32px; }
+.ref-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); padding: 20px 18px; }
+.ref-name { font-weight: 600; font-size: 13px; color: white; margin-bottom: 3px; }
+.ref-loc { font-family: 'DM Mono', monospace; font-size: 8.5px; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); margin-bottom: 8px; }
+.ref-desc { font-size: 11.5px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+/* FAZE0 TIMELINE */
+.faze0-timeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin: 32px 0; }
+.f0t-item { position: relative; padding: 20px 16px 20px 0; }
+.f0t-item::after { content: '→'; position: absolute; right: -8px; top: 50%; transform: translateY(-50%); color: var(--concrete); font-size: 18px; z-index: 1; }
+.f0t-item:last-child::after { display: none; }
+.f0t-phase { font-family: 'DM Mono', monospace; font-size: 8.5px; letter-spacing: 0.12em; margin-bottom: 6px; }
+.f0t-label { font-weight: 600; font-size: 13px; margin-bottom: 4px; }
+.f0t-dur { font-size: 11px; color: var(--concrete); margin-bottom: 6px; }
+.f0t-cost { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; }
+.f0t-prep .f0t-phase { color: #c0392b; }
+.f0t-prep .f0t-cost { color: #c0392b; }
+.f0t-prep { background: rgba(192,57,43,0.06); border: 1px solid rgba(192,57,43,0.15); padding: 16px; }
+.f0t-f1 .f0t-phase { color: var(--green); }
+.f0t-f1 .f0t-cost { color: var(--green); }
+.f0t-f2 .f0t-phase { color: var(--amber); }
+.f0t-f2 .f0t-cost { color: var(--amber); }
+.f0t-f3 .f0t-phase { color: #7fa8c4; }
+.f0t-f3 .f0t-cost { color: #7fa8c4; }
+.f0t-note { font-size: 10.5px; color: var(--concrete); font-style: italic; }
+
+/* DECISION CTA */
+.decision-section { background: var(--ink); padding: 56px 64px; margin: 0 -64px; }
+.decision-inner { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; }
+.dec-title { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; color: white; margin-bottom: 10px; }
+.dec-title em { font-style: italic; color: #fca97a; }
+.dec-desc { font-size: 13.5px; color: rgba(255,255,255,0.6); line-height: 1.7; max-width: 680px; }
+.dec-buttons { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
+.dec-btn { display: block; padding: 14px 24px; font-size: 12.5px; font-weight: 600; text-decoration: none; text-align: center; white-space: nowrap; transition: all 0.2s; }
+.dec-btn-a { background: var(--city); color: white; }
+.dec-btn-a:hover { background: #2550a0; }
+.dec-btn-b { background: var(--corten); color: white; }
+.dec-btn-b:hover { background: var(--corten-dark); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-brand" href="index.html">AREÁL ZA ZASTÁVKOU · PLÁN ZEFEKTIVNĚNÍ</a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Přehled</a>
+    <a class="nav-link" href="strategie.html">Strategie města</a>
+    <a class="nav-link" href="faze1.html">Fáze 1 – HUB</a>
+    <a class="nav-link" href="faze2.html">Fáze 2 – Kampus</a>
+    <a class="nav-link" href="faze3.html">Fáze 3 – Film</a>
+    <a class="nav-link" href="analyza.html">Analýza &amp; Finance</a>
+    <a class="nav-link active" href="realita.html">Reality Check</a>
+    <a class="nav-link" href="dokumenty.html">Dokumenty</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">REALITY CHECK · PŘEDPOKLADY REALIZACE</div>
+      <h1 class="hero-title">Co je třeba vyřešit<br><em>než začneme stavět</em></h1>
+      <p class="hero-desc">Představený koncept tří fází je architektonicky i ekonomicky životaschopný. Existují však infrastrukturní předpoklady, které plánované pořadí výstavby komplikují. Tato stránka je pojmenovává otevřeně — a nabízí dvě cesty, jak s nimi naložit.</p>
+      <div class="hero-note">
+        <p class="hero-note-text"><strong>Finanční modely fází 1–3 předpokládají, že infrastruktura je vyřešena.</strong> Níže uvedené náklady jsou nad rámec těchto modelů a vyžadují samostatné rozhodnutí.</p>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hs-item">
+        <div class="hs-val">6–10 mil.</div>
+        <div class="hs-label">KANALIZACE · CELKOVÝ DOPAD</div>
+        <div class="hs-note">stavba + výpadek příjmu</div>
+      </div>
+      <div class="hs-item">
+        <div class="hs-val">~0 Kč</div>
+        <div class="hs-label">STL PLYNOVOD</div>
+        <div class="hs-note">souhlas distributora, přeložka zbytná</div>
+      </div>
+      <div class="hs-item">
+        <div class="hs-val">~0 Kč</div>
+        <div class="hs-label">KOLEKTORY</div>
+        <div class="hs-note">koordinační vyjádření, bez nákladů</div>
+      </div>
+      <div class="hs-item">
+        <div class="hs-val">prověřit</div>
+        <div class="hs-label">ELEKTRO A VODA</div>
+        <div class="hs-note">situace lepší, ale neúplná</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- INFRA CHALLENGES -->
+  <div class="section">
+    <div class="section-label">INFRASTRUKTURA</div>
+    <h2 class="section-title">Čtyři <em>sítě, čtyři různé úrovně</em> komplikace</h2>
+    <p class="section-desc">Infrastruktura areálu je plně funkční v zadní části, kde jsou současné budovy a kde je plánována Fáze 3. V přední a střední části — kde jsou plánovány Fáze 1 a 2 — situace není kompletní.</p>
+    <div class="infra-grid">
+
+      <div class="infra-card sev-high">
+        <div class="infra-sev">
+          <div class="infra-sev-dot"></div>
+          <div class="infra-sev-label">HLAVNÍ PROBLÉM</div>
+        </div>
+        <div class="infra-name">Kanalizace</div>
+        <p class="infra-desc">Splašková kanalizace existuje pouze v zadní části areálu (budoucí F3). Do přední a střední části (F1, F2) zavedena není. Pro kancelářský a kreativní provoz F2 je kanalizace nezbytná.</p>
+        <div class="infra-impact">Stavba 300 m: 4–6 mil. Kč · výpadek příjmu: 2–4 mil. Kč</div>
+      </div>
+
+      <div class="infra-card sev-mid">
+        <div class="infra-sev">
+          <div class="infra-sev-dot"></div>
+          <div class="infra-sev-label">PROCESNÍ ZÁLEŽITOST</div>
+        </div>
+        <div class="infra-name">STL plynovod</div>
+        <p class="infra-desc">Po jedné straně ulice vede středotlaký plynovod (do 4 bar). Ochranné pásmo STL je pouze 1 m. Přeložení není nutné — stavba v pásmu je možná se souhlasem distributora (Pražská plynárenská Distribuce), který se standardně uděluje pro otevřené konstrukce.</p>
+        <div class="infra-impact">Přeložení zbytné · souhlas distributora: administrativní</div>
+      </div>
+
+      <div class="infra-card sev-low">
+        <div class="infra-sev">
+          <div class="infra-sev-dot"></div>
+          <div class="infra-sev-label">ŘEŠITELNÉ</div>
+        </div>
+        <div class="infra-name">Kolektory</div>
+        <p class="infra-desc">Pod povrchem vedou technické kolektory. Stavba nad nimi je možná za podmínek Kolektory Praha, a.s. — povinné je koordinační vyjádření a statický posudek, pilíře se umísťují mimo prostor kolektoru a šachty musí zůstat přístupné.</p>
+        <div class="infra-impact">Náklady minimální · koordinace standardní proces</div>
+      </div>
+
+      <div class="infra-card sev-mid">
+        <div class="infra-sev">
+          <div class="infra-sev-dot"></div>
+          <div class="infra-sev-label">PROVĚŘIT</div>
+        </div>
+        <div class="infra-name">Elektro a voda</div>
+        <p class="infra-desc">Situace s rozvody elektřiny a vody je lepší než u kanalizace, ale také neúplná. Přípojky pro elektroměrové rozvaděče jsou součástí povinných oprav (Fáze 1, pol. #7). Rozsah rozvodů vody v přední části je třeba upřesnit projektantem.</p>
+        <div class="infra-impact">Přesný rozsah a náklady k upřesnění</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FINANCIAL IMPACT -->
+  <div class="section">
+    <div class="section-label">FINANČNÍ DOPAD</div>
+    <h2 class="section-title">Infrastruktura <em>není v rozpočtu fází</em></h2>
+    <p class="section-desc">Finanční modely Fáze 1 (14–20 mil. Kč) a Fáze 2 (45–70 mil. Kč) počítají s tím, že infrastruktura je připravena. Vyřešení kanalizace pro přední část areálu tvoří samostatný nákladový blok:</p>
+
+    <table class="fin-impact-table">
+      <thead>
+        <tr>
+          <th>Položka</th>
+          <th>Stavba</th>
+          <th>Výpadek příjmu</th>
+          <th>Celkem</th>
+          <th>Poznámka</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="row-label">Kanalizace 300 m</td>
+          <td><span class="amt amt-high">4–6 mil. Kč</span></td>
+          <td><span class="amt amt-high">2–4 mil. Kč</span></td>
+          <td><span class="amt amt-high">6–10 mil. Kč</span></td>
+          <td class="note-cell">Výkop přes aktivní nájmy, 2–4 měs. omezený provoz</td>
+        </tr>
+        <tr>
+          <td class="row-label">STL plynovod</td>
+          <td><span class="amt amt-zero">0 Kč</span></td>
+          <td><span class="amt amt-zero">0 Kč</span></td>
+          <td><span class="amt amt-zero">0 Kč</span></td>
+          <td class="note-cell">Souhlas distributora, přeložka zbytná</td>
+        </tr>
+        <tr>
+          <td class="row-label">Kolektory</td>
+          <td><span class="amt amt-zero">~0 Kč</span></td>
+          <td><span class="amt amt-zero">~0 Kč</span></td>
+          <td><span class="amt amt-zero">~0 Kč</span></td>
+          <td class="note-cell">Koordinační vyjádření, statický posudek</td>
+        </tr>
+        <tr>
+          <td class="row-label">Elektro a voda</td>
+          <td><span class="amt amt-mid">k upřesnění</span></td>
+          <td><span class="amt amt-mid">minimální</span></td>
+          <td><span class="amt amt-mid">k upřesnění</span></td>
+          <td class="note-cell">Závisí na stávajícím stavu přípojek</td>
+        </tr>
+        <tr class="total-row">
+          <td class="row-label">CELKEM (bez elektra a vody)</td>
+          <td></td>
+          <td></td>
+          <td><span class="amt amt-total">6–10 mil. Kč</span></td>
+          <td class="note-cell">Navíc nad rámec investic F1 a F2</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PACHT BANNER -->
+  <div class="pacht-banner">
+    <div class="pb-icon">📋</div>
+    <div class="pb-text">
+      <strong>Současný pacht toto financovat neumožňuje.</strong> Investiční limit pachtu je 20 mil. Kč celkem (obec max. 10 mil. Kč). Přidání 6–10 mil. Kč za infrastrukturu by vyčerpalo velkou část limitu ještě před realizací F1. Vyřešení kanalizace před zahájením F1 nebo F2 vyžaduje buď <strong>změnu podmínek pachtu</strong>, nebo <strong>změnu pořadí výstavby</strong>.
+    </div>
+  </div>
+
+  <!-- TWO VARIANTS -->
+  <div class="section">
+    <div class="section-label">DVĚ CESTY VPŘED</div>
+    <h2 class="section-title">Jak <em>infrastrukturní realitu</em> řešit</h2>
+    <p class="section-desc">Koncept tří fází zůstává v platnosti jako vize. Infrastrukturní omezení nevyvrací smysl projektu — ale vyžaduje rozhodnutí o pořadí kroků.</p>
+
+    <div class="variants-grid">
+      <div class="variant-card variant-a">
+        <div class="variant-label">VARIANTA A · ZACHOVAT POŘADÍ FÁZÍ</div>
+        <div class="variant-title">Přípravná fáze před F1</div>
+        <p class="variant-desc">Stávající koncept (F1 → F2 → F3) se zachovává beze změny. Před zahájením Fáze 1 se vyřeší infrastruktura jako samostatná přípravná etapa. To vyžaduje otevření otázky rozsahu a podmínek pachtu.</p>
+        <div class="variant-steps">
+          <div class="vstep"><span class="vstep-num">01</span><span>Shodneme se na celkové vizi tří fází</span></div>
+          <div class="vstep"><span class="vstep-num">02</span><span>Jednáme o změně pachtu — prodloužení a navýšení investičního rámce pro infrastrukturu</span></div>
+          <div class="vstep"><span class="vstep-num">03</span><span>Přípravná fáze: kanalizace, elektro, voda (8–14 měsíců)</span></div>
+          <div class="vstep"><span class="vstep-num">04</span><span>Fáze 1, 2, 3 probíhají dle původního plánu</span></div>
+        </div>
+        <div class="variant-cost">
+          <div class="vc-label">DODATEČNÁ INVESTICE MIMO FÁZE</div>
+          <div class="vc-val">8–12 mil. Kč</div>
+        </div>
+      </div>
+
+      <div class="variant-card variant-b">
+        <div class="variant-label">VARIANTA B · ZMĚNA POŘADÍ VÝSTAVBY</div>
+        <div class="variant-title">Výstavba od zadní části areálu</div>
+        <p class="variant-desc">Pořadí výstavby se obrátí — začínáme tam, kde infrastruktura existuje. Každá fáze řeší rozvody pro svou část areálu postupně. Umožňuje rychlejší start bez nutnosti změny pachtu, ale vyžaduje přepracování konceptu fází.</p>
+        <div class="variant-steps">
+          <div class="vstep"><span class="vstep-num">01</span><span>Start v zadní části (kanalizace existuje) — první provozní příjem bez čekání na infrastrukturu</span></div>
+          <div class="vstep"><span class="vstep-num">02</span><span>Každá fáze nese náklady na prodloužení sítí o svůj úsek směrem ke vjezdu</span></div>
+          <div class="vstep"><span class="vstep-num">03</span><span>Vize filmového studia (F3) se přesouvá nebo nachází prostor jinde v areálu</span></div>
+          <div class="vstep"><span class="vstep-num">04</span><span>Jednou z možností je postupná zastřešená arkáda — viz níže</span></div>
+        </div>
+        <div class="variant-cost">
+          <div class="vc-label">FINANČNÍ MODEL</div>
+          <div class="vc-val">k dopracování</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VARIANT A TIMELINE -->
+    <div class="section-label" style="margin-bottom:12px;">VARIANTA A · CELKOVÁ ČASOVÁ OSA VČETNĚ PŘÍPRAVNÉ FÁZE</div>
+    <div class="faze0-timeline">
+      <div class="f0t-item f0t-prep">
+        <div class="f0t-phase">FÁZE 0 · 2025–2026</div>
+        <div class="f0t-label">Infrastruktura</div>
+        <div class="f0t-dur">8–14 měsíců</div>
+        <div class="f0t-cost">8–12 mil. Kč</div>
+        <div class="f0t-note">mimo F1–F3 modely</div>
+      </div>
+      <div class="f0t-item f0t-f1">
+        <div class="f0t-phase">FÁZE 1 · 2026–2027</div>
+        <div class="f0t-label">Řemeslný HUB</div>
+        <div class="f0t-dur">průběžně</div>
+        <div class="f0t-cost">14–20 mil. Kč</div>
+        <div class="f0t-note">dle původního modelu</div>
+      </div>
+      <div class="f0t-item f0t-f2">
+        <div class="f0t-phase">FÁZE 2 · 2028–2033</div>
+        <div class="f0t-label">Smart Kampus</div>
+        <div class="f0t-dur">průběžně</div>
+        <div class="f0t-cost">45–70 mil. Kč</div>
+        <div class="f0t-note">dle původního modelu</div>
+      </div>
+      <div class="f0t-item f0t-f3">
+        <div class="f0t-phase">FÁZE 3 · 2033+</div>
+        <div class="f0t-label">Filmový Park</div>
+        <div class="f0t-dur">průběžně</div>
+        <div class="f0t-cost">350+ mil. Kč</div>
+        <div class="f0t-note">dle původního modelu</div>
+      </div>
+      <div class="f0t-item">
+        <div class="f0t-phase">CELKEM</div>
+        <div class="f0t-label">Vč. infrastruktury</div>
+        <div class="f0t-dur">&nbsp;</div>
+        <div class="f0t-cost" style="color:var(--ink);">430+ mil. Kč</div>
+        <div class="f0t-note">infrastruktura z jiných zdrojů než pacht</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ARCADE SECTION -->
+<div class="arcade-section">
+  <div class="arcade-inner">
+    <div class="arcade-label">VARIANTA B · KONKRÉTNÍ MOŽNOST</div>
+    <h2 class="arcade-title">Zastřešená <em>arkáda od zadní části</em> areálu</h2>
+    <p class="arcade-desc">Alternativní návrh z pracovní schůzky: jedna souvislá ocelová konstrukce (zastřešená, na pilířích, bez stěn) táhnoucí se po celé délce jedné strany ulice ve výšce 7 m. Pod střechou modulární objekty přesně dle potřeb nájemníků. Start v zadní části kde je kanalizace, postupné rozšiřování směrem ke vjezdu v dalších letech.</p>
+
+    <div class="arcade-images">
+      <div class="arcade-img-wrap">
+        <img src="images/f2/Box-Park- 2.jpg" alt="BoxPark — modulární kontejnerové jednotky">
+        <div class="arcade-img-caption">
+          <div class="aic-title">BoxPark — modulární jednotky pod otevřenou konstrukcí</div>
+          <div class="aic-sub">SHOREDITCH · LONDÝN</div>
+        </div>
+      </div>
+      <div class="arcade-img-wrap">
+        <img src="images/f2/Box-Park-Qatar.jpg" alt="BoxPark Qatar — zastřešená promenáda">
+        <div class="arcade-img-caption">
+          <div class="aic-title">Zastřešená promenáda s modulárními objekty</div>
+          <div class="aic-sub">KATAR · ORYX STADIUM AREA</div>
+        </div>
+      </div>
+      <div class="arcade-img-wrap">
+        <img src="images/f2/torronto market.jpg" alt="Toronto Market — krytá tržnice na pilířích">
+        <div class="arcade-img-caption">
+          <div class="aic-title">Krytá tržnice — pilíře, otevřené boky, modulární obsah</div>
+          <div class="aic-sub">TORONTO · ST. LAWRENCE MARKET</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="arcade-specs">
+      <div class="aspec">
+        <div class="aspec-val">7 m</div>
+        <div class="aspec-label">VÝŠKA NOSNÉ KONSTRUKCE</div>
+        <div class="aspec-note">Pilíře bez stěn — otevřená ze všech stran</div>
+      </div>
+      <div class="aspec">
+        <div class="aspec-val">50–100 m</div>
+        <div class="aspec-label">DÉLKA PRVNÍ ETAPY</div>
+        <div class="aspec-note">Dle rozpočtu, pak rozšiřovat</div>
+      </div>
+      <div class="aspec">
+        <div class="aspec-val">zadní část</div>
+        <div class="aspec-label">START VÝSTAVBY</div>
+        <div class="aspec-note">Kanalizace existuje, okamžitý provoz</div>
+      </div>
+      <div class="aspec">
+        <div class="aspec-val">modulární</div>
+        <div class="aspec-label">TYP OBJEKTŮ</div>
+        <div class="aspec-note">Přemístitelné dle nájemníků</div>
+      </div>
+    </div>
+
+    <div class="ref-list" style="margin-top: 32px;">
+      <div class="ref-item">
+        <div class="ref-name">BoxPark Shoreditch</div>
+        <div class="ref-loc">LONDÝN · UK</div>
+        <div class="ref-desc">Pionýrský projekt z roku 2011 — 60 kontejnerů v dvoupodlažní sestavě jako open-air mall pro nezávislé značky. Modulární, přemístitelné, s minimální stavební přípravou.</div>
+      </div>
+      <div class="ref-item">
+        <div class="ref-name">Reffen Street Food</div>
+        <div class="ref-loc">KOPENHAGEN · DÁNSKO</div>
+        <div class="ref-desc">Největší street food market v severní Evropě — 12 000 m² v areálu bývalých loděnic B&amp;W. Modulární stánky, otevřená architektura, industriální estetika. Sezónní provoz ukazuje, že velký provoz jde bez pevné infrastruktury.</div>
+      </div>
+      <div class="ref-item">
+        <div class="ref-name">Pop Brixton</div>
+        <div class="ref-loc">BRIXTON · LONDÝN</div>
+        <div class="ref-desc">50+ kontejnerů jako kreativní hub pro místní podnikatele — kavárny, dílny, studio, rádiová stanice. Carl Turner Architects, 2015. Příklad toho, že pod jednotnou střechou může existovat pestrý mix nájemníků.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="decision-section">
+    <div class="decision-inner">
+      <div>
+        <h2 class="dec-title">Klíčové rozhodnutí:<br><em>domluvit se na vizi</em></h2>
+        <p class="dec-desc">Infrastrukturní realita nevyvrací hodnotu projektu — zvyšuje cenu vstupu a vyžaduje jasnou dohodu o směru. Bez ní nelze smysluplně plánovat další kroky. Obě varianty jsou realizovatelné, každá s jiným předpokladem.</p>
+      </div>
+      <div class="dec-buttons">
+        <a class="dec-btn dec-btn-a" href="faze1.html">Varianta A — zobrazit Fázi 1 →</a>
+        <a class="dec-btn dec-btn-b" href="analyza.html">Zpět na Analýzu &amp; Finance →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
