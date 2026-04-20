@@ -203,6 +203,59 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 .dec-btn-a:hover { background: #2550a0; }
 .dec-btn-b { background: var(--corten); color: white; }
 .dec-btn-b:hover { background: var(--corten-dark); }
+
+/* ===========================================
+   RESPONSIVE — mobile & tablet
+   900px = tablet  |  640px = mobile
+=========================================== */
+
+@media (max-width: 900px) {
+  /* Nav: 2 rows — brand top, scrollable links below */
+  .nav { padding: 8px 16px; height: auto; flex-wrap: wrap; }
+  .nav-brand { font-size: 8px; letter-spacing: 0.12em; width: 100%; padding: 4px 0 6px; }
+  .nav-links { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 8px; flex-wrap: nowrap; }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-link { font-size: 10px; padding: 5px 10px; white-space: nowrap; }
+
+  /* Common layouts */
+  .main { padding: 40px 24px; }
+  .two-col { grid-template-columns: 1fr !important; gap: 24px !important; }
+  .three-col { grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
+  .section-title { font-size: 26px !important; }
+  .section-desc { font-size: 13px; }
+}
+
+@media (max-width: 640px) {
+  .main { padding: 28px 16px; }
+  .three-col { grid-template-columns: 1fr !important; }
+  .section-title { font-size: 22px !important; }
+}
+
+@media (max-width: 900px) {
+  .hero { padding: 40px 24px 36px !important; }
+  .hero-inner { grid-template-columns: 1fr; gap: 24px; }
+  .hero-title { font-size: 34px !important; }
+  .hero-stats { grid-template-columns: 1fr 1fr; }
+  .infra-grid { grid-template-columns: 1fr 1fr !important; }
+  .variants-grid { grid-template-columns: 1fr; }
+  .variant-card { padding: 28px 20px; }
+  .arcade-section { padding: 40px 24px !important; margin: 0 0 48px !important; }
+  .arcade-images { grid-template-columns: 1fr 1fr !important; }
+  .arcade-specs { grid-template-columns: 1fr 1fr !important; }
+  .fin-impact-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .f0-timeline { grid-template-columns: 1fr 1fr !important; }
+  .dec-buttons { flex-direction: column; }
+}
+@media (max-width: 640px) {
+  .hero-title { font-size: 26px !important; }
+  .infra-grid { grid-template-columns: 1fr !important; }
+  .hero-stats { grid-template-columns: 1fr; }
+  .arcade-images { grid-template-columns: 1fr !important; }
+  .arcade-specs { grid-template-columns: 1fr 1fr !important; }
+  .hero { padding: 28px 16px !important; }
+  .f0-timeline { grid-template-columns: 1fr !important; }
+}
+
 </style>
 </head>
 <body>

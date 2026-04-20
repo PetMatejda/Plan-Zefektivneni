@@ -124,6 +124,44 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 .footer { background: var(--ink); padding: 28px 64px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); }
 .footer-brand { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--concrete); letter-spacing: 0.15em; }
 .footer-copy { font-size: 10.5px; color: rgba(255,255,255,0.2); }
+
+/* ===========================================
+   RESPONSIVE — mobile & tablet
+   900px = tablet  |  640px = mobile
+=========================================== */
+
+@media (max-width: 900px) {
+  /* Nav: 2 rows — brand top, scrollable links below */
+  .nav { padding: 8px 16px; height: auto; flex-wrap: wrap; }
+  .nav-brand { font-size: 8px; letter-spacing: 0.12em; width: 100%; padding: 4px 0 6px; }
+  .nav-links { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 8px; flex-wrap: nowrap; }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-link { font-size: 10px; padding: 5px 10px; white-space: nowrap; }
+
+  /* Common layouts */
+  .main { padding: 40px 24px; }
+  .two-col { grid-template-columns: 1fr !important; gap: 24px !important; }
+  .three-col { grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
+  .section-title { font-size: 26px !important; }
+  .section-desc { font-size: 13px; }
+}
+
+@media (max-width: 640px) {
+  .main { padding: 28px 16px; }
+  .three-col { grid-template-columns: 1fr !important; }
+  .section-title { font-size: 22px !important; }
+}
+
+@media (max-width: 900px) {
+  .page-hero { padding: 32px 24px; }
+  .ph-title { font-size: 30px !important; }
+  .viewer-section { padding: 0 24px 48px; }
+  .footer { padding: 20px 16px; flex-direction: column; gap: 12px; text-align: center; }
+}
+@media (max-width: 640px) {
+  .page-hero { padding: 24px 16px; }
+}
+
 </style>
 </head>
 <body>

@@ -316,6 +316,64 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
   .discussion-section { grid-template-columns: 1fr; }
   .hero-content { padding: 0 32px 48px; }
 }
+
+/* ===========================================
+   RESPONSIVE — mobile & tablet
+   900px = tablet  |  640px = mobile
+=========================================== */
+
+@media (max-width: 900px) {
+  /* Nav: 2 rows — brand top, scrollable links below */
+  .nav { padding: 8px 16px; height: auto; flex-wrap: wrap; }
+  .nav-brand { font-size: 8px; letter-spacing: 0.12em; width: 100%; padding: 4px 0 6px; }
+  .nav-links { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 8px; flex-wrap: nowrap; }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-link { font-size: 10px; padding: 5px 10px; white-space: nowrap; }
+
+  /* Common layouts */
+  .main { padding: 40px 24px; }
+  .two-col { grid-template-columns: 1fr !important; gap: 24px !important; }
+  .three-col { grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
+  .section-title { font-size: 26px !important; }
+  .section-desc { font-size: 13px; }
+}
+
+@media (max-width: 640px) {
+  .main { padding: 28px 16px; }
+  .three-col { grid-template-columns: 1fr !important; }
+  .section-title { font-size: 22px !important; }
+}
+
+@media (max-width: 900px) {
+  .hero { height: auto; min-height: 65vh; }
+  .hero-content { padding: 0 24px 48px; }
+  .hero-title { font-size: clamp(30px, 7vw, 52px) !important; }
+  .hero-stats { flex-wrap: wrap; gap: 2px; }
+  .hero-stat { flex: 1 1 calc(50% - 2px); min-width: 130px; }
+  .section-intro { grid-template-columns: 1fr; padding: 40px 24px 24px; gap: 20px; }
+  .section-intro-right { border-left: none; border-top: 3px solid var(--amber); padding-left: 0; padding-top: 16px; }
+  .phases-section { padding: 0 24px 48px; }
+  .phases-grid { grid-template-columns: 1fr; }
+  .phase-card { min-height: 380px; }
+  .container-strip { margin: 0 0 48px; }
+  .cs-inner { grid-template-columns: 1fr; }
+  .cs-left { border-right: none; padding: 28px 20px; }
+  .cs-right { grid-template-columns: 1fr 1fr; border-top: 1px solid rgba(255,255,255,0.12); }
+  .cs-phase { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px; }
+  .timeline-section { padding: 0 24px 48px; }
+  .timeline-track { grid-template-columns: 1fr; gap: 16px; }
+  .timeline-track::before { display: none; }
+  .discussion-section { margin: 0 0 48px; padding: 36px 24px; grid-template-columns: 1fr; gap: 24px; }
+  .footer { padding: 24px 16px; flex-direction: column; gap: 16px; text-align: center; }
+  .footer-links { flex-wrap: wrap; justify-content: center; gap: 12px; }
+}
+@media (max-width: 640px) {
+  .hero-content { padding: 0 16px 36px; }
+  .hero-stat { flex: 1 1 100%; }
+  .cs-right { grid-template-columns: 1fr; }
+  .phase-card { min-height: 320px; }
+}
+
 </style>
 </head>
 <body>
