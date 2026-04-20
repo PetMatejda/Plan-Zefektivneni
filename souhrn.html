@@ -299,6 +299,9 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 }
 
 /* RESPONSIVE */
+.nav-toggle { display: none; }
+.nav-hamburger { display: none; }
+
 @media (max-width: 1100px) {
   .hero-facts { grid-template-columns: repeat(3, 1fr); }
   .phase-row, .phase-row-head { grid-template-columns: 160px 1fr 1fr 1fr; }
@@ -309,8 +312,29 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
   .ss-inner { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
-  .nav { padding: 0 20px; }
-  .nav-links { display: none; }
+  /* ── HAMBURGER MENU ── */
+  .nav { padding: 0 16px; height: auto; }
+  .nav-brand { flex: 1; font-size: 9px; letter-spacing: 0.12em; padding: 14px 0; }
+  .nav-hamburger {
+    display: flex; flex-direction: column; justify-content: center; gap: 5px;
+    padding: 14px 4px; cursor: pointer; flex-shrink: 0;
+  }
+  .nav-hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: rgba(255,255,255,0.75);
+    transition: transform 0.25s, opacity 0.25s;
+    transform-origin: center;
+  }
+  .nav-toggle:checked ~ .nav-hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle:checked ~ .nav-hamburger span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-toggle:checked ~ .nav-hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-links {
+    display: none; width: 100%; flex-direction: column;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 6px 0 10px;
+  }
+  .nav-toggle:checked ~ .nav-links { display: flex; }
+  .nav-link { font-size: 13px; padding: 10px 20px; white-space: normal; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.05); }
   .hero, .section, .divider, .decision-strip, .strategy-strip, .conclusion { padding-left: 24px; padding-right: 24px; }
   .why-now { padding: 36px 24px; }
   .wn-inner { grid-template-columns: 1fr; }
@@ -330,7 +354,9 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 <body>
 
 <nav class="nav">
+  <input type="checkbox" id="nav-toggle" class="nav-toggle">
   <a class="nav-brand" href="index.html">AREÁL ZA ZASTÁVKOU · PLÁN ZEFEKTIVNĚNÍ</a>
+  <label for="nav-toggle" class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></label>
   <div class="nav-links">
     <a class="nav-link" href="index.html">Přehled</a>
     <a class="nav-link" href="strategie.html">Strategie města</a>

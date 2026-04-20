@@ -317,18 +317,38 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
   .hero-content { padding: 0 32px 48px; }
 }
 
+.nav-toggle { display: none; }
+.nav-hamburger { display: none; }
+
 /* ===========================================
    RESPONSIVE — mobile & tablet
    900px = tablet  |  640px = mobile
 =========================================== */
 
 @media (max-width: 900px) {
-  /* Nav: 2 rows — brand top, scrollable links below */
-  .nav { padding: 8px 16px; height: auto; flex-wrap: wrap; }
-  .nav-brand { font-size: 8px; letter-spacing: 0.12em; width: 100%; padding: 4px 0 6px; }
-  .nav-links { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 8px; flex-wrap: nowrap; }
-  .nav-links::-webkit-scrollbar { display: none; }
-  .nav-link { font-size: 10px; padding: 5px 10px; white-space: nowrap; }
+  /* ── HAMBURGER MENU ── */
+  .nav { padding: 0 16px; height: auto; }
+  .nav-brand { flex: 1; font-size: 9px; letter-spacing: 0.12em; padding: 14px 0; }
+  .nav-hamburger {
+    display: flex; flex-direction: column; justify-content: center; gap: 5px;
+    padding: 14px 4px; cursor: pointer; flex-shrink: 0;
+  }
+  .nav-hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: rgba(255,255,255,0.75);
+    transition: transform 0.25s, opacity 0.25s;
+    transform-origin: center;
+  }
+  .nav-toggle:checked ~ .nav-hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle:checked ~ .nav-hamburger span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-toggle:checked ~ .nav-hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-links {
+    display: none; width: 100%; flex-direction: column;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 6px 0 10px;
+  }
+  .nav-toggle:checked ~ .nav-links { display: flex; }
+  .nav-link { font-size: 13px; padding: 10px 20px; white-space: normal; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.05); }
 
   /* Common layouts */
   .main { padding: 40px 24px; }
@@ -374,13 +394,28 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
   .phase-card { min-height: 320px; }
 }
 
+
+@media (max-width: 900px) {
+  /* WHY NOT STANDARD section */
+  #why-not-section { margin: 0 0 3px !important; padding: 36px 24px !important; }
+  #why-not-grid { grid-template-columns: 1fr !important; }
+  #why-not-grid > :nth-child(1) { padding-right: 0 !important; }
+  #why-not-grid > :nth-child(2) { display: none !important; } /* vertical divider */
+  #why-not-grid > :nth-child(3) { padding-left: 0 !important; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; }
+  #why-not-bottom { flex-direction: column !important; align-items: flex-start !important; }
+  /* PACHT BANNER */
+  #pacht-banner { margin: 0 0 4px !important; padding: 20px 16px !important; }
+  #pacht-inner-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav class="nav">
+  <input type="checkbox" id="nav-toggle" class="nav-toggle">
   <a class="nav-brand" href="index.html">AREÁL ZA ZASTÁVKOU · PLÁN ZEFEKTIVNĚNÍ</a>
+  <label for="nav-toggle" class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></label>
   <div class="nav-links">
     <a class="nav-link active" href="index.html">Přehled</a>
     <a class="nav-link" href="strategie.html">Strategie města</a>
@@ -451,7 +486,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 </div>
 
 <!-- WHY NOT STANDARD -->
-<div style="background: var(--ink); margin: 0 64px 3px; padding: 64px; position: relative; overflow: hidden;">
+<div id="why-not-section" style="background: var(--ink); margin: 0 64px 3px; padding: 64px; position: relative; overflow: hidden;">
   <div style="position:absolute; inset:0; background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255,0.015) 8px, rgba(255,255,255,0.015) 9px);"></div>
   <div style="position: relative; z-index: 1;">
 
@@ -463,7 +498,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
       V nejbližším okolí areálu Za Zastávkou existuje — nebo brzy vznikne — řada standardních průmyslových areálů a hal: PM areál, areály podél Průmyslové ulice, výhledově i uvolnění části areálu Metrans v sousedství. Konkurovat jim standardní nabídkou skladů a výroby by znamenalo jedinou páku: <strong style="color:white;">cenu za m²</strong>. To je závod ke dnu, který obec nemůže vyhrát.
     </p>
 
-    <div style="display: grid; grid-template-columns: 1fr 1px 1fr; gap: 0; margin-bottom: 48px;">
+    <div id="why-not-grid" style="display: grid; grid-template-columns: 1fr 1px 1fr; gap: 0; margin-bottom: 48px;">
 
       <!-- LEFT: STANDARDNÍ CESTA -->
       <div style="padding-right: 48px;">
@@ -526,7 +561,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
     </div>
 
     <!-- BOTTOM STATEMENT -->
-    <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 32px; display:flex; align-items:center; gap:32px;">
+    <div id="why-not-bottom" style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 32px; display:flex; align-items:center; gap:32px;">
       <div style="font-family:'DM Sans',serif; font-size:22px; font-weight:300; color:rgba(255,255,255,0.9); line-height:1.4; flex:1;">
         Okolní areály nás nemohou kopírovat — <em style="font-style:italic; color:var(--amber-light);">identitu si nekoupíš.</em><br>
         <span style="font-size:16px; color:rgba(255,255,255,0.45);">Standardní hala je komodita. Kreativní kampus s filmovým studiem je destinace.</span>
@@ -667,12 +702,12 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 </div>
 
 <!-- CURRENT LEASE STRATEGY BANNER -->
-<div style="background:#1c1a16; border-left:5px solid #f0b845; margin:0 64px 4px; padding:28px 36px; display:grid; grid-template-columns:auto 1fr; gap:28px; align-items:start;">
+<div id="pacht-banner" style="background:#1c1a16; border-left:5px solid #f0b845; margin:0 64px 4px; padding:28px 36px; display:grid; grid-template-columns:auto 1fr; gap:28px; align-items:start;">
   <div style="font-size:32px; padding-top:2px;">📋</div>
   <div>
     <div style="font-family:'DM Mono',monospace; font-size:9.5px; letter-spacing:0.2em; color:#f0b845; margin-bottom:10px;">CO NAVRHUJEME V RÁMCI STÁVAJÍCÍHO PACHTU (do února 2035)</div>
     <div style="font-family:'DM Sans',serif; font-size:22px; font-weight:600; color:white; margin-bottom:14px; line-height:1.2;">Fáze 1 ihned + <span style="color:#f0b845; font-style:italic;">příprava půdy pro Fáze 2 a 3</span></div>
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+    <div id="pacht-inner-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
       <div>
         <div style="font-size:11px; font-weight:600; color:#86efac; margin-bottom:6px;">▶ REALIZACE — okamžitě</div>
         <div style="font-size:12.5px; color:rgba(255,255,255,0.7); line-height:1.65;">Kontejnerový park · Doplňková zeleň · Hala č. 5 (zateplení + plynové vytápění). Příjem plyne od prvního kontejneru. <span style="color:rgba(255,255,255,0.45); font-size:11px;">Investice v limitu smlouvy: max. 20 mil. Kč.</span></div>

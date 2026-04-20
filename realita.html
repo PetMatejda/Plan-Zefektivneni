@@ -204,18 +204,38 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 .dec-btn-b { background: var(--corten); color: white; }
 .dec-btn-b:hover { background: var(--corten-dark); }
 
+.nav-toggle { display: none; }
+.nav-hamburger { display: none; }
+
 /* ===========================================
    RESPONSIVE — mobile & tablet
    900px = tablet  |  640px = mobile
 =========================================== */
 
 @media (max-width: 900px) {
-  /* Nav: 2 rows — brand top, scrollable links below */
-  .nav { padding: 8px 16px; height: auto; flex-wrap: wrap; }
-  .nav-brand { font-size: 8px; letter-spacing: 0.12em; width: 100%; padding: 4px 0 6px; }
-  .nav-links { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 8px; flex-wrap: nowrap; }
-  .nav-links::-webkit-scrollbar { display: none; }
-  .nav-link { font-size: 10px; padding: 5px 10px; white-space: nowrap; }
+  /* ── HAMBURGER MENU ── */
+  .nav { padding: 0 16px; height: auto; }
+  .nav-brand { flex: 1; font-size: 9px; letter-spacing: 0.12em; padding: 14px 0; }
+  .nav-hamburger {
+    display: flex; flex-direction: column; justify-content: center; gap: 5px;
+    padding: 14px 4px; cursor: pointer; flex-shrink: 0;
+  }
+  .nav-hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: rgba(255,255,255,0.75);
+    transition: transform 0.25s, opacity 0.25s;
+    transform-origin: center;
+  }
+  .nav-toggle:checked ~ .nav-hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle:checked ~ .nav-hamburger span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-toggle:checked ~ .nav-hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-links {
+    display: none; width: 100%; flex-direction: column;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 6px 0 10px;
+  }
+  .nav-toggle:checked ~ .nav-links { display: flex; }
+  .nav-link { font-size: 13px; padding: 10px 20px; white-space: normal; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.05); }
 
   /* Common layouts */
   .main { padding: 40px 24px; }
@@ -261,7 +281,9 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 <body>
 
 <nav class="nav">
+  <input type="checkbox" id="nav-toggle" class="nav-toggle">
   <a class="nav-brand" href="index.html">AREÁL ZA ZASTÁVKOU · PLÁN ZEFEKTIVNĚNÍ</a>
+  <label for="nav-toggle" class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></label>
   <div class="nav-links">
     <a class="nav-link" href="index.html">Přehled</a>
     <a class="nav-link" href="strategie.html">Strategie města</a>

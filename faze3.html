@@ -226,18 +226,38 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 .btn-nav-outline { background: transparent; color: rgba(255,255,255,0.7); border: 1.5px solid rgba(255,255,255,0.2); padding: 12px 22px; font-size: 13px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
 .btn-nav-outline:hover { border-color: white; color: white; }
 
+.nav-toggle { display: none; }
+.nav-hamburger { display: none; }
+
 /* ===========================================
    RESPONSIVE — mobile & tablet
    900px = tablet  |  640px = mobile
 =========================================== */
 
 @media (max-width: 900px) {
-  /* Nav: 2 rows — brand top, scrollable links below */
-  .nav { padding: 8px 16px; height: auto; flex-wrap: wrap; }
-  .nav-brand { font-size: 8px; letter-spacing: 0.12em; width: 100%; padding: 4px 0 6px; }
-  .nav-links { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 8px; flex-wrap: nowrap; }
-  .nav-links::-webkit-scrollbar { display: none; }
-  .nav-link { font-size: 10px; padding: 5px 10px; white-space: nowrap; }
+  /* ── HAMBURGER MENU ── */
+  .nav { padding: 0 16px; height: auto; }
+  .nav-brand { flex: 1; font-size: 9px; letter-spacing: 0.12em; padding: 14px 0; }
+  .nav-hamburger {
+    display: flex; flex-direction: column; justify-content: center; gap: 5px;
+    padding: 14px 4px; cursor: pointer; flex-shrink: 0;
+  }
+  .nav-hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: rgba(255,255,255,0.75);
+    transition: transform 0.25s, opacity 0.25s;
+    transform-origin: center;
+  }
+  .nav-toggle:checked ~ .nav-hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle:checked ~ .nav-hamburger span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-toggle:checked ~ .nav-hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-links {
+    display: none; width: 100%; flex-direction: column;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 6px 0 10px;
+  }
+  .nav-toggle:checked ~ .nav-links { display: flex; }
+  .nav-link { font-size: 13px; padding: 10px 20px; white-space: normal; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.05); }
 
   /* Common layouts */
   .main { padding: 40px 24px; }
@@ -290,12 +310,36 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
   .sustain-grid { grid-template-columns: 1fr !important; }
 }
 
+
+@media (max-width: 900px) {
+  /* faze3 hero uses different class names than faze1/2 */
+  .phase-hero { height: auto; min-height: 400px; }
+  .phase-hero-content { grid-template-columns: 1fr !important; padding: 0 24px 48px !important; }
+  .ph-right { display: none !important; }
+  /* Sound stages */
+  .stages-grid { grid-template-columns: 1fr 1fr !important; }
+  /* Market / crisis grid */
+  .market-grid { grid-template-columns: 1fr !important; }
+  /* LED volume panel */
+  .led-volume { grid-template-columns: 1fr !important; padding: 28px 24px !important; }
+  /* Dual-use inner grid */
+  .du-inner { grid-template-columns: 1fr !important; gap: 32px !important; }
+  /* SFA banner */
+  .sfa-banner { flex-direction: column !important; gap: 12px !important; text-align: left !important; }
+  .sfa-right { text-align: left !important; }
+}
+@media (max-width: 640px) {
+  .phase-hero-content { padding: 0 16px 36px !important; }
+  .stages-grid { grid-template-columns: 1fr !important; }
+}
 </style>
 </head>
 <body>
 
 <nav class="nav">
+  <input type="checkbox" id="nav-toggle" class="nav-toggle">
   <a class="nav-brand" href="index.html">AREÁL ZA ZASTÁVKOU · PLÁN ZEFEKTIVNĚNÍ</a>
+  <label for="nav-toggle" class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></label>
   <div class="nav-links">
     <a class="nav-link" href="index.html">Přehled</a>
     <a class="nav-link" href="strategie.html">Strategie města</a>
@@ -645,7 +689,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
   <div class="section">
     <div class="section-label">CÍLOVÉ NÁJEMNÍ SKUPINY</div>
     <h2 class="section-title">Kdo bude v Filmovém Parku <em>natáčet a pracovat</em>?</h2>
-    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:3px;">
+    <div class="tenant-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:3px;">
       <div style="padding:24px 20px; background:var(--film); border:1px solid rgba(255,255,255,0.1);">
         <div style="font-size:28px; margin-bottom:10px;">🎬</div>
         <div style="font-family:'DM Sans',serif; font-size:18px; font-weight:600; margin-bottom:6px; color:white;">Velké streamovací platformy</div>
