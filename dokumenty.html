@@ -175,11 +175,16 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 @media (max-width: 900px) {
   .page-hero { padding: 32px 24px; }
   .ph-title { font-size: 30px !important; }
+  .docs-grid { grid-template-columns: 1fr 1fr !important; padding: 32px 24px; gap: 16px; }
+  #souhrn-callout { padding: 36px 24px !important; }
+  #souhrn-callout-inner { grid-template-columns: 1fr !important; gap: 24px !important; }
   .viewer-section { padding: 0 24px 48px; }
+  .viewer-header { flex-direction: column; align-items: flex-start; gap: 12px; }
   .footer { padding: 20px 16px; flex-direction: column; gap: 12px; text-align: center; }
 }
 @media (max-width: 640px) {
   .page-hero { padding: 24px 16px; }
+  .docs-grid { grid-template-columns: 1fr !important; }
 }
 
 </style>
@@ -273,8 +278,8 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
 </div>
 
 <!-- SOUHRN CALLOUT -->
-<div style="background: var(--ink); border-top: 3px solid var(--amber); padding: 40px 64px; margin: 0;">
-  <div style="max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center;">
+<div id="souhrn-callout" style="background: var(--ink); border-top: 3px solid var(--amber); padding: 40px 64px; margin: 0;">
+  <div id="souhrn-callout-inner" style="max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center;">
     <div>
       <div style="font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: var(--amber-light); margin-bottom: 10px;">PREZENTAČNÍ SOUHRN · NOVÁ STRÁNKA</div>
       <div style="font-family: 'DM Sans', sans-serif; font-size: 32px; font-weight: 300; color: white; line-height: 1.15; margin-bottom: 14px;">Souhrn celého konceptu — <em style="font-style:italic; color:var(--amber-light);">vše na jednom místě</em></div>
