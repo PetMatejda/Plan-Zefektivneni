@@ -76,7 +76,9 @@
       "Bash(powershell -Command 'Select-String -Path '\\\\''C:\\\\Users\\\\petrm\\\\OneDrive\\\\Dokumenty\\\\Claude Code\\\\Zefektivneni_v2\\\\index.html'\\\\'' -Pattern '\\\\''Playfair|Cormorant'\\\\'' | Select-Object -First 5 | ForEach-Object { $_.Line.Trim\\(\\) }')",
       "Bash(powershell -Command ' *)",
       "Bash(python inject_responsive.py)",
-      "Bash(python fix_responsive.py)"
+      "Bash(python fix_responsive.py)",
+      "Bash(python add_scroll_anim.py)",
+      "Bash(python -)"
     ]
   }
 }
