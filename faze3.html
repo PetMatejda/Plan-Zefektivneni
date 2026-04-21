@@ -327,6 +327,8 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
   /* SFA banner */
   .sfa-banner { flex-direction: column !important; gap: 12px !important; text-align: left !important; }
   .sfa-right { text-align: left !important; }
+  /* AI section inner grid */
+  .discussion-section { grid-template-columns: 1fr !important; padding: 24px !important; }
 }
 @media (max-width: 640px) {
   .phase-hero-content { padding: 0 16px 36px !important; }
@@ -493,6 +495,33 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
     </div>
   </div>
 
+  <!-- AI & FILM INDUSTRY -->
+  <div class="section">
+    <div class="section-label">KONTEXT · TECHNOLOGICKÝ POSUN</div>
+    <h2 class="section-title">AI jako akcelerátor,<br><em>ne hrozba pro odvětví</em></h2>
+    <p class="section-desc">Rychlý nástup nástrojů AI vyvolává otázky o budoucnosti filmového průmyslu. Odborná data i tržní praxe ukazují konzistentní závěr: AI mění konkrétní pracovní postupy, ale celkový objem výroby — a potřeba fyzické produkční infrastruktury — roste.</p>
+    <div class="discussion-section" style="padding:32px 36px; background:var(--ink); display:grid; grid-template-columns:1fr 1fr 1fr; gap:3px; margin-bottom:0;">
+      <div style="background:#1a2a3a; padding:24px 22px; border-left:3px solid var(--amber);">
+        <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.18em; color:var(--amber-light); margin-bottom:10px;">VÍCE TITULŮ, NE MÉNĚ</div>
+        <div style="font-size:20px; font-weight:600; color:white; margin-bottom:8px; line-height:1.2;">Vyšší obrátkovost produkce</div>
+        <div style="font-size:12.5px; color:rgba(255,255,255,0.65); line-height:1.65;">AI zkracuje pre-produkci o 25–35 % a snižuje náklady na VFX. Výsledkem není méně filmů — ale více filmů za stejné peníze. Studia mohou vyrábět více titulů paralelně a rychleji. Fyzické soundstage kapacity jsou proto ještě cennější, ne méně.</div>
+      </div>
+      <div style="background:#1a2a3a; padding:24px 22px; border-left:3px solid var(--amber);">
+        <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.18em; color:var(--amber-light); margin-bottom:10px;">GLOBÁLNÍ EXPANZE</div>
+        <div style="font-size:20px; font-weight:600; color:white; margin-bottom:8px; line-height:1.2;">Více hráčů, více trhů</div>
+        <div style="font-size:12.5px; color:rgba(255,255,255,0.65); line-height:1.65;">Od roku 2022 vzniklo globálně více než 65 nových AI-centric studií, z toho přes 30 v letech 2024–25. Streamovací platformy expandují do nových trhů a regionů. Poptávka po produkci roste i v segmentech dosud ovládaných místními producenty — otevírá se prostor pro nová studia v CEE.</div>
+      </div>
+      <div style="background:#1a2a3a; padding:24px 22px; border-left:3px solid var(--amber);">
+        <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.18em; color:var(--amber-light); margin-bottom:10px;">KONVERGENCE ODVĚTVÍ</div>
+        <div style="font-size:20px; font-weight:600; color:white; margin-bottom:8px; line-height:1.2;">Film, hry a zábava splývají</div>
+        <div style="font-size:12.5px; color:rgba(255,255,255,0.65); line-height:1.65;">Hranice mezi filmem, počítačovými hrami a interaktivní zábavou se stírají. Herní motory (Unreal Engine) pohánějí filmovou LED produkci, filmové IP se přeměňují na hry a naopak. Studia s LED Volume technologií jsou v epicentru tohoto průsečíku — a jejich hodnota roste.</div>
+      </div>
+    </div>
+    <div style="margin-top:3px; background:#162030; border-top:2px solid var(--amber); padding:18px 24px; font-size:12.5px; color:rgba(255,255,255,0.7); line-height:1.65;">
+      <strong style="color:var(--amber-light);">Závěr pro areál:</strong> AI neohrožuje potřebu fyzické produkční infrastruktury — naopak ji posiluje. Studia, která investují do technologické špičky (LED Volume, efektivní zázemí), budou mít v éře AI silnější, ne slabší pozici na trhu.
+    </div>
+  </div>
+
   <!-- SOUND STAGES -->
   <div class="section">
     <div class="section-label">INFRASTRUKTURA STUDIA</div>
@@ -500,15 +529,15 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
     <div class="stages-grid" style="grid-template-columns: repeat(3, 1fr);">
       <div class="stage-card">
         <div class="stage-num">STAGE 01</div>
-        <div class="stage-area">1 200 m²</div>
-        <div class="stage-label">PLOCHA</div>
+        <div class="stage-area">min. 1 200 m²</div>
+        <div class="stage-label">PLOCHA (dle možností)</div>
         <div class="stage-feature">Standardní produkce, seriály, komerce. Sdružitelná se Stage 02 pro velké produkce.</div>
       </div>
       <div class="stage-card" style="background: #1a2a3a; border: 1px solid var(--amber);">
         <div class="stage-num" style="color: var(--amber);">STAGE 02 · PREMIUM</div>
-        <div class="stage-area">1 200 m²</div>
+        <div class="stage-area">min. 1 200 m²</div>
         <div class="stage-label">LED VOLUME STAGE</div>
-        <div class="stage-feature" style="color: rgba(255,255,255,0.7);">Virtuální produkce · LED stěna 270° · Jediné v ČR</div>
+        <div class="stage-feature" style="color: rgba(255,255,255,0.7);">Virtuální produkce · LED stěna 270° · Průkopnická technologie v regionu</div>
       </div>
       <div class="stage-card">
         <div class="stage-num">STAGE 03</div>
@@ -529,8 +558,8 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
           Výsledek: nižší náklady, rychlejší natáčení, lepší výkon herců.
         </p>
         <p class="lv-desc" style="margin-top: 12px;">
-          Jako první studio tohoto druhu v ČR by areál přilákal produkce hledající
-          technologickou špičku — v prostředí, kde Barrandov takovou infrastrukturu dosud nenabízí.
+          Jedno z mála studií s touto technologií v ČR by areál zařadilo mezi přední destinace pro produkce
+          hledající technologickou špičku — v prostředí, kde stávající studia tuto infrastrukturu teprve budují.
         </p>
       </div>
       <div class="lv-stats">
@@ -539,8 +568,8 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
           <div class="lv-stat-label">IMERZIVNÍ VIRTUÁLNÍ PROSTŘEDÍ</div>
         </div>
         <div class="lv-stat">
-          <div class="lv-stat-val">Jediné v ČR</div>
-          <div class="lv-stat-label">UNIKÁTNÍ KONKURENČNÍ VÝHODA</div>
+          <div class="lv-stat-val">Špičková tech</div>
+          <div class="lv-stat-label">VÝJIMEČNÁ POZICE V REGIONU</div>
         </div>
         <div class="lv-stat">
           <div class="lv-stat-val">–30 % nákladů</div>
@@ -715,17 +744,17 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
   <!-- REFERENCES -->
   <div class="section">
     <div class="section-label">INSPIRACE A REFERENCE</div>
-    <h2 class="section-title">Studia, která ukazují cestu</h2>
+    <h2 class="section-title">Studia, která ukazují cestu —<br><em>současné projekty s aktivními investicemi</em></h2>
     <div class="ref-grid">
       <div class="ref-card">
         <div class="ref-name">Cinecittà</div>
-        <div class="ref-location">ŘÍM · ITÁLIE · 1937 (zrenovováno 2022)</div>
-        <div class="ref-desc">Nejslavnější evropské filmové studio. Felliho filmy, Gladiátor, Ben-Hur. Po renovaci hostí Netflix originals. Model pro revitalizaci industriálního komplexu na filmové studio.</div>
+        <div class="ref-location">ŘÍM · ITÁLIE · PROBÍHAJÍCÍ EXPANZE DO 2026+</div>
+        <div class="ref-desc">Nejslavnější evropské filmové studio prochází masivní transformací: €300 mil. z EU Recovery Fondu, 5 nových stagí (celkem 25), hotovo do června 2026. Výnosové cíle sahají až do roku 2029 a dál. Aktivní příklad toho, jak průmyslový komplex přetváří s veřejnými i soukromými prostředky.</div>
       </div>
       <div class="ref-card">
         <div class="ref-name">Korda Studios</div>
-        <div class="ref-location">BUDAKESZI · MAĎARSKO</div>
-        <div class="ref-desc">Největší rivalové Barrandova. Přetáhli část Hollywood produkcí díky daňovým pobídkám. Ukazují, že Praha ztrácí produkce do regionální konkurence — okno příležitosti.</div>
+        <div class="ref-location">BUDAKESZI · MAĎARSKO · AKTIVNÍ PRODUKCE</div>
+        <div class="ref-desc">Největší rivalové Barrandova — přetáhli část Hollywood produkcí díky daňovým pobídkám. Aktivní produkce: The Brutalist, Norimberk. Maďarský filmový sektor roste o 22 % (NFI Studios). Ukazují, že Praha ztrácí produkce do regionální konkurence.</div>
       </div>
       <div class="ref-card">
         <div class="ref-name">Barrandov Studios</div>
