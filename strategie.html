@@ -701,10 +701,11 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
       <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.18em; color:var(--concrete); margin-bottom:12px;">INTERAKTIVNÍ CHAT · DESÍTKY STRATEGICKÝCH DOKUMENTŮ PRAHY</div>
       <a href="https://notebooklm.google.com/notebook/f8e6cbbd-31fe-44b7-a356-276ce28ecf17/preview"
          target="_blank" rel="noopener noreferrer"
+         class="nblm-card"
          style="display:block; text-decoration:none; background:var(--city); border:2px solid rgba(255,255,255,0.1); padding:44px 48px; transition:border-color 0.2s;"
          onmouseover="this.style.borderColor='var(--amber-light)'"
          onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
-        <div style="display:grid; grid-template-columns:auto 1fr auto; gap:32px; align-items:center;">
+        <div class="nblm-card-grid" style="display:grid; grid-template-columns:auto 1fr auto; gap:32px; align-items:center;">
           <div style="font-size:52px; line-height:1;">💬</div>
           <div>
             <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.18em; color:rgba(255,255,255,0.4); margin-bottom:10px;">NOTEBOOKLM · GOOGLE</div>
@@ -717,7 +718,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
               <span style="font-family:'DM Mono',monospace; font-size:9px; padding:4px 10px; background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.6);">+ desítky dalších</span>
             </div>
           </div>
-          <div style="flex-shrink:0; background:var(--amber); color:white; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.15em; padding:14px 22px; white-space:nowrap; align-self:center;">
+          <div class="nblm-card-btn" style="flex-shrink:0; background:var(--amber); color:white; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.15em; padding:14px 22px; white-space:nowrap; align-self:center;">
             OTEVŘÍT CHAT →
           </div>
         </div>
@@ -750,6 +751,9 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
     <style>
       @media (max-width: 640px) {
         .strat-podcast-grid { grid-template-columns: 1fr !important; }
+        .nblm-card { padding: 24px 20px !important; }
+        .nblm-card-grid { grid-template-columns: auto 1fr !important; gap: 16px !important; }
+        .nblm-card-btn { display: none !important; }
       }
     </style>
 
