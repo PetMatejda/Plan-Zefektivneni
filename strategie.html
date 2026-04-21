@@ -699,23 +699,30 @@ body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(
     <!-- NotebookLM chat -->
     <div style="margin-bottom:40px;">
       <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.18em; color:var(--concrete); margin-bottom:12px;">INTERAKTIVNÍ CHAT · DESÍTKY STRATEGICKÝCH DOKUMENTŮ PRAHY</div>
-      <div style="border:2px solid var(--city); background:white; overflow:hidden;">
-        <iframe
-          src="https://notebooklm.google.com/notebook/f8e6cbbd-31fe-44b7-a356-276ce28ecf17/preview"
-          style="width:100%; height:620px; border:none; display:block;"
-          title="NotebookLM · Strategie Prahy — interaktivní chat"
-          loading="lazy"
-          allow="clipboard-write"
-        ></iframe>
-        <div style="background:var(--city); padding:12px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
-          <span style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.12em; color:rgba(255,255,255,0.45);">NOTEBOOKLM · GOOGLE · STRATEGICKÉ DOKUMENTY PRAHY</span>
-          <a href="https://notebooklm.google.com/notebook/f8e6cbbd-31fe-44b7-a356-276ce28ecf17/preview" target="_blank" rel="noopener noreferrer"
-            style="font-family:'DM Mono',monospace; font-size:9.5px; letter-spacing:0.12em; color:var(--amber-light); text-decoration:none; white-space:nowrap;">
-            OTEVŘÍT V NOVÉM OKNĚ →
-          </a>
+      <a href="https://notebooklm.google.com/notebook/f8e6cbbd-31fe-44b7-a356-276ce28ecf17/preview"
+         target="_blank" rel="noopener noreferrer"
+         style="display:block; text-decoration:none; background:var(--city); border:2px solid rgba(255,255,255,0.1); padding:44px 48px; transition:border-color 0.2s;"
+         onmouseover="this.style.borderColor='var(--amber-light)'"
+         onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
+        <div style="display:grid; grid-template-columns:auto 1fr auto; gap:32px; align-items:center;">
+          <div style="font-size:52px; line-height:1;">💬</div>
+          <div>
+            <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.18em; color:rgba(255,255,255,0.4); margin-bottom:10px;">NOTEBOOKLM · GOOGLE</div>
+            <div style="font-family:'DM Sans',sans-serif; font-size:22px; font-weight:600; color:white; margin-bottom:8px; line-height:1.2;">Zeptejte se na strategii Prahy</div>
+            <div style="font-size:13px; color:rgba(255,255,255,0.65); line-height:1.65; max-width:560px;">Desítky klíčových strategických dokumentů Prahy v jednom místě. Ptejte se přirozenou češtinou — NotebookLM odpovídá s přesnými citacemi ze zdrojů.</div>
+            <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:16px;">
+              <span style="font-family:'DM Mono',monospace; font-size:9px; padding:4px 10px; background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.6);">SP HMP 2030</span>
+              <span style="font-family:'DM Mono',monospace; font-size:9px; padding:4px 10px; background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.6);">Metropolitní plán</span>
+              <span style="font-family:'DM Mono',monospace; font-size:9px; padding:4px 10px; background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.6);">Klimatický plán 2030</span>
+              <span style="font-family:'DM Mono',monospace; font-size:9px; padding:4px 10px; background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.6);">+ desítky dalších</span>
+            </div>
+          </div>
+          <div style="flex-shrink:0; background:var(--amber); color:white; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.15em; padding:14px 22px; white-space:nowrap; align-self:center;">
+            OTEVŘÍT CHAT →
+          </div>
         </div>
-      </div>
-      <p style="font-size:11.5px; color:var(--concrete); margin-top:8px; line-height:1.6;">Pokud chat nenačte, otevřete ho v novém okně pomocí odkazu výše. Vyžaduje přihlášení do Google účtu.</p>
+      </a>
+      <p style="font-size:11.5px; color:var(--concrete); margin-top:8px; line-height:1.6;">Otevře se v novém okně. Vyžaduje přihlášení do Google účtu.</p>
     </div>
 
     <!-- Podcast -->
