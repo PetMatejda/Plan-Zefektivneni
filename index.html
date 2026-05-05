@@ -453,6 +453,7 @@ function closeDisclaimer(){
     <a class="nav-link" href="faze3.html">Fáze 3 – Film</a>
     <a class="nav-link" href="analyza.html">Analýza &amp; Finance</a>
     <a class="nav-link" href="realita.html">Reality Check</a>
+    <a class="nav-link" href="identita.html">Identita</a>
     <a class="nav-link" href="dokumenty.html">Dokumenty</a>
   </div>
 </nav>
@@ -601,57 +602,25 @@ function closeDisclaimer(){
   </div>
 </div>
 
-<!-- BRANDING SECTION -->
-<div style="background:var(--linen-dark); padding:72px 64px 80px;">
-  <style>
-    .brand-header { display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:end; margin-bottom:40px; }
-    .brand-logos  { display:grid; grid-template-columns:1fr 1fr; gap:3px; margin-top:3px; }
-    @media (max-width:800px) {
-      .brand-header { grid-template-columns:1fr; gap:16px; }
-      .brand-logos  { grid-template-columns:1fr; }
-    }
-    @media (max-width:640px) {
-      .brand-section-wrap { padding:40px 20px 56px !important; }
-    }
-  </style>
-  <div class="brand-section-wrap" style="max-width:1300px; margin:0 auto;">
-
-    <div style="font-family:'DM Mono',monospace; font-size:9.5px; letter-spacing:0.2em; color:var(--concrete); margin-bottom:8px;">VIZUÁLNÍ IDENTITA · NÁVRH BRANDINGU AREÁLU</div>
-
-    <div class="brand-header">
-      <h2 style="font-family:'DM Sans',sans-serif; font-size:clamp(26px,3vw,38px); font-weight:400; line-height:1.15; letter-spacing:-0.01em; color:var(--ink);">Areál, který poznáte <em style="font-style:italic; color:var(--amber);">na první pohled</em></h2>
-      <p style="font-size:13.5px; color:var(--ink-soft); line-height:1.8;">Silná vizuální identita přitahuje správné nájemníky, buduje povědomí a odlišuje areál od konkurence. Jednotný branding od vstupní brány přes orientační systém až po logo na každé hale — identita, která se nekopíruje.</p>
+<!-- BRANDING TEASER -->
+<a href="identita.html" style="display:block; text-decoration:none; background:var(--linen-dark); padding:48px 64px; border-top:1px solid var(--linen-dark); transition:background 0.2s;"
+   onmouseover="this.style.background='#ddd7c8'" onmouseout="this.style.background='var(--linen-dark)'">
+  <div style="max-width:1300px; margin:0 auto; display:grid; grid-template-columns:1fr auto; gap:32px; align-items:center;">
+    <div>
+      <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em; color:var(--concrete); margin-bottom:10px;">VIZUÁLNÍ IDENTITA · BRANDING · ORIENTAČNÍ SYSTÉM</div>
+      <div style="font-family:'DM Sans',sans-serif; font-size:clamp(20px,2.5vw,28px); font-weight:400; color:var(--ink); line-height:1.2; margin-bottom:10px;">Areál, který poznáte <em style="font-style:italic; color:var(--amber);">na první pohled</em></div>
+      <p style="font-size:13px; color:var(--ink-soft); line-height:1.7; max-width:640px;">Logo, orientační systém, signage — návrhy vizuální identity, která odlišuje areál od konkurence a nelze ji zkopírovat.</p>
     </div>
-
-    <!-- Signage system — full width -->
-    <div style="overflow:hidden; line-height:0; border:1px solid var(--linen-dark);">
-      <img src="images/branding-signage.png"
-           alt="Vizuální identita a orientační systém areálu Za Zastávkou — hlavní varianta"
-           style="width:100%; height:auto; display:block;">
+    <div style="flex-shrink:0; background:var(--ink); color:var(--amber-light); font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.15em; padding:14px 24px; white-space:nowrap;">
+      ZOBRAZIT NÁVRHY →
     </div>
-
-    <!-- Logo sheets — side by side -->
-    <div class="brand-logos">
-      <div style="overflow:hidden; line-height:0; border:1px solid var(--linen-dark); border-top:none;">
-        <img src="images/branding-loga-1.png"
-             alt="Návrhy loga Areál Zastávka — horizontální varianty"
-             style="width:100%; height:auto; display:block;">
-      </div>
-      <div style="overflow:hidden; line-height:0; border:1px solid var(--linen-dark); border-top:none;">
-        <img src="images/branding-loga-2.png"
-             alt="Návrhy loga Areál Zastávka — vertikální varianty"
-             style="width:100%; height:auto; display:block;">
-      </div>
-    </div>
-
-    <!-- Footer note -->
-    <div style="margin-top:20px; padding:15px 20px; background:var(--amber-pale); border-left:3px solid var(--amber-light); display:flex; align-items:baseline; gap:10px;">
-      <span style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.15em; color:var(--amber); flex-shrink:0;">POZNÁMKA</span>
-      <p style="font-size:12.5px; color:var(--ink-soft); line-height:1.65;">Zobrazené návrhy jsou konceptuální — finální vizuální styl bude upřesněn v rámci architektonické studie Fáze 1.</p>
-    </div>
-
   </div>
-</div>
+</a>
+<style>
+  @media (max-width: 640px) {
+    #brand-teaser-inner { grid-template-columns: 1fr !important; }
+  }
+</style>
 
 <!-- PHASE CARDS -->
 <div class="phases-section">

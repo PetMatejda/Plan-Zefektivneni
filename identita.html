@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vizuální identita · Areál Za Zastávkou</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #1c1a16; --ink-soft: #4a4540;
+  --linen: #f4efe6; --linen-dark: #e8e0d2;
+  --amber: #c8860a; --amber-light: #f0b845; --amber-pale: #fdf3de;
+  --concrete: #8a8278; --concrete-light: #c4bdb4;
+  --film: #2c3e50; --film-pale: #e8ecf0;
+  --green: #3d6b4f; --green-pale: #e8f2ec;
+  --corten: #b5611a; --corten-pale: #fdf0e8;
+  --city: #1a3566; --city-pale: #e8eef8;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--linen); color: var(--ink); }
+
+/* NAV */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--ink); border-bottom: 2px solid var(--amber);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 54px;
+}
+.nav-brand { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--amber-light); text-decoration: none; }
+.nav-links { display: flex; gap: 4px; }
+.nav-link { font-size: 11.5px; font-weight: 500; color: rgba(255,255,255,0.65); text-decoration: none; padding: 6px 14px; transition: all 0.2s; }
+.nav-link:hover { color: white; background: rgba(255,255,255,0.08); }
+.nav-link.active { color: var(--amber-light); }
+
+/* HERO */
+.page-hero {
+  background: var(--ink);
+  padding: 72px 64px 64px;
+  position: relative; overflow: hidden;
+}
+.page-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255,0.02) 8px, rgba(255,255,255,0.02) 9px);
+}
+.ph-inner { position: relative; z-index: 1; max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: end; }
+.ph-eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: rgba(255,255,255,0.45); margin-bottom: 16px; }
+.ph-title { font-family: 'DM Sans', sans-serif; font-size: clamp(36px, 5vw, 60px); font-weight: 300; color: white; line-height: 1.05; letter-spacing: -0.02em; }
+.ph-title em { font-style: italic; color: var(--amber-light); }
+.ph-desc { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.8; margin-top: 20px; }
+.ph-quote {
+  background: rgba(255,255,255,0.05); border-left: 3px solid var(--amber);
+  padding: 28px 32px;
+}
+.ph-quote-text { font-size: 18px; font-weight: 300; color: white; line-height: 1.5; font-style: italic; margin-bottom: 10px; }
+.ph-quote-text em { color: var(--amber-light); font-style: normal; }
+.ph-quote-sub { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.15em; color: rgba(255,255,255,0.35); }
+
+/* MAIN */
+.main { max-width: 1300px; margin: 0 auto; padding: 72px 64px 80px; }
+.section { margin-bottom: 72px; }
+.section-label { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: var(--concrete); margin-bottom: 6px; }
+.section-title { font-family: 'DM Sans', sans-serif; font-size: clamp(26px, 3vw, 36px); font-weight: 400; margin-bottom: 10px; letter-spacing: -0.01em; }
+.section-title em { font-style: italic; color: var(--amber); }
+.section-desc { font-size: 13.5px; color: var(--ink-soft); line-height: 1.8; max-width: 780px; margin-bottom: 32px; }
+
+/* IMAGE BLOCKS */
+.img-full { overflow: hidden; line-height: 0; border: 1px solid var(--linen-dark); }
+.img-full img { width: 100%; height: auto; display: block; }
+.img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-top: 3px; }
+.img-grid-item { overflow: hidden; line-height: 0; border: 1px solid var(--linen-dark); }
+.img-grid-item img { width: 100%; height: auto; display: block; }
+
+/* CAPTION */
+.img-caption {
+  margin-top: 10px; font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.12em; color: var(--concrete); line-height: 1.5;
+}
+
+/* PRINCIPLES GRID */
+.principles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; margin-top: 24px; }
+.principle-card { background: white; border: 1px solid var(--linen-dark); border-top: 3px solid var(--amber); padding: 22px 18px; }
+.pc-num { font-family: 'DM Mono', monospace; font-size: 24px; color: var(--amber); line-height: 1; margin-bottom: 10px; }
+.pc-name { font-weight: 700; font-size: 13px; margin-bottom: 8px; }
+.pc-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.6; }
+
+/* NOTE BANNER */
+.note-banner {
+  margin-top: 24px; padding: 16px 22px;
+  background: var(--amber-pale); border-left: 3px solid var(--amber-light);
+  display: flex; align-items: baseline; gap: 12px;
+}
+.note-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.15em; color: var(--amber); flex-shrink: 0; }
+.note-text { font-size: 12.5px; color: var(--ink-soft); line-height: 1.65; }
+
+/* PHASE NAV */
+.phase-nav {
+  background: var(--ink); padding: 32px 64px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.phase-nav-back { text-decoration: none; color: rgba(255,255,255,0.5); font-size: 12px; transition: color 0.2s; }
+.phase-nav-back:hover { color: white; }
+.footer-copy { font-size: 10.5px; color: rgba(255,255,255,0.2); }
+
+/* HAMBURGER */
+.nav-toggle { display: none; }
+.nav-hamburger { display: none; }
+
+@media (max-width: 900px) {
+  .nav { padding: 0 16px; height: auto; }
+  .nav-brand { flex: 1; font-size: 9px; letter-spacing: 0.12em; padding: 14px 0; }
+  .nav-hamburger {
+    display: flex; flex-direction: column; justify-content: center; gap: 5px;
+    padding: 14px 4px; cursor: pointer; flex-shrink: 0;
+  }
+  .nav-hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: rgba(255,255,255,0.75);
+    transition: transform 0.25s, opacity 0.25s; transform-origin: center;
+  }
+  .nav-toggle:checked ~ .nav-hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle:checked ~ .nav-hamburger span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-toggle:checked ~ .nav-hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-links { display: none; width: 100%; flex-direction: column; border-top: 1px solid rgba(255,255,255,0.08); padding: 6px 0 10px; }
+  .nav-toggle:checked ~ .nav-links { display: flex; }
+  .nav-link { font-size: 13px; padding: 10px 20px; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+  .page-hero { padding: 40px 24px 36px; }
+  .ph-inner { grid-template-columns: 1fr; gap: 28px; }
+  .ph-title { font-size: clamp(28px, 7vw, 44px) !important; }
+  .main { padding: 40px 24px 64px; }
+  .img-grid { grid-template-columns: 1fr; }
+  .principles { grid-template-columns: 1fr 1fr; }
+  .phase-nav { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+}
+@media (max-width: 640px) {
+  .page-hero { padding: 28px 16px 28px; }
+  .main { padding: 28px 16px 48px; }
+  .principles { grid-template-columns: 1fr; }
+}
+</style>
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<nav class="nav">
+  <input type="checkbox" id="nav-toggle" class="nav-toggle">
+  <a class="nav-brand" href="index.html">AREÁL ZA ZASTÁVKOU · VIZE AREÁLU</a>
+  <label for="nav-toggle" class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></label>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Přehled</a>
+    <a class="nav-link" href="strategie.html">Strategie města</a>
+    <a class="nav-link" href="faze1.html">Fáze 1 – HUB</a>
+    <a class="nav-link" href="faze2.html">Fáze 2 – Kampus</a>
+    <a class="nav-link" href="faze3.html">Fáze 3 – Film</a>
+    <a class="nav-link" href="analyza.html">Analýza &amp; Finance</a>
+    <a class="nav-link" href="realita.html">Reality Check</a>
+    <a class="nav-link active" href="identita.html">Identita</a>
+    <a class="nav-link" href="dokumenty.html">Dokumenty</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="ph-inner">
+    <div>
+      <div class="ph-eyebrow">VIZUÁLNÍ IDENTITA · BRANDING · ORIENTAČNÍ SYSTÉM</div>
+      <h1 class="ph-title">Areál, který poznáte<br><em>na první pohled</em></h1>
+      <p class="ph-desc">
+        Silná vizuální identita přitahuje správné nájemníky, buduje povědomí o areálu
+        a odlišuje ho od konkurence. Jednotný branding od vstupní brány přes orientační
+        systém až po logo na každé hale — identita, která se nekopíruje.
+      </p>
+    </div>
+    <div class="ph-quote">
+      <div class="ph-quote-text">Standardní hala je komodita.<br><em>Kreativní kampus s vlastní identitou je destinace.</em></div>
+      <div class="ph-quote-sub">ZÁKLADNÍ PRINCIP VIZE AREÁLU ZA ZASTÁVKOU</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- BRANDING PRINCIPLES -->
+  <div class="section">
+    <div class="section-label">PROČ NA IDENTITĚ ZÁLEŽÍ</div>
+    <h2 class="section-title">Co silná vizuální identita <em>přináší areálu</em></h2>
+    <div class="principles">
+      <div class="principle-card">
+        <div class="pc-num">01</div>
+        <div class="pc-name">Okamžité rozpoznání</div>
+        <div class="pc-desc">Sjednocené logo, barvy a materiály vytváří konzistentní dojem — od billboardu u D1 až po cedulku na hale.</div>
+      </div>
+      <div class="principle-card">
+        <div class="pc-num">02</div>
+        <div class="pc-name">Prémiová vnímání</div>
+        <div class="pc-desc">Kvalitní orientační systém a signage zvyšují vnímanou hodnotu areálu a umožňují dosahovat vyšší nájmy.</div>
+      </div>
+      <div class="principle-card">
+        <div class="pc-num">03</div>
+        <div class="pc-name">Navigace bez tření</div>
+        <div class="pc-desc">Přehledný orientační systém snižuje frustrace nájemníků i návštěvníků a buduje profesionální dojem od prvního kontaktu.</div>
+      </div>
+      <div class="principle-card">
+        <div class="pc-num">04</div>
+        <div class="pc-name">Nekopírovatelná pozice</div>
+        <div class="pc-desc">Areál se stává adresou, ne jen lokalitou. Identita vybudovaná v čase nelze koupit — jen vytvořit.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIGNAGE SYSTEM -->
+  <div class="section">
+    <div class="section-label">ORIENTAČNÍ SYSTÉM · HLAVNÍ VARIANTA</div>
+    <h2 class="section-title">Signage &amp; wayfinding — <em>od brány po každou halu</em></h2>
+    <p class="section-desc">Komplexní orientační systém zahrnuje vstupní portál, pilony s adresáři nájemců, směrové cedule, označení hal, bezpečnostní značení a informační panely. Barevný kód: antracit RAL 7021 + oranžová RAL 2008.</p>
+
+    <div class="img-full">
+      <img src="images/branding-signage.png"
+           alt="Vizuální identita a orientační systém areálu Za Zastávkou — hlavní varianta">
+    </div>
+    <div class="img-caption">
+      HLAVNÍ VARIANTA · ODVÁŽNĚJŠÍ — vstupní portál, pilony, směrové cedule, označení hal, noční varianta · materiály: práškový hliník / ocelový plech / dibond / akrylátové sklo
+    </div>
+  </div>
+
+  <!-- LOGO VARIATIONS -->
+  <div class="section">
+    <div class="section-label">LOGO · VARIANTY ZPRACOVÁNÍ</div>
+    <h2 class="section-title">Návrhy loga — <em>různé styly, jeden charakter</em></h2>
+    <p class="section-desc">Sada návrhů loga pokrývá horizontální i vertikální variace, různé míry komplexnosti a dvě základní ikonografické cesty — geometrická forma AZ monogramu nebo architektonická silueta haly. Všechny varianty sdílejí typografii a barevný systém.</p>
+
+    <div class="img-grid">
+      <div class="img-grid-item">
+        <img src="images/branding-loga-1.png"
+             alt="Návrhy loga Areál Zastávka — horizontální varianty s rámem">
+      </div>
+      <div class="img-grid-item">
+        <img src="images/branding-loga-2.png"
+             alt="Návrhy loga Areál Zastávka — vertikální a alternativní varianty">
+      </div>
+    </div>
+    <div class="img-caption">
+      VLEVO: horizontální varianty s charakteristickým oranžovým rohový detailem · VPRAVO: vertikální varianty, AZ monogram a silhoueta haly
+    </div>
+
+    <div class="note-banner">
+      <span class="note-label">POZNÁMKA</span>
+      <p class="note-text">Zobrazené návrhy jsou konceptuální a slouží jako inspirační podklad. Finální vizuální styl a brand manuál budou upřesněny v rámci architektonické studie Fáze 1 ve spolupráci s grafickým studiem.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER NAV -->
+<div class="phase-nav">
+  <a class="phase-nav-back" href="index.html">← Zpět na přehled</a>
+  <div class="footer-copy">BALLOON · light · Praha · Areál Za Zastávkou 377 · Dolní Měcholupy · Vize areálu 2026</div>
+</div>
+
+<!-- BOTPRESS CHATBOT -->
+<script src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2026/04/20/20/20260420203454-36N7UADN.js" defer></script>
+
+<script>
+/* SCROLL REVEAL */
+(function () {
+  if (!('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var s = document.createElement('style');
+  s.textContent =
+    '.sr{opacity:0;transform:translateY(22px);' +
+    'transition:opacity .58s cubic-bezier(.4,0,.2,1),transform .58s cubic-bezier(.4,0,.2,1)}' +
+    '.sr.in{opacity:1;transform:translateY(0)}' +
+    '.sr.d1{transition-delay:.09s}.sr.d2{transition-delay:.18s}' +
+    '.sr.d3{transition-delay:.27s}.sr.d4{transition-delay:.36s}';
+  document.head.appendChild(s);
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+  var vh = window.innerHeight;
+  function reg(sel, stagger) {
+    var els = Array.from(document.querySelectorAll(sel));
+    if (stagger) {
+      var map = new Map();
+      els.forEach(function (el) { var p = el.parentElement; if (!map.has(p)) map.set(p, []); map.get(p).push(el); });
+      map.forEach(function (grp) { grp.forEach(function (el, i) { if (i > 0 && i <= 4) el.dataset.srD = i; }); });
+    }
+    els.forEach(function (el) {
+      if (el.getBoundingClientRect().top >= vh - 40) {
+        el.classList.add('sr');
+        if (el.dataset.srD) el.classList.add('d' + el.dataset.srD);
+        obs.observe(el);
+      }
+    });
+  }
+  reg('.section,.phase-nav', false);
+  reg('.principle-card', true);
+}());
+</script>
+</body>
+</html>
